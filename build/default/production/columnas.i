@@ -1,4 +1,4 @@
-# 1 "matriz_leds.c"
+# 1 "columnas.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "matriz_leds.c" 2
+# 1 "columnas.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
 
 
@@ -104,7 +104,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 1 "matriz_leds.c" 2
+# 1 "columnas.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -202,7 +202,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 2 "matriz_leds.c" 2
+# 2 "columnas.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -337,7 +337,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 3 "matriz_leds.c" 2
+# 3 "columnas.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
@@ -2047,9 +2047,17 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 4 "matriz_leds.c" 2
+# 4 "columnas.c" 2
 
 
+# 1 "./filas.h" 1
+# 15 "./filas.h"
+void latchClock_Fil(void);
+void shiftClock_Fil(void);
+void setFilas(uint16_t reg_value);
+void enableFilas(void);
+void disableFilas(void);
+# 6 "columnas.c" 2
 
 void latchClock_Col(void){
     PORTBbits.RB4 = 1;
@@ -2064,29 +2072,7 @@ void shiftClock_Col(void){
     PORTBbits.RB5 = 0;
 }
 
-void enableFilas(void){
-    PORTDbits.RD3 = 0;
-}
 
-void disableFilas(void){
-    PORTDbits.RD3 = 1;
-}
-
-void latchClock_Fil(void){
-    PORTDbits.RD4 = 0;
-
-    PORTDbits.RD4 = 1;
-
-    PORTDbits.RD4 = 0;
-}
-
-void shiftClock_Fil(void){
-    PORTDbits.RD5 = 0;
-
-    PORTDbits.RD5 = 1;
-
-    PORTDbits.RD5 = 0;
-}
 
 void setColumnas(uint8_t reg_value){
     int i = 0;
@@ -2103,28 +2089,6 @@ void setColumnas(uint8_t reg_value){
     return;
 }
 
-void setFilas(uint16_t reg_value){
-
-    int i = 0;
-    uint16_t valor = 0;
-
-
-
-
-
-
-
-    for(i=0;i<16;i++){
-
-        PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
-
-        shiftClock_Fil();
-
-    }
-
-    enableFilas();
-    return;
-}
 
 void shiftBitColumna(uint8_t bit){
     PORTBbits.RB1 = bit & 0x01;

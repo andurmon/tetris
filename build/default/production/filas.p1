@@ -1,16 +1,5 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"222 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 222:     struct {
-[s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S13 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"221
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 221: typedef union {
-[u S12 `S13 1 ]
-[n S12 . . ]
-"233
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 233: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
-[v _PORTBbits `VS12 ~T0 @X0 0 e@6 ]
-"346
+"346 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 346:     struct {
 [s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S17 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
@@ -201,224 +190,113 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"7 matriz_leds.c
-[; ;matriz_leds.c: 7: void latchClock_Col(void){
-[v _latchClock_Col `(v ~T0 @X0 1 ef ]
-{
-[e :U _latchClock_Col ]
-[f ]
-"8
-[; ;matriz_leds.c: 8:     PORTBbits.RB4 = 1;
-[e = . . _PORTBbits 0 4 -> -> 1 `i `uc ]
-"10
-[; ;matriz_leds.c: 10:     PORTBbits.RB4 = 0;
-[e = . . _PORTBbits 0 4 -> -> 0 `i `uc ]
-"11
-[; ;matriz_leds.c: 11: }
-[e :UE 100 ]
-}
-"13
-[; ;matriz_leds.c: 13: void shiftClock_Col(void){
-[v _shiftClock_Col `(v ~T0 @X0 1 ef ]
-{
-[e :U _shiftClock_Col ]
-[f ]
-"14
-[; ;matriz_leds.c: 14:     PORTBbits.RB5 = 0;
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-"15
-[; ;matriz_leds.c: 15:     PORTBbits.RB5 = 1;
-[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
-"17
-[; ;matriz_leds.c: 17:     PORTBbits.RB5 = 0;
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-"18
-[; ;matriz_leds.c: 18: }
-[e :UE 101 ]
-}
-"20
-[; ;matriz_leds.c: 20: void enableFilas(void){
+"8 filas.c
+[; ;filas.c: 8: void enableFilas(void){
 [v _enableFilas `(v ~T0 @X0 1 ef ]
 {
 [e :U _enableFilas ]
 [f ]
-"21
-[; ;matriz_leds.c: 21:     PORTDbits.RD3 = 0;
+"9
+[; ;filas.c: 9:     PORTDbits.RD3 = 0;
 [e = . . _PORTDbits 0 3 -> -> 0 `i `uc ]
-"22
-[; ;matriz_leds.c: 22: }
-[e :UE 102 ]
+"10
+[; ;filas.c: 10: }
+[e :UE 100 ]
 }
-"24
-[; ;matriz_leds.c: 24: void disableFilas(void){
+"12
+[; ;filas.c: 12: void disableFilas(void){
 [v _disableFilas `(v ~T0 @X0 1 ef ]
 {
 [e :U _disableFilas ]
 [f ]
-"25
-[; ;matriz_leds.c: 25:     PORTDbits.RD3 = 1;
+"13
+[; ;filas.c: 13:     PORTDbits.RD3 = 1;
 [e = . . _PORTDbits 0 3 -> -> 1 `i `uc ]
-"26
-[; ;matriz_leds.c: 26: }
-[e :UE 103 ]
+"14
+[; ;filas.c: 14: }
+[e :UE 101 ]
 }
-"28
-[; ;matriz_leds.c: 28: void latchClock_Fil(void){
+"16
+[; ;filas.c: 16: void latchClock_Fil(void){
 [v _latchClock_Fil `(v ~T0 @X0 1 ef ]
 {
 [e :U _latchClock_Fil ]
 [f ]
-"29
-[; ;matriz_leds.c: 29:     PORTDbits.RD4 = 0;
+"17
+[; ;filas.c: 17:     PORTDbits.RD4 = 0;
 [e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
-"31
-[; ;matriz_leds.c: 31:     PORTDbits.RD4 = 1;
+"19
+[; ;filas.c: 19:     PORTDbits.RD4 = 1;
 [e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
-"33
-[; ;matriz_leds.c: 33:     PORTDbits.RD4 = 0;
+"21
+[; ;filas.c: 21:     PORTDbits.RD4 = 0;
 [e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
-"34
-[; ;matriz_leds.c: 34: }
-[e :UE 104 ]
+"22
+[; ;filas.c: 22: }
+[e :UE 102 ]
 }
-"36
-[; ;matriz_leds.c: 36: void shiftClock_Fil(void){
+"24
+[; ;filas.c: 24: void shiftClock_Fil(void){
 [v _shiftClock_Fil `(v ~T0 @X0 1 ef ]
 {
 [e :U _shiftClock_Fil ]
 [f ]
-"37
-[; ;matriz_leds.c: 37:     PORTDbits.RD5 = 0;
+"25
+[; ;filas.c: 25:     PORTDbits.RD5 = 0;
 [e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
-"39
-[; ;matriz_leds.c: 39:     PORTDbits.RD5 = 1;
+"27
+[; ;filas.c: 27:     PORTDbits.RD5 = 1;
 [e = . . _PORTDbits 0 5 -> -> 1 `i `uc ]
-"41
-[; ;matriz_leds.c: 41:     PORTDbits.RD5 = 0;
+"29
+[; ;filas.c: 29:     PORTDbits.RD5 = 0;
 [e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
-"42
-[; ;matriz_leds.c: 42: }
-[e :UE 105 ]
+"30
+[; ;filas.c: 30: }
+[e :UE 103 ]
 }
-"44
-[; ;matriz_leds.c: 44: void setColumnas(uint8_t reg_value){
-[v _setColumnas `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _setColumnas ]
-[v _reg_value `uc ~T0 @X0 1 r1 ]
-[f ]
-"45
-[; ;matriz_leds.c: 45:     int i = 0;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-"46
-[; ;matriz_leds.c: 46:     uint8_t indice = (1<<2);
-[v _indice `uc ~T0 @X0 1 a ]
-[e = _indice -> << -> 1 `i -> 2 `i `uc ]
-"47
-[; ;matriz_leds.c: 47:     uint8_t valor = reg_value & indice;
-[v _valor `uc ~T0 @X0 1 a ]
-[e = _valor -> & -> _reg_value `i -> _indice `i `uc ]
-"48
-[; ;matriz_leds.c: 48:     for(i=0;i<8;i++){
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 107  ]
-[e $U 108  ]
-[e :U 107 ]
-{
-"49
-[; ;matriz_leds.c: 49:         valor = (reg_value & (1<<i) )>>i;
-[e = _valor -> >> & -> _reg_value `i << -> 1 `i _i _i `uc ]
-"50
-[; ;matriz_leds.c: 50:         PORTBbits.RB1 = valor;
-[e = . . _PORTBbits 0 1 _valor ]
-"51
-[; ;matriz_leds.c: 51:         shiftClock_Col();
-[e ( _shiftClock_Col ..  ]
-"54
-[; ;matriz_leds.c: 54:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 107  ]
-[e :U 108 ]
-}
-"55
-[; ;matriz_leds.c: 55:     latchClock_Col();
-[e ( _latchClock_Col ..  ]
-"56
-[; ;matriz_leds.c: 56:     return;
-[e $UE 106  ]
-"57
-[; ;matriz_leds.c: 57: }
-[e :UE 106 ]
-}
-"59
-[; ;matriz_leds.c: 59: void setFilas(uint16_t reg_value){
+"32
+[; ;filas.c: 32: void setFilas(uint16_t reg_value){
 [v _setFilas `(v ~T0 @X0 1 ef1`ui ]
 {
 [e :U _setFilas ]
 [v _reg_value `ui ~T0 @X0 1 r1 ]
 [f ]
-"61
-[; ;matriz_leds.c: 61:     int i = 0;
+"34
+[; ;filas.c: 34:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"62
-[; ;matriz_leds.c: 62:     uint16_t valor = 0;
+"35
+[; ;filas.c: 35:     uint16_t valor = 0;
 [v _valor `ui ~T0 @X0 1 a ]
 [e = _valor -> -> 0 `i `ui ]
-"70
-[; ;matriz_leds.c: 70:     for(i=0;i<16;i++){
+"43
+[; ;filas.c: 43:     for(i=0;i<16;i++){
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 111  ]
-[e $U 112  ]
-[e :U 111 ]
+[e $ < _i -> 16 `i 105  ]
+[e $U 106  ]
+[e :U 105 ]
 {
-"72
-[; ;matriz_leds.c: 72:         PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
+"45
+[; ;filas.c: 45:         PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
 [e = . . _PORTDbits 0 2 -> >> & _reg_value -> << -> 1 `i _i `ui _i `uc ]
-"74
-[; ;matriz_leds.c: 74:         shiftClock_Fil();
+"47
+[; ;filas.c: 47:         shiftClock_Fil();
 [e ( _shiftClock_Fil ..  ]
-"76
-[; ;matriz_leds.c: 76:     }
+"49
+[; ;filas.c: 49:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 111  ]
-[e :U 112 ]
+[e $ < _i -> 16 `i 105  ]
+[e :U 106 ]
 }
-"78
-[; ;matriz_leds.c: 78:     enableFilas();
+"51
+[; ;filas.c: 51:     enableFilas();
 [e ( _enableFilas ..  ]
-"79
-[; ;matriz_leds.c: 79:     return;
-[e $UE 110  ]
-"80
-[; ;matriz_leds.c: 80: }
-[e :UE 110 ]
-}
-"82
-[; ;matriz_leds.c: 82: void shiftBitColumna(uint8_t bit){
-[v _shiftBitColumna `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _shiftBitColumna ]
-[v _bit `uc ~T0 @X0 1 r1 ]
-[f ]
-"83
-[; ;matriz_leds.c: 83:     PORTBbits.RB1 = bit & 0x01;
-[e = . . _PORTBbits 0 1 -> & -> _bit `i -> 1 `i `uc ]
-"84
-[; ;matriz_leds.c: 84:     shiftClock_Col();
-[e ( _shiftClock_Col ..  ]
-"85
-[; ;matriz_leds.c: 85:     latchClock_Col();
-[e ( _latchClock_Col ..  ]
-"86
-[; ;matriz_leds.c: 86:     latchClock_Fil();
-[e ( _latchClock_Fil ..  ]
-"87
-[; ;matriz_leds.c: 87: }
-[e :UE 114 ]
+"52
+[; ;filas.c: 52:     return;
+[e $UE 104  ]
+"53
+[; ;filas.c: 53: }
+[e :UE 104 ]
 }

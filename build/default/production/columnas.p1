@@ -1,47 +1,18 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[p mainexit ]
-"14 ./init.h
-[; ;./init.h: 14:     void init_pines(void);
-[v _init_pines `(v ~T0 @X0 0 ef ]
-"17 ./columnas.h
-[; ;./columnas.h: 17:     void setColumnas(uint8_t reg_value);
-[v _setColumnas `(v ~T0 @X0 0 ef1`uc ]
-"17 ./filas.h
-[; ;./filas.h: 17: void setFilas(uint16_t reg_value);
-[v _setFilas `(v ~T0 @X0 0 ef1`ui ]
 "222 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 222:     struct {
-[s S8 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S8 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+[s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S13 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
 "221
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 221: typedef union {
-[u S7 `S8 1 ]
-[n S7 . . ]
+[u S12 `S13 1 ]
+[n S12 . . ]
 "233
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 233: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
-[v _PORTBbits `VS7 ~T0 @X0 0 e@6 ]
-"44 mainsource.c
-[; ;mainsource.c: 44: void updateScreen(void);
-[v _updateScreen `(v ~T0 @X0 0 ef ]
-"18 ./columnas.h
-[; ;./columnas.h: 18:     void shiftBitColumna(uint8_t bit);
-[v _shiftBitColumna `(v ~T0 @X0 0 ef1`uc ]
-"13 mainsource.c
-[p x FOSC = XT ]
-"14
-[p x WDTE = OFF ]
-"15
-[p x PWRTE = OFF ]
-"16
-[p x BOREN = ON ]
-"17
-[p x LVP = OFF ]
-"18
-[p x CPD = OFF ]
-"19
-[p x WRT = OFF ]
-"20
-[p x CP = OFF ]
+[v _PORTBbits `VS12 ~T0 @X0 0 e@6 ]
+"15 ./filas.h
+[; ;./filas.h: 15: void latchClock_Fil(void);
+[v _latchClock_Fil `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -222,237 +193,114 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"37 mainsource.c
-[; ;mainsource.c: 37: unsigned char value[8]={1,0,0,1,0,1,1,0};
-[v _value `uc ~T0 @X0 -> 8 `i e ]
-[i _value
-:U ..
--> -> 1 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
--> -> 1 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
-..
-]
-"38
-[; ;mainsource.c: 38: uint8_t value2 = 0b10010110;
-[v _value2 `uc ~T0 @X0 1 e ]
-[i _value2
--> -> 150 `i `uc
-]
-"39
-[; ;mainsource.c: 39: uint16_t value3 = 0b1001011010101010;
-[v _value3 `ui ~T0 @X0 1 e ]
-[i _value3
--> 38570 `ui
-]
-"40
-[; ;mainsource.c: 40: uint16_t value4 = 0xffff;
-[v _value4 `ui ~T0 @X0 1 e ]
-[i _value4
--> 65535 `ui
-]
-"42
-[; ;mainsource.c: 42: uint16_t columna = 1;
-[v _columna `ui ~T0 @X0 1 e ]
-[i _columna
--> -> 1 `i `ui
-]
-[v $root$_main `(v ~T0 @X0 0 e ]
-"46
-[; ;mainsource.c: 46: int main(int argc, char** argv) {
-[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
+"7 columnas.c
+[; ;columnas.c: 7: void latchClock_Col(void){
+[v _latchClock_Col `(v ~T0 @X0 1 ef ]
 {
-[e :U _main ]
-[v _argc `i ~T0 @X0 1 r1 ]
-[v _argv `**uc ~T0 @X0 1 r2 ]
+[e :U _latchClock_Col ]
 [f ]
-"48
-[; ;mainsource.c: 48:     init_pines();
-[e ( _init_pines ..  ]
-"50
-[; ;mainsource.c: 50:     int i=0;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-"52
-[; ;mainsource.c: 52:     setColumnas(0x00);
-[e ( _setColumnas (1 -> -> 0 `i `uc ]
-"53
-[; ;mainsource.c: 53:     setFilas(0x0000);
-[e ( _setFilas (1 -> -> 0 `i `ui ]
-"54
-[; ;mainsource.c: 54:     PORTBbits.RB0 = 1;
-[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
-"56
-[; ;mainsource.c: 56:     while(1){
-[e :U 102 ]
-{
-"57
-[; ;mainsource.c: 57:         updateScreen();
-[e ( _updateScreen ..  ]
-"59
-[; ;mainsource.c: 59:     }
-}
-[e :U 101 ]
-[e $U 102  ]
-[e :U 103 ]
-"60
-[; ;mainsource.c: 60:     return (0);
-[e ) -> 0 `i ]
-[e $UE 100  ]
-"61
-[; ;mainsource.c: 61: }
+"8
+[; ;columnas.c: 8:     PORTBbits.RB4 = 1;
+[e = . . _PORTBbits 0 4 -> -> 1 `i `uc ]
+"10
+[; ;columnas.c: 10:     PORTBbits.RB4 = 0;
+[e = . . _PORTBbits 0 4 -> -> 0 `i `uc ]
+"11
+[; ;columnas.c: 11: }
 [e :UE 100 ]
 }
-"63
-[; ;mainsource.c: 63: void updateScreen(void){
-[v _updateScreen `(v ~T0 @X0 1 ef ]
+"13
+[; ;columnas.c: 13: void shiftClock_Col(void){
+[v _shiftClock_Col `(v ~T0 @X0 1 ef ]
 {
-[e :U _updateScreen ]
+[e :U _shiftClock_Col ]
 [f ]
-"64
-[; ;mainsource.c: 64:     switch(columna){
-[e $U 106  ]
-{
-"65
-[; ;mainsource.c: 65:             case 1:
-[e :U 107 ]
-"66
-[; ;mainsource.c: 66:                 setFilas(0xffcf);
-[e ( _setFilas (1 -> 65487 `ui ]
-"67
-[; ;mainsource.c: 67:                 shiftBitColumna(1);
-[e ( _shiftBitColumna (1 -> -> 1 `i `uc ]
-"68
-[; ;mainsource.c: 68:                 columna=2;
-[e = _columna -> -> 2 `i `ui ]
-"69
-[; ;mainsource.c: 69:                 break;
-[e $U 105  ]
-"70
-[; ;mainsource.c: 70:             case 2:
-[e :U 108 ]
-"71
-[; ;mainsource.c: 71:                 setFilas(0xffb7);
-[e ( _setFilas (1 -> 65463 `ui ]
-"72
-[; ;mainsource.c: 72:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"73
-[; ;mainsource.c: 73:                 columna=3;
-[e = _columna -> -> 3 `i `ui ]
-"74
-[; ;mainsource.c: 74:                 break;
-[e $U 105  ]
-"75
-[; ;mainsource.c: 75:             case 3:
-[e :U 109 ]
-"76
-[; ;mainsource.c: 76:                 setFilas(0xffbb);
-[e ( _setFilas (1 -> 65467 `ui ]
-"77
-[; ;mainsource.c: 77:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"78
-[; ;mainsource.c: 78:                 columna=4;
-[e = _columna -> -> 4 `i `ui ]
-"79
-[; ;mainsource.c: 79:                 break;
-[e $U 105  ]
-"80
-[; ;mainsource.c: 80:             case 4:
-[e :U 110 ]
-"81
-[; ;mainsource.c: 81:                 setFilas(0xffdd);
-[e ( _setFilas (1 -> 65501 `ui ]
-"82
-[; ;mainsource.c: 82:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"83
-[; ;mainsource.c: 83:                 columna=5;
-[e = _columna -> -> 5 `i `ui ]
-"84
-[; ;mainsource.c: 84:                 break;
-[e $U 105  ]
-"85
-[; ;mainsource.c: 85:             case 5:
-[e :U 111 ]
-"86
-[; ;mainsource.c: 86:                 setFilas(0xffbb);
-[e ( _setFilas (1 -> 65467 `ui ]
-"87
-[; ;mainsource.c: 87:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"88
-[; ;mainsource.c: 88:                 columna=6;
-[e = _columna -> -> 6 `i `ui ]
-"89
-[; ;mainsource.c: 89:                 break;
-[e $U 105  ]
-"90
-[; ;mainsource.c: 90:             case 6:
-[e :U 112 ]
-"91
-[; ;mainsource.c: 91:                 setFilas(0xffb7);
-[e ( _setFilas (1 -> 65463 `ui ]
-"92
-[; ;mainsource.c: 92:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"93
-[; ;mainsource.c: 93:                 columna=7;
-[e = _columna -> -> 7 `i `ui ]
-"94
-[; ;mainsource.c: 94:                 break;
-[e $U 105  ]
-"95
-[; ;mainsource.c: 95:             case 7:
-[e :U 113 ]
-"96
-[; ;mainsource.c: 96:                 setFilas(0xffcf);
-[e ( _setFilas (1 -> 65487 `ui ]
-"97
-[; ;mainsource.c: 97:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"98
-[; ;mainsource.c: 98:                 columna=8;
-[e = _columna -> -> 8 `i `ui ]
-"99
-[; ;mainsource.c: 99:                 break;
-[e $U 105  ]
-"100
-[; ;mainsource.c: 100:             case 8:
-[e :U 114 ]
-"101
-[; ;mainsource.c: 101:                 setFilas(0xffff);
-[e ( _setFilas (1 -> 65535 `ui ]
-"102
-[; ;mainsource.c: 102:                 shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"103
-[; ;mainsource.c: 103:                 columna=1;
-[e = _columna -> -> 1 `i `ui ]
-"104
-[; ;mainsource.c: 104:                 break;
-[e $U 105  ]
-"105
-[; ;mainsource.c: 105:         }
+"14
+[; ;columnas.c: 14:     PORTBbits.RB5 = 0;
+[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
+"15
+[; ;columnas.c: 15:     PORTBbits.RB5 = 1;
+[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
+"17
+[; ;columnas.c: 17:     PORTBbits.RB5 = 0;
+[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
+"18
+[; ;columnas.c: 18: }
+[e :UE 101 ]
 }
-[e $U 105  ]
-[e :U 106 ]
-[e [\ _columna , $ -> -> 1 `i `ui 107
- , $ -> -> 2 `i `ui 108
- , $ -> -> 3 `i `ui 109
- , $ -> -> 4 `i `ui 110
- , $ -> -> 5 `i `ui 111
- , $ -> -> 6 `i `ui 112
- , $ -> -> 7 `i `ui 113
- , $ -> -> 8 `i `ui 114
- 105 ]
-[e :U 105 ]
-"106
-[; ;mainsource.c: 106: }
-[e :UE 104 ]
+"22
+[; ;columnas.c: 22: void setColumnas(uint8_t reg_value){
+[v _setColumnas `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _setColumnas ]
+[v _reg_value `uc ~T0 @X0 1 r1 ]
+[f ]
+"23
+[; ;columnas.c: 23:     int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"24
+[; ;columnas.c: 24:     uint8_t indice = (1<<2);
+[v _indice `uc ~T0 @X0 1 a ]
+[e = _indice -> << -> 1 `i -> 2 `i `uc ]
+"25
+[; ;columnas.c: 25:     uint8_t valor = reg_value & indice;
+[v _valor `uc ~T0 @X0 1 a ]
+[e = _valor -> & -> _reg_value `i -> _indice `i `uc ]
+"26
+[; ;columnas.c: 26:     for(i=0;i<8;i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 103  ]
+[e $U 104  ]
+[e :U 103 ]
+{
+"27
+[; ;columnas.c: 27:         valor = (reg_value & (1<<i) )>>i;
+[e = _valor -> >> & -> _reg_value `i << -> 1 `i _i _i `uc ]
+"28
+[; ;columnas.c: 28:         PORTBbits.RB1 = valor;
+[e = . . _PORTBbits 0 1 _valor ]
+"29
+[; ;columnas.c: 29:         shiftClock_Col();
+[e ( _shiftClock_Col ..  ]
+"32
+[; ;columnas.c: 32:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 103  ]
+[e :U 104 ]
+}
+"33
+[; ;columnas.c: 33:     latchClock_Col();
+[e ( _latchClock_Col ..  ]
+"34
+[; ;columnas.c: 34:     return;
+[e $UE 102  ]
+"35
+[; ;columnas.c: 35: }
+[e :UE 102 ]
+}
+"38
+[; ;columnas.c: 38: void shiftBitColumna(uint8_t bit){
+[v _shiftBitColumna `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _shiftBitColumna ]
+[v _bit `uc ~T0 @X0 1 r1 ]
+[f ]
+"39
+[; ;columnas.c: 39:     PORTBbits.RB1 = bit & 0x01;
+[e = . . _PORTBbits 0 1 -> & -> _bit `i -> 1 `i `uc ]
+"40
+[; ;columnas.c: 40:     shiftClock_Col();
+[e ( _shiftClock_Col ..  ]
+"41
+[; ;columnas.c: 41:     latchClock_Col();
+[e ( _latchClock_Col ..  ]
+"42
+[; ;columnas.c: 42:     latchClock_Fil();
+[e ( _latchClock_Fil ..  ]
+"43
+[; ;columnas.c: 43: }
+[e :UE 106 ]
 }
