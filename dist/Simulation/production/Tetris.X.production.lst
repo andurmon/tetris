@@ -1,0 +1,2553 @@
+
+
+Microchip MPLAB XC8 Assembler V2.10 build 88905656 
+                                                                                               Fri May 01 16:11:10 2020
+
+Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
+     1                           	processor	16F877A
+     2                           	opt	pw 120
+     3                           	opt	flic
+     4                           	psect	idataCOMMON,global,class=CODE,delta=2
+     5                           	psect	idataBANK0,global,class=CODE,delta=2
+     6                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     7                           	psect	bssCOMMON,global,class=COMMON,space=1,delta=1
+     8                           	psect	dataCOMMON,global,class=COMMON,space=1,delta=1
+     9                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1
+    10                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1
+    11                           	psect	inittext,global,class=CODE,delta=2
+    12                           	psect	clrtext,global,class=CODE,delta=2
+    13                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+    14                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1
+    15                           	psect	maintext,global,class=CODE,split=1,delta=2
+    16                           	psect	text1,local,class=CODE,merge=1,delta=2
+    17                           	psect	text2,local,class=CODE,merge=1,delta=2
+    18                           	psect	text3,local,class=CODE,merge=1,delta=2
+    19                           	psect	text4,local,class=CODE,merge=1,delta=2
+    20                           	psect	text5,local,class=CODE,merge=1,delta=2
+    21                           	psect	text6,local,class=CODE,merge=1,delta=2
+    22                           	psect	text7,local,class=CODE,merge=1,delta=2
+    23                           	psect	text8,local,class=CODE,merge=1,delta=2
+    24                           	psect	text9,local,class=CODE,merge=1,delta=2
+    25                           	psect	text10,local,class=CODE,merge=1,delta=2
+    26                           	psect	text11,local,class=CODE,merge=1,delta=2
+    27                           	psect	text12,local,class=CODE,merge=1,delta=2
+    28                           	psect	text13,local,class=CODE,merge=1,delta=2
+    29                           	psect	text14,local,class=CODE,merge=1,delta=2
+    30                           	psect	intentry,global,class=CODE,delta=2
+    31                           	dabs	1,0x7E,2
+    32  0000                     
+    33                           ; Version 2.10
+    34                           ; Generated 31/07/2019 GMT
+    35                           ; 
+    36                           ; Copyright © 2019, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    37                           ; All rights reserved.
+    38                           ; 
+    39                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    40                           ; 
+    41                           ; Redistribution and use in source and binary forms, with or without modification, are
+    42                           ; permitted provided that the following conditions are met:
+    43                           ; 
+    44                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    45                           ;        conditions and the following disclaimer.
+    46                           ; 
+    47                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    48                           ;        of conditions and the following disclaimer in the documentation and/or other
+    49                           ;        materials provided with the distribution.
+    50                           ; 
+    51                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    52                           ;        software without specific prior written permission.
+    53                           ; 
+    54                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    55                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    56                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    57                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    58                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    59                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    60                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    61                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    62                           ; 
+    63                           ; 
+    64                           ; Code-generator required, PIC16F877A Definitions
+    65                           ; 
+    66                           ; SFR Addresses
+    67  0000                     	;# 
+    68  0001                     	;# 
+    69  0002                     	;# 
+    70  0003                     	;# 
+    71  0004                     	;# 
+    72  0005                     	;# 
+    73  0006                     	;# 
+    74  0007                     	;# 
+    75  0008                     	;# 
+    76  0009                     	;# 
+    77  000A                     	;# 
+    78  000B                     	;# 
+    79  000C                     	;# 
+    80  000D                     	;# 
+    81  000E                     	;# 
+    82  000E                     	;# 
+    83  000F                     	;# 
+    84  0010                     	;# 
+    85  0011                     	;# 
+    86  0012                     	;# 
+    87  0013                     	;# 
+    88  0014                     	;# 
+    89  0015                     	;# 
+    90  0015                     	;# 
+    91  0016                     	;# 
+    92  0017                     	;# 
+    93  0018                     	;# 
+    94  0019                     	;# 
+    95  001A                     	;# 
+    96  001B                     	;# 
+    97  001B                     	;# 
+    98  001C                     	;# 
+    99  001D                     	;# 
+   100  001E                     	;# 
+   101  001F                     	;# 
+   102  0081                     	;# 
+   103  0085                     	;# 
+   104  0086                     	;# 
+   105  0087                     	;# 
+   106  0088                     	;# 
+   107  0089                     	;# 
+   108  008C                     	;# 
+   109  008D                     	;# 
+   110  008E                     	;# 
+   111  0091                     	;# 
+   112  0092                     	;# 
+   113  0093                     	;# 
+   114  0094                     	;# 
+   115  0098                     	;# 
+   116  0099                     	;# 
+   117  009C                     	;# 
+   118  009D                     	;# 
+   119  009E                     	;# 
+   120  009F                     	;# 
+   121  010C                     	;# 
+   122  010D                     	;# 
+   123  010E                     	;# 
+   124  010F                     	;# 
+   125  018C                     	;# 
+   126  018D                     	;# 
+   127  0000                     	;# 
+   128  0001                     	;# 
+   129  0002                     	;# 
+   130  0003                     	;# 
+   131  0004                     	;# 
+   132  0005                     	;# 
+   133  0006                     	;# 
+   134  0007                     	;# 
+   135  0008                     	;# 
+   136  0009                     	;# 
+   137  000A                     	;# 
+   138  000B                     	;# 
+   139  000C                     	;# 
+   140  000D                     	;# 
+   141  000E                     	;# 
+   142  000E                     	;# 
+   143  000F                     	;# 
+   144  0010                     	;# 
+   145  0011                     	;# 
+   146  0012                     	;# 
+   147  0013                     	;# 
+   148  0014                     	;# 
+   149  0015                     	;# 
+   150  0015                     	;# 
+   151  0016                     	;# 
+   152  0017                     	;# 
+   153  0018                     	;# 
+   154  0019                     	;# 
+   155  001A                     	;# 
+   156  001B                     	;# 
+   157  001B                     	;# 
+   158  001C                     	;# 
+   159  001D                     	;# 
+   160  001E                     	;# 
+   161  001F                     	;# 
+   162  0081                     	;# 
+   163  0085                     	;# 
+   164  0086                     	;# 
+   165  0087                     	;# 
+   166  0088                     	;# 
+   167  0089                     	;# 
+   168  008C                     	;# 
+   169  008D                     	;# 
+   170  008E                     	;# 
+   171  0091                     	;# 
+   172  0092                     	;# 
+   173  0093                     	;# 
+   174  0094                     	;# 
+   175  0098                     	;# 
+   176  0099                     	;# 
+   177  009C                     	;# 
+   178  009D                     	;# 
+   179  009E                     	;# 
+   180  009F                     	;# 
+   181  010C                     	;# 
+   182  010D                     	;# 
+   183  010E                     	;# 
+   184  010F                     	;# 
+   185  018C                     	;# 
+   186  018D                     	;# 
+   187  0000                     	;# 
+   188  0001                     	;# 
+   189  0002                     	;# 
+   190  0003                     	;# 
+   191  0004                     	;# 
+   192  0005                     	;# 
+   193  0006                     	;# 
+   194  0007                     	;# 
+   195  0008                     	;# 
+   196  0009                     	;# 
+   197  000A                     	;# 
+   198  000B                     	;# 
+   199  000C                     	;# 
+   200  000D                     	;# 
+   201  000E                     	;# 
+   202  000E                     	;# 
+   203  000F                     	;# 
+   204  0010                     	;# 
+   205  0011                     	;# 
+   206  0012                     	;# 
+   207  0013                     	;# 
+   208  0014                     	;# 
+   209  0015                     	;# 
+   210  0015                     	;# 
+   211  0016                     	;# 
+   212  0017                     	;# 
+   213  0018                     	;# 
+   214  0019                     	;# 
+   215  001A                     	;# 
+   216  001B                     	;# 
+   217  001B                     	;# 
+   218  001C                     	;# 
+   219  001D                     	;# 
+   220  001E                     	;# 
+   221  001F                     	;# 
+   222  0081                     	;# 
+   223  0085                     	;# 
+   224  0086                     	;# 
+   225  0087                     	;# 
+   226  0088                     	;# 
+   227  0089                     	;# 
+   228  008C                     	;# 
+   229  008D                     	;# 
+   230  008E                     	;# 
+   231  0091                     	;# 
+   232  0092                     	;# 
+   233  0093                     	;# 
+   234  0094                     	;# 
+   235  0098                     	;# 
+   236  0099                     	;# 
+   237  009C                     	;# 
+   238  009D                     	;# 
+   239  009E                     	;# 
+   240  009F                     	;# 
+   241  010C                     	;# 
+   242  010D                     	;# 
+   243  010E                     	;# 
+   244  010F                     	;# 
+   245  018C                     	;# 
+   246  018D                     	;# 
+   247  0000                     	;# 
+   248  0001                     	;# 
+   249  0002                     	;# 
+   250  0003                     	;# 
+   251  0004                     	;# 
+   252  0005                     	;# 
+   253  0006                     	;# 
+   254  0007                     	;# 
+   255  0008                     	;# 
+   256  0009                     	;# 
+   257  000A                     	;# 
+   258  000B                     	;# 
+   259  000C                     	;# 
+   260  000D                     	;# 
+   261  000E                     	;# 
+   262  000E                     	;# 
+   263  000F                     	;# 
+   264  0010                     	;# 
+   265  0011                     	;# 
+   266  0012                     	;# 
+   267  0013                     	;# 
+   268  0014                     	;# 
+   269  0015                     	;# 
+   270  0015                     	;# 
+   271  0016                     	;# 
+   272  0017                     	;# 
+   273  0018                     	;# 
+   274  0019                     	;# 
+   275  001A                     	;# 
+   276  001B                     	;# 
+   277  001B                     	;# 
+   278  001C                     	;# 
+   279  001D                     	;# 
+   280  001E                     	;# 
+   281  001F                     	;# 
+   282  0081                     	;# 
+   283  0085                     	;# 
+   284  0086                     	;# 
+   285  0087                     	;# 
+   286  0088                     	;# 
+   287  0089                     	;# 
+   288  008C                     	;# 
+   289  008D                     	;# 
+   290  008E                     	;# 
+   291  0091                     	;# 
+   292  0092                     	;# 
+   293  0093                     	;# 
+   294  0094                     	;# 
+   295  0098                     	;# 
+   296  0099                     	;# 
+   297  009C                     	;# 
+   298  009D                     	;# 
+   299  009E                     	;# 
+   300  009F                     	;# 
+   301  010C                     	;# 
+   302  010D                     	;# 
+   303  010E                     	;# 
+   304  010F                     	;# 
+   305  018C                     	;# 
+   306  018D                     	;# 
+   307  0000                     	;# 
+   308  0001                     	;# 
+   309  0002                     	;# 
+   310  0003                     	;# 
+   311  0004                     	;# 
+   312  0005                     	;# 
+   313  0006                     	;# 
+   314  0007                     	;# 
+   315  0008                     	;# 
+   316  0009                     	;# 
+   317  000A                     	;# 
+   318  000B                     	;# 
+   319  000C                     	;# 
+   320  000D                     	;# 
+   321  000E                     	;# 
+   322  000E                     	;# 
+   323  000F                     	;# 
+   324  0010                     	;# 
+   325  0011                     	;# 
+   326  0012                     	;# 
+   327  0013                     	;# 
+   328  0014                     	;# 
+   329  0015                     	;# 
+   330  0015                     	;# 
+   331  0016                     	;# 
+   332  0017                     	;# 
+   333  0018                     	;# 
+   334  0019                     	;# 
+   335  001A                     	;# 
+   336  001B                     	;# 
+   337  001B                     	;# 
+   338  001C                     	;# 
+   339  001D                     	;# 
+   340  001E                     	;# 
+   341  001F                     	;# 
+   342  0081                     	;# 
+   343  0085                     	;# 
+   344  0086                     	;# 
+   345  0087                     	;# 
+   346  0088                     	;# 
+   347  0089                     	;# 
+   348  008C                     	;# 
+   349  008D                     	;# 
+   350  008E                     	;# 
+   351  0091                     	;# 
+   352  0092                     	;# 
+   353  0093                     	;# 
+   354  0094                     	;# 
+   355  0098                     	;# 
+   356  0099                     	;# 
+   357  009C                     	;# 
+   358  009D                     	;# 
+   359  009E                     	;# 
+   360  009F                     	;# 
+   361  010C                     	;# 
+   362  010D                     	;# 
+   363  010E                     	;# 
+   364  010F                     	;# 
+   365  018C                     	;# 
+   366  018D                     	;# 
+   367  0000                     	;# 
+   368  0001                     	;# 
+   369  0002                     	;# 
+   370  0003                     	;# 
+   371  0004                     	;# 
+   372  0005                     	;# 
+   373  0006                     	;# 
+   374  0007                     	;# 
+   375  0008                     	;# 
+   376  0009                     	;# 
+   377  000A                     	;# 
+   378  000B                     	;# 
+   379  000C                     	;# 
+   380  000D                     	;# 
+   381  000E                     	;# 
+   382  000E                     	;# 
+   383  000F                     	;# 
+   384  0010                     	;# 
+   385  0011                     	;# 
+   386  0012                     	;# 
+   387  0013                     	;# 
+   388  0014                     	;# 
+   389  0015                     	;# 
+   390  0015                     	;# 
+   391  0016                     	;# 
+   392  0017                     	;# 
+   393  0018                     	;# 
+   394  0019                     	;# 
+   395  001A                     	;# 
+   396  001B                     	;# 
+   397  001B                     	;# 
+   398  001C                     	;# 
+   399  001D                     	;# 
+   400  001E                     	;# 
+   401  001F                     	;# 
+   402  0081                     	;# 
+   403  0085                     	;# 
+   404  0086                     	;# 
+   405  0087                     	;# 
+   406  0088                     	;# 
+   407  0089                     	;# 
+   408  008C                     	;# 
+   409  008D                     	;# 
+   410  008E                     	;# 
+   411  0091                     	;# 
+   412  0092                     	;# 
+   413  0093                     	;# 
+   414  0094                     	;# 
+   415  0098                     	;# 
+   416  0099                     	;# 
+   417  009C                     	;# 
+   418  009D                     	;# 
+   419  009E                     	;# 
+   420  009F                     	;# 
+   421  010C                     	;# 
+   422  010D                     	;# 
+   423  010E                     	;# 
+   424  010F                     	;# 
+   425  018C                     	;# 
+   426  018D                     	;# 
+   427                           
+   428                           	psect	idataCOMMON
+   429  0315                     __pidataCOMMON:	
+   430                           
+   431                           ;initializer for _columna
+   432  0315  3401               	retlw	1
+   433  0316  3400               	retlw	0
+   434                           
+   435                           	psect	idataBANK0
+   436  0292                     __pidataBANK0:	
+   437                           
+   438                           ;initializer for _corazon
+   439  0292  3430               	retlw	48
+   440  0293  3400               	retlw	0
+   441  0294  3448               	retlw	72
+   442  0295  3400               	retlw	0
+   443  0296  3444               	retlw	68
+   444  0297  3400               	retlw	0
+   445  0298  3422               	retlw	34
+   446  0299  3400               	retlw	0
+   447  029A  3444               	retlw	68
+   448  029B  3400               	retlw	0
+   449  029C  3448               	retlw	72
+   450  029D  3400               	retlw	0
+   451  029E  3430               	retlw	48
+   452  029F  3400               	retlw	0
+   453  02A0  3400               	retlw	0
+   454  02A1  3400               	retlw	0
+   455                           
+   456                           ;initializer for _figura
+   457  02A2  3404               	retlw	4
+   458  02A3  3400               	retlw	0
+   459  02A4  3404               	retlw	4
+   460  02A5  3400               	retlw	0
+   461  02A6  3406               	retlw	6
+   462  02A7  3400               	retlw	0
+   463  02A8  3400               	retlw	0
+   464  02A9  3400               	retlw	0
+   465  000B                     _INTCONbits	set	11
+   466  0001                     _TMR0	set	1
+   467  0006                     _PORTBbits	set	6
+   468  0008                     _PORTDbits	set	8
+   469  0081                     _OPTION_REGbits	set	129
+   470  0086                     _TRISBbits	set	134
+   471  0088                     _TRISDbits	set	136
+   472                           
+   473                           ; #config settings
+   474  0000                     
+   475                           	psect	cinit
+   476  0013                     start_initialization:	
+   477  0013                     __initialization:	
+   478                           
+   479                           ; Initialize objects allocated to BANK0
+   480  0013  1383               	bcf	3,7	;select IRP bank0
+   481  0014  3038               	movlw	low (__pdataBANK0+24)
+   482  0015  00FD               	movwf	btemp+-1
+   483  0016  3002               	movlw	high __pidataBANK0
+   484  0017  00FE               	movwf	btemp
+   485  0018  3092               	movlw	low __pidataBANK0
+   486  0019  00FF               	movwf	btemp+1
+   487  001A  3020               	movlw	low __pdataBANK0
+   488  001B  0084               	movwf	4
+   489  001C  120A  118A  22AE  120A  118A  	fcall	init_ram0
+   490                           
+   491                           ; Initialize objects allocated to COMMON
+   492  0021  120A  118A  2315  120A  118A  	fcall	__pidataCOMMON	;fetch initializer
+   493  0026  00F8               	movwf	__pdataCOMMON& (0+127)
+   494  0027  120A  118A  2316  120A  118A  	fcall	__pidataCOMMON+1	;fetch initializer
+   495  002C  00F9               	movwf	(__pdataCOMMON+1)& (0+127)
+   496                           
+   497                           ; Clear objects allocated to BANK0
+   498  002D  3038               	movlw	low __pbssBANK0
+   499  002E  0084               	movwf	4
+   500  002F  304A               	movlw	low (__pbssBANK0+18)
+   501  0030  120A  118A  22F2  120A  118A  	fcall	clear_ram0
+   502                           
+   503                           ; Clear objects allocated to COMMON
+   504  0035  01FA               	clrf	__pbssCOMMON& (0+127)
+   505  0036                     end_of_initialization:	
+   506                           ;End of C runtime variable initialization code
+   507                           
+   508  0036                     __end_of__initialization:	
+   509  0036  0183               	clrf	3
+   510  0037  120A  118A  2943   	ljmp	_main	;jump to C main() function
+   511                           
+   512                           	psect	bssCOMMON
+   513  007A                     __pbssCOMMON:	
+   514  007A                     _led:	
+   515  007A                     	ds	1
+   516                           
+   517                           	psect	dataCOMMON
+   518  0078                     __pdataCOMMON:	
+   519  0078                     _columna:	
+   520  0078                     	ds	2
+   521                           
+   522                           	psect	bssBANK0
+   523  0038                     __pbssBANK0:	
+   524  0038                     _counter:	
+   525  0038                     	ds	2
+   526  003A                     _dibujo:	
+   527  003A                     	ds	16
+   528                           
+   529                           	psect	dataBANK0
+   530  0020                     __pdataBANK0:	
+   531  0020                     _corazon:	
+   532  0020                     	ds	16
+   533  0030                     _figura:	
+   534  0030                     	ds	8
+   535                           
+   536                           	psect	inittext
+   537  02AA                     init_fetch0:	
+   538                           ;	Called with low address in FSR and high address in W
+   539                           
+   540  02AA  087E               	movf	btemp,w
+   541  02AB  008A               	movwf	10
+   542  02AC  087F               	movf	btemp+1,w
+   543  02AD  0082               	movwf	2
+   544  02AE                     init_ram0:	
+   545                           ;Called with:
+   546                           ;	high address of idata address in btemp 
+   547                           ;	low address of idata address in btemp+1 
+   548                           ;	low address of data in FSR
+   549                           ;	high address + 1 of data in btemp-1
+   550                           
+   551  02AE  120A  118A  22AA  120A  118A  	fcall	init_fetch0
+   552  02B3  0080               	movwf	0
+   553  02B4  0A84               	incf	4,f
+   554  02B5  0804               	movf	4,w
+   555  02B6  067D               	xorwf	btemp+-1,w
+   556  02B7  1903               	btfsc	3,2
+   557  02B8  3400               	retlw	0
+   558  02B9  0AFF               	incf	btemp+1,f
+   559  02BA  1903               	btfsc	3,2
+   560  02BB  0AFE               	incf	btemp,f
+   561  02BC  2AAE               	goto	init_ram0
+   562                           
+   563                           	psect	clrtext
+   564  02F2                     clear_ram0:	
+   565                           ;	Called with FSR containing the base address, and
+   566                           ;	W with the last address+1
+   567                           
+   568  02F2  0064               	clrwdt	;clear the watchdog before getting into this loop
+   569  02F3                     clrloop0:	
+   570  02F3  0180               	clrf	0	;clear RAM location pointed to by FSR
+   571  02F4  0A84               	incf	4,f	;increment pointer
+   572  02F5  0604               	xorwf	4,w	;XOR with final address
+   573  02F6  1903               	btfsc	3,2	;have we reached the end yet?
+   574  02F7  3400               	retlw	0	;all done for this memory range, return
+   575  02F8  0604               	xorwf	4,w	;XOR again to restore value
+   576  02F9  2AF3               	goto	clrloop0	;do the next byte
+   577                           
+   578                           	psect	cstackCOMMON
+   579  0070                     __pcstackCOMMON:	
+   580  0070                     ?_setColumnas:	
+   581  0070                     ?_updateScreen:	
+   582                           ; 1 bytes @ 0x0
+   583                           
+   584  0070                     ?_shiftBitColumna:	
+   585                           ; 1 bytes @ 0x0
+   586                           
+   587  0070                     ?_init_pines_fil:	
+   588                           ; 1 bytes @ 0x0
+   589                           
+   590  0070                     ?_init_pines_col:	
+   591                           ; 1 bytes @ 0x0
+   592                           
+   593  0070                     ?_init_pines:	
+   594                           ; 1 bytes @ 0x0
+   595                           
+   596  0070                     ?_init_timer:	
+   597                           ; 1 bytes @ 0x0
+   598                           
+   599  0070                     ?_Timer0_ISR:	
+   600                           ; 1 bytes @ 0x0
+   601                           
+   602  0070                     ??_Timer0_ISR:	
+   603                           ; 1 bytes @ 0x0
+   604                           
+   605  0070                     ?_enableFilas:	
+   606                           ; 1 bytes @ 0x0
+   607                           
+   608  0070                     ?_latchClock_Fil:	
+   609                           ; 1 bytes @ 0x0
+   610                           
+   611  0070                     ?_shiftClock_Fil:	
+   612                           ; 1 bytes @ 0x0
+   613                           
+   614  0070                     ?_latchClock_Col:	
+   615                           ; 1 bytes @ 0x0
+   616                           
+   617  0070                     ?_shiftClock_Col:	
+   618                           ; 1 bytes @ 0x0
+   619                           
+   620                           
+   621                           ; 1 bytes @ 0x0
+   622  0070                     	ds	3
+   623  0073                     ??_setColumnas:	
+   624  0073                     ?_setFilas:	
+   625                           ; 1 bytes @ 0x3
+   626                           
+   627  0073                     ??_shiftBitColumna:	
+   628                           ; 1 bytes @ 0x3
+   629                           
+   630  0073                     ??_init_pines_fil:	
+   631                           ; 1 bytes @ 0x3
+   632                           
+   633  0073                     ??_init_pines_col:	
+   634                           ; 1 bytes @ 0x3
+   635                           
+   636  0073                     ??_init_pines:	
+   637                           ; 1 bytes @ 0x3
+   638                           
+   639  0073                     ??_init_timer:	
+   640                           ; 1 bytes @ 0x3
+   641                           
+   642  0073                     ??_enableFilas:	
+   643                           ; 1 bytes @ 0x3
+   644                           
+   645  0073                     ??_latchClock_Fil:	
+   646                           ; 1 bytes @ 0x3
+   647                           
+   648  0073                     ??_shiftClock_Fil:	
+   649                           ; 1 bytes @ 0x3
+   650                           
+   651  0073                     ??_latchClock_Col:	
+   652                           ; 1 bytes @ 0x3
+   653                           
+   654  0073                     ??_shiftClock_Col:	
+   655                           ; 1 bytes @ 0x3
+   656                           
+   657  0073                     setFilas@reg_value:	
+   658                           ; 1 bytes @ 0x3
+   659                           
+   660                           
+   661                           ; 2 bytes @ 0x3
+   662  0073                     	ds	1
+   663  0074                     shiftBitColumna@bit:	
+   664                           
+   665                           ; 1 bytes @ 0x4
+   666  0074                     	ds	1
+   667  0075                     ??_updateScreen:	
+   668                           
+   669                           ; 1 bytes @ 0x5
+   670  0075                     	ds	2
+   671  0077                     updateScreen@dibujo:	
+   672                           
+   673                           ; 1 bytes @ 0x7
+   674  0077                     	ds	1
+   675                           
+   676                           	psect	cstackBANK0
+   677  004A                     __pcstackBANK0:	
+   678  004A                     ??_setFilas:	
+   679                           
+   680                           ; 1 bytes @ 0x0
+   681  004A                     	ds	1
+   682  004B                     setColumnas@valor:	
+   683                           
+   684                           ; 1 bytes @ 0x1
+   685  004B                     	ds	1
+   686  004C                     setColumnas@reg_value:	
+   687                           
+   688                           ; 1 bytes @ 0x2
+   689  004C                     	ds	1
+   690  004D                     setColumnas@i:	
+   691                           
+   692                           ; 2 bytes @ 0x3
+   693  004D                     	ds	5
+   694  0052                     setFilas@i:	
+   695                           
+   696                           ; 2 bytes @ 0x8
+   697  0052                     	ds	2
+   698  0054                     ?_main:	
+   699  0054                     main@argc:	
+   700                           ; 2 bytes @ 0xA
+   701                           
+   702                           
+   703                           ; 2 bytes @ 0xA
+   704  0054                     	ds	2
+   705  0056                     main@argv:	
+   706                           
+   707                           ; 2 bytes @ 0xC
+   708  0056                     	ds	2
+   709  0058                     ??_main:	
+   710                           
+   711                           ; 1 bytes @ 0xE
+   712  0058                     	ds	2
+   713                           
+   714                           	psect	maintext
+   715  0143                     __pmaintext:	
+   716 ;;
+   717 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   718 ;;
+   719 ;; *************** function _main *****************
+   720 ;; Defined at:
+   721 ;;		line 66 in file "mainsource.c"
+   722 ;; Parameters:    Size  Location     Type
+   723 ;;  argc            2   10[BANK0 ] int 
+   724 ;;  argv            2   12[BANK0 ] PTR PTR unsigned char 
+   725 ;; Auto vars:     Size  Location     Type
+   726 ;;  i               2    0        int 
+   727 ;; Return value:  Size  Location     Type
+   728 ;;                  2   10[BANK0 ] int 
+   729 ;; Registers used:
+   730 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   731 ;; Tracked objects:
+   732 ;;		On entry : B00/0
+   733 ;;		On exit  : 0/0
+   734 ;;		Unchanged: 0/0
+   735 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   736 ;;      Params:         0       4       0       0       0
+   737 ;;      Locals:         0       2       0       0       0
+   738 ;;      Temps:          0       2       0       0       0
+   739 ;;      Totals:         0       8       0       0       0
+   740 ;;Total ram usage:        8 bytes
+   741 ;; Hardware stack levels required when called:    4
+   742 ;; This function calls:
+   743 ;;		_init_pines
+   744 ;;		_init_timer
+   745 ;;		_setColumnas
+   746 ;;		_setFilas
+   747 ;;		_updateScreen
+   748 ;; This function is called by:
+   749 ;;		Startup code after reset
+   750 ;; This function uses a non-reentrant model
+   751 ;;
+   752                           
+   753                           
+   754                           ;psect for function _main
+   755  0143                     _main:	
+   756  0143                     l1238:	
+   757                           ;incstack = 0
+   758                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   759                           
+   760                           
+   761                           ;mainsource.c: 68:     init_pines();
+   762  0143  120A  118A  22E7  120A  118A  	fcall	_init_pines
+   763                           
+   764                           ;mainsource.c: 69:     init_timer();
+   765  0148  120A  118A  22CC  120A  118A  	fcall	_init_timer
+   766  014D                     l1240:	
+   767  014D                     l1242:	
+   768                           
+   769                           ;mainsource.c: 72:     setColumnas(0x00);
+   770  014D  3000               	movlw	0
+   771  014E  120A  118A  2205  120A  118A  	fcall	_setColumnas
+   772  0153                     l1244:	
+   773                           
+   774                           ;mainsource.c: 73:     setFilas(0x0000);
+   775  0153  3000               	movlw	0
+   776  0154  00F3               	movwf	setFilas@reg_value
+   777  0155  00F4               	movwf	setFilas@reg_value+1
+   778  0156  120A  118A  21B8  120A  118A  	fcall	_setFilas
+   779  015B                     l1246:	
+   780                           
+   781                           ;mainsource.c: 75:     dibujo[2]= dibujo[2] | figura[0]<<13;
+   782  015B  1283               	bcf	3,5	;RP0=0, select bank0
+   783  015C  1303               	bcf	3,6	;RP1=0, select bank0
+   784  015D  0831               	movf	_figura+1,w
+   785  015E  00D9               	movwf	??_main+1
+   786  015F  0830               	movf	_figura,w
+   787  0160  00D8               	movwf	??_main
+   788  0161  300D               	movlw	13
+   789  0162  00FF               	movwf	btemp+1
+   790  0163                     u315:	
+   791  0163  1003               	clrc
+   792  0164  0DD8               	rlf	??_main,f
+   793  0165  0DD9               	rlf	??_main+1,f
+   794  0166  0BFF               	decfsz	btemp+1,f
+   795  0167  2963               	goto	u315
+   796  0168  083E               	movf	_dibujo+4,w
+   797  0169  0458               	iorwf	??_main,w
+   798  016A  00BE               	movwf	_dibujo+4
+   799  016B  083F               	movf	_dibujo+5,w
+   800  016C  0459               	iorwf	??_main+1,w
+   801  016D  00BF               	movwf	_dibujo+5
+   802  016E                     l1248:	
+   803                           
+   804                           ;mainsource.c: 76:     dibujo[3]= dibujo[3] | figura[1]<<13;
+   805  016E  3002               	movlw	2
+   806  016F  3E30               	addlw	(low (_figura| 0))& (0+255)
+   807  0170  0084               	movwf	4
+   808  0171  1383               	bcf	3,7	;select IRP bank0
+   809  0172  0800               	movf	0,w
+   810  0173  00D8               	movwf	??_main
+   811  0174  0A84               	incf	4,f
+   812  0175  0800               	movf	0,w
+   813  0176  00D9               	movwf	??_main+1
+   814  0177  300D               	movlw	13
+   815  0178  00FF               	movwf	btemp+1
+   816  0179                     u325:	
+   817  0179  1003               	clrc
+   818  017A  0DD8               	rlf	??_main,f
+   819  017B  0DD9               	rlf	??_main+1,f
+   820  017C  0BFF               	decfsz	btemp+1,f
+   821  017D  2979               	goto	u325
+   822  017E  0840               	movf	_dibujo+6,w
+   823  017F  0458               	iorwf	??_main,w
+   824  0180  00C0               	movwf	_dibujo+6
+   825  0181  0841               	movf	_dibujo+7,w
+   826  0182  0459               	iorwf	??_main+1,w
+   827  0183  00C1               	movwf	_dibujo+7
+   828  0184                     l1250:	
+   829                           
+   830                           ;mainsource.c: 77:     dibujo[4]= dibujo[4] | figura[2]<<13;
+   831  0184  3004               	movlw	4
+   832  0185  3E30               	addlw	(low (_figura| 0))& (0+255)
+   833  0186  0084               	movwf	4
+   834  0187  0800               	movf	0,w
+   835  0188  00D8               	movwf	??_main
+   836  0189  0A84               	incf	4,f
+   837  018A  0800               	movf	0,w
+   838  018B  00D9               	movwf	??_main+1
+   839  018C  300D               	movlw	13
+   840  018D  00FF               	movwf	btemp+1
+   841  018E                     u335:	
+   842  018E  1003               	clrc
+   843  018F  0DD8               	rlf	??_main,f
+   844  0190  0DD9               	rlf	??_main+1,f
+   845  0191  0BFF               	decfsz	btemp+1,f
+   846  0192  298E               	goto	u335
+   847  0193  0842               	movf	_dibujo+8,w
+   848  0194  0458               	iorwf	??_main,w
+   849  0195  00C2               	movwf	_dibujo+8
+   850  0196  0843               	movf	_dibujo+9,w
+   851  0197  0459               	iorwf	??_main+1,w
+   852  0198  00C3               	movwf	_dibujo+9
+   853  0199                     l1252:	
+   854                           
+   855                           ;mainsource.c: 78:     dibujo[5]= dibujo[5] | figura[3]<<13;
+   856  0199  3006               	movlw	6
+   857  019A  3E30               	addlw	(low (_figura| 0))& (0+255)
+   858  019B  0084               	movwf	4
+   859  019C  0800               	movf	0,w
+   860  019D  00D8               	movwf	??_main
+   861  019E  0A84               	incf	4,f
+   862  019F  0800               	movf	0,w
+   863  01A0  00D9               	movwf	??_main+1
+   864  01A1  300D               	movlw	13
+   865  01A2  00FF               	movwf	btemp+1
+   866  01A3                     u345:	
+   867  01A3  1003               	clrc
+   868  01A4  0DD8               	rlf	??_main,f
+   869  01A5  0DD9               	rlf	??_main+1,f
+   870  01A6  0BFF               	decfsz	btemp+1,f
+   871  01A7  29A3               	goto	u345
+   872  01A8  0844               	movf	_dibujo+10,w
+   873  01A9  0458               	iorwf	??_main,w
+   874  01AA  00C4               	movwf	_dibujo+10
+   875  01AB  0845               	movf	_dibujo+11,w
+   876  01AC  0459               	iorwf	??_main+1,w
+   877  01AD  00C5               	movwf	_dibujo+11
+   878  01AE                     l1254:	
+   879                           
+   880                           ;mainsource.c: 82:         updateScreen(dibujo);
+   881  01AE  303A               	movlw	(low (_dibujo| 0))& (0+255)
+   882  01AF  120A  118A  203A  120A  118A  	fcall	_updateScreen
+   883  01B4  29AE               	goto	l1254
+   884  01B5  120A  118A  2810   	ljmp	start
+   885  01B8                     __end_of_main:	
+   886                           
+   887                           	psect	text1
+   888  003A                     __ptext1:	
+   889 ;; *************** function _updateScreen *****************
+   890 ;; Defined at:
+   891 ;;		line 90 in file "mainsource.c"
+   892 ;; Parameters:    Size  Location     Type
+   893 ;;  dibujo          1    wreg     PTR unsigned int 
+   894 ;;		 -> dibujo(16), 
+   895 ;; Auto vars:     Size  Location     Type
+   896 ;;  dibujo          1    7[COMMON] PTR unsigned int 
+   897 ;;		 -> dibujo(16), 
+   898 ;; Return value:  Size  Location     Type
+   899 ;;                  1    wreg      void 
+   900 ;; Registers used:
+   901 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   902 ;; Tracked objects:
+   903 ;;		On entry : 0/0
+   904 ;;		On exit  : 0/0
+   905 ;;		Unchanged: 0/0
+   906 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   907 ;;      Params:         0       0       0       0       0
+   908 ;;      Locals:         1       0       0       0       0
+   909 ;;      Temps:          2       0       0       0       0
+   910 ;;      Totals:         3       0       0       0       0
+   911 ;;Total ram usage:        3 bytes
+   912 ;; Hardware stack levels used:    1
+   913 ;; Hardware stack levels required when called:    3
+   914 ;; This function calls:
+   915 ;;		_setFilas
+   916 ;;		_shiftBitColumna
+   917 ;; This function is called by:
+   918 ;;		_main
+   919 ;; This function uses a non-reentrant model
+   920 ;;
+   921                           
+   922                           
+   923                           ;psect for function _updateScreen
+   924  003A                     _updateScreen:	
+   925                           
+   926                           ;incstack = 0
+   927                           ; Regs used in _updateScreen: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   928                           ;updateScreen@dibujo stored from wreg
+   929  003A  00F7               	movwf	updateScreen@dibujo
+   930  003B                     l1180:	
+   931                           
+   932                           ;mainsource.c: 91:     switch(columna){
+   933  003B  2923               	goto	l1232
+   934  003C                     l1182:	
+   935                           
+   936                           ;mainsource.c: 93:             setFilas(~dibujo[0]);
+   937  003C  0877               	movf	updateScreen@dibujo,w
+   938  003D  0084               	movwf	4
+   939  003E  1383               	bcf	3,7	;select IRP bank0
+   940  003F  0800               	movf	0,w
+   941  0040  00F5               	movwf	??_updateScreen
+   942  0041  0A84               	incf	4,f
+   943  0042  0800               	movf	0,w
+   944  0043  00F6               	movwf	??_updateScreen+1
+   945  0044  0975               	comf	??_updateScreen,w
+   946  0045  00F3               	movwf	setFilas@reg_value
+   947  0046  0976               	comf	??_updateScreen+1,w
+   948  0047  00F4               	movwf	setFilas@reg_value+1
+   949  0048  120A  118A  21B8  120A  118A  	fcall	_setFilas
+   950  004D                     l1184:	
+   951                           
+   952                           ;mainsource.c: 94:             shiftBitColumna(1);
+   953  004D  3001               	movlw	1
+   954  004E  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+   955  0053                     l1186:	
+   956                           
+   957                           ;mainsource.c: 95:             columna=2;
+   958  0053  3002               	movlw	2
+   959  0054  00F8               	movwf	_columna
+   960  0055  3000               	movlw	0
+   961  0056  00F9               	movwf	_columna+1
+   962                           
+   963                           ;mainsource.c: 96:             break;
+   964  0057  2942               	goto	l83
+   965  0058                     l1188:	
+   966                           
+   967                           ;mainsource.c: 98:             setFilas(~dibujo[1]);
+   968  0058  0877               	movf	updateScreen@dibujo,w
+   969  0059  3E02               	addlw	2
+   970  005A  0084               	movwf	4
+   971  005B  1383               	bcf	3,7	;select IRP bank0
+   972  005C  0800               	movf	0,w
+   973  005D  00F5               	movwf	??_updateScreen
+   974  005E  0A84               	incf	4,f
+   975  005F  0800               	movf	0,w
+   976  0060  00F6               	movwf	??_updateScreen+1
+   977  0061  0975               	comf	??_updateScreen,w
+   978  0062  00F3               	movwf	setFilas@reg_value
+   979  0063  0976               	comf	??_updateScreen+1,w
+   980  0064  00F4               	movwf	setFilas@reg_value+1
+   981  0065  120A  118A  21B8  120A  118A  	fcall	_setFilas
+   982  006A                     l1190:	
+   983                           
+   984                           ;mainsource.c: 99:             shiftBitColumna(0);
+   985  006A  3000               	movlw	0
+   986  006B  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+   987  0070                     l1192:	
+   988                           
+   989                           ;mainsource.c: 100:             columna=3;
+   990  0070  3003               	movlw	3
+   991  0071  00F8               	movwf	_columna
+   992  0072  3000               	movlw	0
+   993  0073  00F9               	movwf	_columna+1
+   994                           
+   995                           ;mainsource.c: 101:             break;
+   996  0074  2942               	goto	l83
+   997  0075                     l1194:	
+   998                           
+   999                           ;mainsource.c: 103:             setFilas(~dibujo[2]);
+  1000  0075  0877               	movf	updateScreen@dibujo,w
+  1001  0076  3E04               	addlw	4
+  1002  0077  0084               	movwf	4
+  1003  0078  1383               	bcf	3,7	;select IRP bank0
+  1004  0079  0800               	movf	0,w
+  1005  007A  00F5               	movwf	??_updateScreen
+  1006  007B  0A84               	incf	4,f
+  1007  007C  0800               	movf	0,w
+  1008  007D  00F6               	movwf	??_updateScreen+1
+  1009  007E  0975               	comf	??_updateScreen,w
+  1010  007F  00F3               	movwf	setFilas@reg_value
+  1011  0080  0976               	comf	??_updateScreen+1,w
+  1012  0081  00F4               	movwf	setFilas@reg_value+1
+  1013  0082  120A  118A  21B8  120A  118A  	fcall	_setFilas
+  1014  0087                     l1196:	
+  1015                           
+  1016                           ;mainsource.c: 104:             shiftBitColumna(0);
+  1017  0087  3000               	movlw	0
+  1018  0088  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+  1019  008D                     l1198:	
+  1020                           
+  1021                           ;mainsource.c: 105:             columna=4;
+  1022  008D  3004               	movlw	4
+  1023  008E  00F8               	movwf	_columna
+  1024  008F  3000               	movlw	0
+  1025  0090  00F9               	movwf	_columna+1
+  1026                           
+  1027                           ;mainsource.c: 106:             break;
+  1028  0091  2942               	goto	l83
+  1029  0092                     l1200:	
+  1030                           
+  1031                           ;mainsource.c: 108:             setFilas(~dibujo[3]);
+  1032  0092  0877               	movf	updateScreen@dibujo,w
+  1033  0093  3E06               	addlw	6
+  1034  0094  0084               	movwf	4
+  1035  0095  1383               	bcf	3,7	;select IRP bank0
+  1036  0096  0800               	movf	0,w
+  1037  0097  00F5               	movwf	??_updateScreen
+  1038  0098  0A84               	incf	4,f
+  1039  0099  0800               	movf	0,w
+  1040  009A  00F6               	movwf	??_updateScreen+1
+  1041  009B  0975               	comf	??_updateScreen,w
+  1042  009C  00F3               	movwf	setFilas@reg_value
+  1043  009D  0976               	comf	??_updateScreen+1,w
+  1044  009E  00F4               	movwf	setFilas@reg_value+1
+  1045  009F  120A  118A  21B8  120A  118A  	fcall	_setFilas
+  1046  00A4                     l1202:	
+  1047                           
+  1048                           ;mainsource.c: 109:             shiftBitColumna(0);
+  1049  00A4  3000               	movlw	0
+  1050  00A5  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+  1051  00AA                     l1204:	
+  1052                           
+  1053                           ;mainsource.c: 110:             columna=5;
+  1054  00AA  3005               	movlw	5
+  1055  00AB  00F8               	movwf	_columna
+  1056  00AC  3000               	movlw	0
+  1057  00AD  00F9               	movwf	_columna+1
+  1058                           
+  1059                           ;mainsource.c: 111:             break;
+  1060  00AE  2942               	goto	l83
+  1061  00AF                     l1206:	
+  1062                           
+  1063                           ;mainsource.c: 113:             setFilas(~dibujo[4]);
+  1064  00AF  0877               	movf	updateScreen@dibujo,w
+  1065  00B0  3E08               	addlw	8
+  1066  00B1  0084               	movwf	4
+  1067  00B2  1383               	bcf	3,7	;select IRP bank0
+  1068  00B3  0800               	movf	0,w
+  1069  00B4  00F5               	movwf	??_updateScreen
+  1070  00B5  0A84               	incf	4,f
+  1071  00B6  0800               	movf	0,w
+  1072  00B7  00F6               	movwf	??_updateScreen+1
+  1073  00B8  0975               	comf	??_updateScreen,w
+  1074  00B9  00F3               	movwf	setFilas@reg_value
+  1075  00BA  0976               	comf	??_updateScreen+1,w
+  1076  00BB  00F4               	movwf	setFilas@reg_value+1
+  1077  00BC  120A  118A  21B8  120A  118A  	fcall	_setFilas
+  1078  00C1                     l1208:	
+  1079                           
+  1080                           ;mainsource.c: 114:             shiftBitColumna(0);
+  1081  00C1  3000               	movlw	0
+  1082  00C2  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+  1083  00C7                     l1210:	
+  1084                           
+  1085                           ;mainsource.c: 115:             columna=6;
+  1086  00C7  3006               	movlw	6
+  1087  00C8  00F8               	movwf	_columna
+  1088  00C9  3000               	movlw	0
+  1089  00CA  00F9               	movwf	_columna+1
+  1090                           
+  1091                           ;mainsource.c: 116:             break;
+  1092  00CB  2942               	goto	l83
+  1093  00CC                     l1212:	
+  1094                           
+  1095                           ;mainsource.c: 118:             setFilas(~dibujo[5]);
+  1096  00CC  0877               	movf	updateScreen@dibujo,w
+  1097  00CD  3E0A               	addlw	10
+  1098  00CE  0084               	movwf	4
+  1099  00CF  1383               	bcf	3,7	;select IRP bank0
+  1100  00D0  0800               	movf	0,w
+  1101  00D1  00F5               	movwf	??_updateScreen
+  1102  00D2  0A84               	incf	4,f
+  1103  00D3  0800               	movf	0,w
+  1104  00D4  00F6               	movwf	??_updateScreen+1
+  1105  00D5  0975               	comf	??_updateScreen,w
+  1106  00D6  00F3               	movwf	setFilas@reg_value
+  1107  00D7  0976               	comf	??_updateScreen+1,w
+  1108  00D8  00F4               	movwf	setFilas@reg_value+1
+  1109  00D9  120A  118A  21B8  120A  118A  	fcall	_setFilas
+  1110  00DE                     l1214:	
+  1111                           
+  1112                           ;mainsource.c: 119:             shiftBitColumna(0);
+  1113  00DE  3000               	movlw	0
+  1114  00DF  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+  1115  00E4                     l1216:	
+  1116                           
+  1117                           ;mainsource.c: 120:             columna=7;
+  1118  00E4  3007               	movlw	7
+  1119  00E5  00F8               	movwf	_columna
+  1120  00E6  3000               	movlw	0
+  1121  00E7  00F9               	movwf	_columna+1
+  1122                           
+  1123                           ;mainsource.c: 121:             break;
+  1124  00E8  2942               	goto	l83
+  1125  00E9                     l1218:	
+  1126                           
+  1127                           ;mainsource.c: 123:             setFilas(~dibujo[6]);
+  1128  00E9  0877               	movf	updateScreen@dibujo,w
+  1129  00EA  3E0C               	addlw	12
+  1130  00EB  0084               	movwf	4
+  1131  00EC  1383               	bcf	3,7	;select IRP bank0
+  1132  00ED  0800               	movf	0,w
+  1133  00EE  00F5               	movwf	??_updateScreen
+  1134  00EF  0A84               	incf	4,f
+  1135  00F0  0800               	movf	0,w
+  1136  00F1  00F6               	movwf	??_updateScreen+1
+  1137  00F2  0975               	comf	??_updateScreen,w
+  1138  00F3  00F3               	movwf	setFilas@reg_value
+  1139  00F4  0976               	comf	??_updateScreen+1,w
+  1140  00F5  00F4               	movwf	setFilas@reg_value+1
+  1141  00F6  120A  118A  21B8  120A  118A  	fcall	_setFilas
+  1142  00FB                     l1220:	
+  1143                           
+  1144                           ;mainsource.c: 124:             shiftBitColumna(0);
+  1145  00FB  3000               	movlw	0
+  1146  00FC  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+  1147  0101                     l1222:	
+  1148                           
+  1149                           ;mainsource.c: 125:             columna=8;
+  1150  0101  3008               	movlw	8
+  1151  0102  00F8               	movwf	_columna
+  1152  0103  3000               	movlw	0
+  1153  0104  00F9               	movwf	_columna+1
+  1154                           
+  1155                           ;mainsource.c: 126:             break;
+  1156  0105  2942               	goto	l83
+  1157  0106                     l1224:	
+  1158                           
+  1159                           ;mainsource.c: 128:             setFilas(~dibujo[7]);
+  1160  0106  0877               	movf	updateScreen@dibujo,w
+  1161  0107  3E0E               	addlw	14
+  1162  0108  0084               	movwf	4
+  1163  0109  1383               	bcf	3,7	;select IRP bank0
+  1164  010A  0800               	movf	0,w
+  1165  010B  00F5               	movwf	??_updateScreen
+  1166  010C  0A84               	incf	4,f
+  1167  010D  0800               	movf	0,w
+  1168  010E  00F6               	movwf	??_updateScreen+1
+  1169  010F  0975               	comf	??_updateScreen,w
+  1170  0110  00F3               	movwf	setFilas@reg_value
+  1171  0111  0976               	comf	??_updateScreen+1,w
+  1172  0112  00F4               	movwf	setFilas@reg_value+1
+  1173  0113  120A  118A  21B8  120A  118A  	fcall	_setFilas
+  1174  0118                     l1226:	
+  1175                           
+  1176                           ;mainsource.c: 129:             shiftBitColumna(0);
+  1177  0118  3000               	movlw	0
+  1178  0119  120A  118A  2276  120A  118A  	fcall	_shiftBitColumna
+  1179  011E                     l1228:	
+  1180                           
+  1181                           ;mainsource.c: 130:             columna=1;
+  1182  011E  3001               	movlw	1
+  1183  011F  00F8               	movwf	_columna
+  1184  0120  3000               	movlw	0
+  1185  0121  00F9               	movwf	_columna+1
+  1186                           
+  1187                           ;mainsource.c: 131:             break;
+  1188  0122  2942               	goto	l83
+  1189  0123                     l1232:	
+  1190                           
+  1191                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+  1192                           ; Switch size 1, requested type "simple"
+  1193                           ; Number of cases is 1, Range of values is 0 to 0
+  1194                           ; switch strategies available:
+  1195                           ; Name         Instructions Cycles
+  1196                           ; simple_byte            4     3 (average)
+  1197                           ; direct_byte           11     8 (fixed)
+  1198                           ; jumptable            260     6 (fixed)
+  1199                           ;	Chosen strategy is simple_byte
+  1200  0123  0879               	movf	_columna+1,w
+  1201  0124  3A00               	xorlw	0	; case 0
+  1202  0125  1903               	skipnz
+  1203  0126  2928               	goto	l1276
+  1204  0127  2942               	goto	l83
+  1205  0128                     l1276:	
+  1206                           
+  1207                           ; Switch size 1, requested type "simple"
+  1208                           ; Number of cases is 8, Range of values is 1 to 8
+  1209                           ; switch strategies available:
+  1210                           ; Name         Instructions Cycles
+  1211                           ; simple_byte           25    13 (average)
+  1212                           ; direct_byte           35    11 (fixed)
+  1213                           ; jumptable            263     9 (fixed)
+  1214                           ;	Chosen strategy is simple_byte
+  1215  0128  0878               	movf	_columna,w
+  1216  0129  3A01               	xorlw	1	; case 1
+  1217  012A  1903               	skipnz
+  1218  012B  283C               	goto	l1182
+  1219  012C  3A03               	xorlw	3	; case 2
+  1220  012D  1903               	skipnz
+  1221  012E  2858               	goto	l1188
+  1222  012F  3A01               	xorlw	1	; case 3
+  1223  0130  1903               	skipnz
+  1224  0131  2875               	goto	l1194
+  1225  0132  3A07               	xorlw	7	; case 4
+  1226  0133  1903               	skipnz
+  1227  0134  2892               	goto	l1200
+  1228  0135  3A01               	xorlw	1	; case 5
+  1229  0136  1903               	skipnz
+  1230  0137  28AF               	goto	l1206
+  1231  0138  3A03               	xorlw	3	; case 6
+  1232  0139  1903               	skipnz
+  1233  013A  28CC               	goto	l1212
+  1234  013B  3A01               	xorlw	1	; case 7
+  1235  013C  1903               	skipnz
+  1236  013D  28E9               	goto	l1218
+  1237  013E  3A0F               	xorlw	15	; case 8
+  1238  013F  1903               	skipnz
+  1239  0140  2906               	goto	l1224
+  1240  0141  2942               	goto	l83
+  1241  0142                     l83:	
+  1242  0142  0008               	return
+  1243  0143                     __end_of_updateScreen:	
+  1244                           
+  1245                           	psect	text2
+  1246  0276                     __ptext2:	
+  1247 ;; *************** function _shiftBitColumna *****************
+  1248 ;; Defined at:
+  1249 ;;		line 38 in file "columnas.c"
+  1250 ;; Parameters:    Size  Location     Type
+  1251 ;;  bit             1    wreg     unsigned char 
+  1252 ;; Auto vars:     Size  Location     Type
+  1253 ;;  bit             1    4[COMMON] unsigned char 
+  1254 ;; Return value:  Size  Location     Type
+  1255 ;;                  1    wreg      void 
+  1256 ;; Registers used:
+  1257 ;;		wreg, status,2, status,0, pclath, cstack
+  1258 ;; Tracked objects:
+  1259 ;;		On entry : 0/0
+  1260 ;;		On exit  : 0/0
+  1261 ;;		Unchanged: 0/0
+  1262 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1263 ;;      Params:         0       0       0       0       0
+  1264 ;;      Locals:         1       0       0       0       0
+  1265 ;;      Temps:          1       0       0       0       0
+  1266 ;;      Totals:         2       0       0       0       0
+  1267 ;;Total ram usage:        2 bytes
+  1268 ;; Hardware stack levels used:    1
+  1269 ;; Hardware stack levels required when called:    2
+  1270 ;; This function calls:
+  1271 ;;		_latchClock_Col
+  1272 ;;		_latchClock_Fil
+  1273 ;;		_shiftClock_Col
+  1274 ;; This function is called by:
+  1275 ;;		_updateScreen
+  1276 ;; This function uses a non-reentrant model
+  1277 ;;
+  1278                           
+  1279                           
+  1280                           ;psect for function _shiftBitColumna
+  1281  0276                     _shiftBitColumna:	
+  1282                           
+  1283                           ;incstack = 0
+  1284                           ; Regs used in _shiftBitColumna: [wreg+status,2+status,0+pclath+cstack]
+  1285                           ;shiftBitColumna@bit stored from wreg
+  1286  0276  00F4               	movwf	shiftBitColumna@bit
+  1287  0277                     l1146:	
+  1288                           
+  1289                           ;columnas.c: 39:     PORTBbits.RB1 = bit & 0x01;
+  1290  0277  0874               	movf	shiftBitColumna@bit,w
+  1291  0278  3901               	andlw	1
+  1292  0279  00F3               	movwf	??_shiftBitColumna
+  1293  027A  0DF3               	rlf	??_shiftBitColumna,f
+  1294  027B  1283               	bcf	3,5	;RP0=0, select bank0
+  1295  027C  1303               	bcf	3,6	;RP1=0, select bank0
+  1296  027D  0806               	movf	6,w	;volatile
+  1297  027E  0673               	xorwf	??_shiftBitColumna,w
+  1298  027F  39FD               	andlw	-3
+  1299  0280  0673               	xorwf	??_shiftBitColumna,w
+  1300  0281  0086               	movwf	6	;volatile
+  1301  0282                     l1148:	
+  1302                           
+  1303                           ;columnas.c: 40:     shiftClock_Col();
+  1304  0282  120A  118A  2306  120A  118A  	fcall	_shiftClock_Col
+  1305  0287                     l1150:	
+  1306                           
+  1307                           ;columnas.c: 41:     latchClock_Col();
+  1308  0287  120A  118A  230C  120A  118A  	fcall	_latchClock_Col
+  1309  028C                     l1152:	
+  1310                           
+  1311                           ;columnas.c: 42:     latchClock_Fil();
+  1312  028C  120A  118A  22FA  120A  118A  	fcall	_latchClock_Fil
+  1313  0291                     l120:	
+  1314  0291  0008               	return
+  1315  0292                     __end_of_shiftBitColumna:	
+  1316                           
+  1317                           	psect	text3
+  1318  02FA                     __ptext3:	
+  1319 ;; *************** function _latchClock_Fil *****************
+  1320 ;; Defined at:
+  1321 ;;		line 16 in file "filas.c"
+  1322 ;; Parameters:    Size  Location     Type
+  1323 ;;		None
+  1324 ;; Auto vars:     Size  Location     Type
+  1325 ;;		None
+  1326 ;; Return value:  Size  Location     Type
+  1327 ;;                  1    wreg      void 
+  1328 ;; Registers used:
+  1329 ;;		None
+  1330 ;; Tracked objects:
+  1331 ;;		On entry : 0/0
+  1332 ;;		On exit  : 0/0
+  1333 ;;		Unchanged: 0/0
+  1334 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1335 ;;      Params:         0       0       0       0       0
+  1336 ;;      Locals:         0       0       0       0       0
+  1337 ;;      Temps:          0       0       0       0       0
+  1338 ;;      Totals:         0       0       0       0       0
+  1339 ;;Total ram usage:        0 bytes
+  1340 ;; Hardware stack levels used:    1
+  1341 ;; Hardware stack levels required when called:    1
+  1342 ;; This function calls:
+  1343 ;;		Nothing
+  1344 ;; This function is called by:
+  1345 ;;		_shiftBitColumna
+  1346 ;; This function uses a non-reentrant model
+  1347 ;;
+  1348                           
+  1349                           
+  1350                           ;psect for function _latchClock_Fil
+  1351  02FA                     _latchClock_Fil:	
+  1352  02FA                     l1120:	
+  1353                           ;incstack = 0
+  1354                           ; Regs used in _latchClock_Fil: []
+  1355                           
+  1356                           
+  1357                           ;filas.c: 17:     PORTDbits.RD4 = 0;
+  1358  02FA  1283               	bcf	3,5	;RP0=0, select bank0
+  1359  02FB  1303               	bcf	3,6	;RP1=0, select bank0
+  1360  02FC  1208               	bcf	8,4	;volatile
+  1361                           
+  1362                           ;filas.c: 19:     PORTDbits.RD4 = 1;
+  1363  02FD  1608               	bsf	8,4	;volatile
+  1364                           
+  1365                           ;filas.c: 21:     PORTDbits.RD4 = 0;
+  1366  02FE  1208               	bcf	8,4	;volatile
+  1367  02FF                     l94:	
+  1368  02FF  0008               	return
+  1369  0300                     __end_of_latchClock_Fil:	
+  1370                           
+  1371                           	psect	text4
+  1372  01B8                     __ptext4:	
+  1373 ;; *************** function _setFilas *****************
+  1374 ;; Defined at:
+  1375 ;;		line 32 in file "filas.c"
+  1376 ;; Parameters:    Size  Location     Type
+  1377 ;;  reg_value       2    3[COMMON] unsigned int 
+  1378 ;; Auto vars:     Size  Location     Type
+  1379 ;;  i               2    8[BANK0 ] int 
+  1380 ;;  valor           2    0        unsigned int 
+  1381 ;; Return value:  Size  Location     Type
+  1382 ;;                  1    wreg      void 
+  1383 ;; Registers used:
+  1384 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1385 ;; Tracked objects:
+  1386 ;;		On entry : 0/0
+  1387 ;;		On exit  : 0/0
+  1388 ;;		Unchanged: 0/0
+  1389 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1390 ;;      Params:         2       0       0       0       0
+  1391 ;;      Locals:         0       4       0       0       0
+  1392 ;;      Temps:          0       6       0       0       0
+  1393 ;;      Totals:         2      10       0       0       0
+  1394 ;;Total ram usage:       12 bytes
+  1395 ;; Hardware stack levels used:    1
+  1396 ;; Hardware stack levels required when called:    2
+  1397 ;; This function calls:
+  1398 ;;		_enableFilas
+  1399 ;;		_shiftClock_Fil
+  1400 ;; This function is called by:
+  1401 ;;		_main
+  1402 ;;		_updateScreen
+  1403 ;; This function uses a non-reentrant model
+  1404 ;;
+  1405                           
+  1406                           
+  1407                           ;psect for function _setFilas
+  1408  01B8                     _setFilas:	
+  1409  01B8                     l1128:	
+  1410                           ;incstack = 0
+  1411                           ; Regs used in _setFilas: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1412                           
+  1413                           
+  1414                           ;filas.c: 34:     int i = 0;
+  1415  01B8  1283               	bcf	3,5	;RP0=0, select bank0
+  1416  01B9  1303               	bcf	3,6	;RP1=0, select bank0
+  1417  01BA  01D2               	clrf	setFilas@i
+  1418  01BB  01D3               	clrf	setFilas@i+1
+  1419                           
+  1420                           ;filas.c: 43:     for(i=0;i<16;i++){
+  1421  01BC  01D2               	clrf	setFilas@i
+  1422  01BD  01D3               	clrf	setFilas@i+1
+  1423  01BE                     l1130:	
+  1424  01BE  0853               	movf	setFilas@i+1,w
+  1425  01BF  3A80               	xorlw	128
+  1426  01C0  00FF               	movwf	btemp+1
+  1427  01C1  3080               	movlw	128
+  1428  01C2  027F               	subwf	btemp+1,w
+  1429  01C3  1D03               	skipz
+  1430  01C4  29C7               	goto	u255
+  1431  01C5  3010               	movlw	16
+  1432  01C6  0252               	subwf	setFilas@i,w
+  1433  01C7                     u255:	
+  1434  01C7  1C03               	skipc
+  1435  01C8  29CA               	goto	u251
+  1436  01C9  29CB               	goto	u250
+  1437  01CA                     u251:	
+  1438  01CA  29CC               	goto	l1134
+  1439  01CB                     u250:	
+  1440  01CB  29FF               	goto	l1142
+  1441  01CC                     l1134:	
+  1442                           
+  1443                           ;filas.c: 45:         PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
+  1444  01CC  1283               	bcf	3,5	;RP0=0, select bank0
+  1445  01CD  1303               	bcf	3,6	;RP1=0, select bank0
+  1446  01CE  0A52               	incf	setFilas@i,w
+  1447  01CF  00CA               	movwf	??_setFilas
+  1448  01D0  3001               	movlw	1
+  1449  01D1  00CB               	movwf	??_setFilas+1
+  1450  01D2  3000               	movlw	0
+  1451  01D3  00CC               	movwf	??_setFilas+2
+  1452  01D4  29D8               	goto	u264
+  1453  01D5                     u265:	
+  1454  01D5  1003               	clrc
+  1455  01D6  0DCB               	rlf	??_setFilas+1,f
+  1456  01D7  0DCC               	rlf	??_setFilas+2,f
+  1457  01D8                     u264:	
+  1458  01D8  0BCA               	decfsz	??_setFilas,f
+  1459  01D9  29D5               	goto	u265
+  1460  01DA  0873               	movf	setFilas@reg_value,w
+  1461  01DB  054B               	andwf	??_setFilas+1,w
+  1462  01DC  00CD               	movwf	??_setFilas+3
+  1463  01DD  0874               	movf	setFilas@reg_value+1,w
+  1464  01DE  054C               	andwf	??_setFilas+2,w
+  1465  01DF  00CE               	movwf	??_setFilas+4
+  1466  01E0  0A52               	incf	setFilas@i,w
+  1467  01E1  29E5               	goto	u274
+  1468  01E2                     u275:	
+  1469  01E2  1003               	clrc
+  1470  01E3  0CCE               	rrf	??_setFilas+4,f
+  1471  01E4  0CCD               	rrf	??_setFilas+3,f
+  1472  01E5                     u274:	
+  1473  01E5  3EFF               	addlw	-1
+  1474  01E6  1D03               	skipz
+  1475  01E7  29E2               	goto	u275
+  1476  01E8  084D               	movf	??_setFilas+3,w
+  1477  01E9  00CF               	movwf	??_setFilas+5
+  1478  01EA  0DCF               	rlf	??_setFilas+5,f
+  1479  01EB  0DCF               	rlf	??_setFilas+5,f
+  1480  01EC  0808               	movf	8,w	;volatile
+  1481  01ED  064F               	xorwf	??_setFilas+5,w
+  1482  01EE  39FB               	andlw	-5
+  1483  01EF  064F               	xorwf	??_setFilas+5,w
+  1484  01F0  0088               	movwf	8	;volatile
+  1485  01F1                     l1136:	
+  1486                           
+  1487                           ;filas.c: 47:         shiftClock_Fil();
+  1488  01F1  120A  118A  2300  120A  118A  	fcall	_shiftClock_Fil
+  1489  01F6                     l1138:	
+  1490                           
+  1491                           ;filas.c: 49:     }
+  1492  01F6  3001               	movlw	1
+  1493  01F7  1283               	bcf	3,5	;RP0=0, select bank0
+  1494  01F8  1303               	bcf	3,6	;RP1=0, select bank0
+  1495  01F9  07D2               	addwf	setFilas@i,f
+  1496  01FA  1803               	skipnc
+  1497  01FB  0AD3               	incf	setFilas@i+1,f
+  1498  01FC  3000               	movlw	0
+  1499  01FD  07D3               	addwf	setFilas@i+1,f
+  1500  01FE  29BE               	goto	l1130
+  1501  01FF                     l1142:	
+  1502                           
+  1503                           ;filas.c: 51:     enableFilas();
+  1504  01FF  120A  118A  2311  120A  118A  	fcall	_enableFilas
+  1505  0204                     l102:	
+  1506  0204  0008               	return
+  1507  0205                     __end_of_setFilas:	
+  1508                           
+  1509                           	psect	text5
+  1510  0300                     __ptext5:	
+  1511 ;; *************** function _shiftClock_Fil *****************
+  1512 ;; Defined at:
+  1513 ;;		line 24 in file "filas.c"
+  1514 ;; Parameters:    Size  Location     Type
+  1515 ;;		None
+  1516 ;; Auto vars:     Size  Location     Type
+  1517 ;;		None
+  1518 ;; Return value:  Size  Location     Type
+  1519 ;;                  1    wreg      void 
+  1520 ;; Registers used:
+  1521 ;;		None
+  1522 ;; Tracked objects:
+  1523 ;;		On entry : 0/0
+  1524 ;;		On exit  : 0/0
+  1525 ;;		Unchanged: 0/0
+  1526 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1527 ;;      Params:         0       0       0       0       0
+  1528 ;;      Locals:         0       0       0       0       0
+  1529 ;;      Temps:          0       0       0       0       0
+  1530 ;;      Totals:         0       0       0       0       0
+  1531 ;;Total ram usage:        0 bytes
+  1532 ;; Hardware stack levels used:    1
+  1533 ;; Hardware stack levels required when called:    1
+  1534 ;; This function calls:
+  1535 ;;		Nothing
+  1536 ;; This function is called by:
+  1537 ;;		_setFilas
+  1538 ;; This function uses a non-reentrant model
+  1539 ;;
+  1540                           
+  1541                           
+  1542                           ;psect for function _shiftClock_Fil
+  1543  0300                     _shiftClock_Fil:	
+  1544  0300                     l1122:	
+  1545                           ;incstack = 0
+  1546                           ; Regs used in _shiftClock_Fil: []
+  1547                           
+  1548                           
+  1549                           ;filas.c: 25:     PORTDbits.RD5 = 0;
+  1550  0300  1283               	bcf	3,5	;RP0=0, select bank0
+  1551  0301  1303               	bcf	3,6	;RP1=0, select bank0
+  1552  0302  1288               	bcf	8,5	;volatile
+  1553                           
+  1554                           ;filas.c: 27:     PORTDbits.RD5 = 1;
+  1555  0303  1688               	bsf	8,5	;volatile
+  1556                           
+  1557                           ;filas.c: 29:     PORTDbits.RD5 = 0;
+  1558  0304  1288               	bcf	8,5	;volatile
+  1559  0305                     l97:	
+  1560  0305  0008               	return
+  1561  0306                     __end_of_shiftClock_Fil:	
+  1562                           
+  1563                           	psect	text6
+  1564  0311                     __ptext6:	
+  1565 ;; *************** function _enableFilas *****************
+  1566 ;; Defined at:
+  1567 ;;		line 8 in file "filas.c"
+  1568 ;; Parameters:    Size  Location     Type
+  1569 ;;		None
+  1570 ;; Auto vars:     Size  Location     Type
+  1571 ;;		None
+  1572 ;; Return value:  Size  Location     Type
+  1573 ;;                  1    wreg      void 
+  1574 ;; Registers used:
+  1575 ;;		None
+  1576 ;; Tracked objects:
+  1577 ;;		On entry : 0/0
+  1578 ;;		On exit  : 0/0
+  1579 ;;		Unchanged: 0/0
+  1580 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1581 ;;      Params:         0       0       0       0       0
+  1582 ;;      Locals:         0       0       0       0       0
+  1583 ;;      Temps:          0       0       0       0       0
+  1584 ;;      Totals:         0       0       0       0       0
+  1585 ;;Total ram usage:        0 bytes
+  1586 ;; Hardware stack levels used:    1
+  1587 ;; Hardware stack levels required when called:    1
+  1588 ;; This function calls:
+  1589 ;;		Nothing
+  1590 ;; This function is called by:
+  1591 ;;		_setFilas
+  1592 ;; This function uses a non-reentrant model
+  1593 ;;
+  1594                           
+  1595                           
+  1596                           ;psect for function _enableFilas
+  1597  0311                     _enableFilas:	
+  1598  0311                     l1118:	
+  1599                           ;incstack = 0
+  1600                           ; Regs used in _enableFilas: []
+  1601                           
+  1602                           
+  1603                           ;filas.c: 9:     PORTDbits.RD3 = 0;
+  1604  0311  1283               	bcf	3,5	;RP0=0, select bank0
+  1605  0312  1303               	bcf	3,6	;RP1=0, select bank0
+  1606  0313  1188               	bcf	8,3	;volatile
+  1607  0314                     l88:	
+  1608  0314  0008               	return
+  1609  0315                     __end_of_enableFilas:	
+  1610                           
+  1611                           	psect	text7
+  1612  0205                     __ptext7:	
+  1613 ;; *************** function _setColumnas *****************
+  1614 ;; Defined at:
+  1615 ;;		line 22 in file "columnas.c"
+  1616 ;; Parameters:    Size  Location     Type
+  1617 ;;  reg_value       1    wreg     unsigned char 
+  1618 ;; Auto vars:     Size  Location     Type
+  1619 ;;  reg_value       1    2[BANK0 ] unsigned char 
+  1620 ;;  i               2    3[BANK0 ] int 
+  1621 ;;  valor           1    1[BANK0 ] unsigned char 
+  1622 ;;  indice          1    0        unsigned char 
+  1623 ;; Return value:  Size  Location     Type
+  1624 ;;                  1    wreg      void 
+  1625 ;; Registers used:
+  1626 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1627 ;; Tracked objects:
+  1628 ;;		On entry : 0/0
+  1629 ;;		On exit  : 0/0
+  1630 ;;		Unchanged: 0/0
+  1631 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1632 ;;      Params:         0       0       0       0       0
+  1633 ;;      Locals:         0       5       0       0       0
+  1634 ;;      Temps:          3       0       0       0       0
+  1635 ;;      Totals:         3       5       0       0       0
+  1636 ;;Total ram usage:        8 bytes
+  1637 ;; Hardware stack levels used:    1
+  1638 ;; Hardware stack levels required when called:    2
+  1639 ;; This function calls:
+  1640 ;;		_latchClock_Col
+  1641 ;;		_shiftClock_Col
+  1642 ;; This function is called by:
+  1643 ;;		_main
+  1644 ;; This function uses a non-reentrant model
+  1645 ;;
+  1646                           
+  1647                           
+  1648                           ;psect for function _setColumnas
+  1649  0205                     _setColumnas:	
+  1650                           
+  1651                           ;incstack = 0
+  1652                           ; Regs used in _setColumnas: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1653                           ;setColumnas@reg_value stored from wreg
+  1654  0205  1283               	bcf	3,5	;RP0=0, select bank0
+  1655  0206  1303               	bcf	3,6	;RP1=0, select bank0
+  1656  0207  00CC               	movwf	setColumnas@reg_value
+  1657  0208                     l1154:	
+  1658  0208                     l1156:	
+  1659  0208                     l1158:	
+  1660  0208                     l1160:	
+  1661                           
+  1662                           ;columnas.c: 26:     for(i=0;i<8;i++){
+  1663  0208  01CD               	clrf	setColumnas@i
+  1664  0209  01CE               	clrf	setColumnas@i+1
+  1665  020A                     l1166:	
+  1666                           
+  1667                           ;columnas.c: 27:         valor = (reg_value & (1<<i) )>>i;
+  1668  020A  3001               	movlw	1
+  1669  020B  00F3               	movwf	??_setColumnas
+  1670  020C  1283               	bcf	3,5	;RP0=0, select bank0
+  1671  020D  1303               	bcf	3,6	;RP1=0, select bank0
+  1672  020E  0A4D               	incf	setColumnas@i,w
+  1673  020F  2A12               	goto	u284
+  1674  0210                     u285:	
+  1675  0210  1003               	clrc
+  1676  0211  0DF3               	rlf	??_setColumnas,f
+  1677  0212                     u284:	
+  1678  0212  3EFF               	addlw	-1
+  1679  0213  1D03               	skipz
+  1680  0214  2A10               	goto	u285
+  1681  0215  0873               	movf	??_setColumnas,w
+  1682  0216  054C               	andwf	setColumnas@reg_value,w
+  1683  0217  00F4               	movwf	??_setColumnas+1
+  1684  0218  0A4D               	incf	setColumnas@i,w
+  1685  0219  2A1C               	goto	u294
+  1686  021A                     u295:	
+  1687  021A  1003               	clrc
+  1688  021B  0CF4               	rrf	??_setColumnas+1,f
+  1689  021C                     u294:	
+  1690  021C  3EFF               	addlw	-1
+  1691  021D  1D03               	skipz
+  1692  021E  2A1A               	goto	u295
+  1693  021F  0874               	movf	??_setColumnas+1,w
+  1694  0220  00F5               	movwf	??_setColumnas+2
+  1695  0221  0875               	movf	??_setColumnas+2,w
+  1696  0222  00CB               	movwf	setColumnas@valor
+  1697  0223                     l1168:	
+  1698                           
+  1699                           ;columnas.c: 28:         PORTBbits.RB1 = valor;
+  1700  0223  0C4B               	rrf	setColumnas@valor,w
+  1701  0224  1C03               	skipc
+  1702  0225  1086               	bcf	6,1	;volatile
+  1703  0226  1803               	skipnc
+  1704  0227  1486               	bsf	6,1	;volatile
+  1705  0228                     l1170:	
+  1706                           
+  1707                           ;columnas.c: 29:         shiftClock_Col();
+  1708  0228  120A  118A  2306  120A  118A  	fcall	_shiftClock_Col
+  1709  022D                     l1172:	
+  1710                           
+  1711                           ;columnas.c: 32:     }
+  1712  022D  3001               	movlw	1
+  1713  022E  1283               	bcf	3,5	;RP0=0, select bank0
+  1714  022F  1303               	bcf	3,6	;RP1=0, select bank0
+  1715  0230  07CD               	addwf	setColumnas@i,f
+  1716  0231  1803               	skipnc
+  1717  0232  0ACE               	incf	setColumnas@i+1,f
+  1718  0233  3000               	movlw	0
+  1719  0234  07CE               	addwf	setColumnas@i+1,f
+  1720  0235                     l1174:	
+  1721  0235  084E               	movf	setColumnas@i+1,w
+  1722  0236  3A80               	xorlw	128
+  1723  0237  00FF               	movwf	btemp+1
+  1724  0238  3080               	movlw	128
+  1725  0239  027F               	subwf	btemp+1,w
+  1726  023A  1D03               	skipz
+  1727  023B  2A3E               	goto	u305
+  1728  023C  3008               	movlw	8
+  1729  023D  024D               	subwf	setColumnas@i,w
+  1730  023E                     u305:	
+  1731  023E  1C03               	skipc
+  1732  023F  2A41               	goto	u301
+  1733  0240  2A42               	goto	u300
+  1734  0241                     u301:	
+  1735  0241  2A0A               	goto	l1166
+  1736  0242                     u300:	
+  1737  0242                     l1176:	
+  1738                           
+  1739                           ;columnas.c: 33:     latchClock_Col();
+  1740  0242  120A  118A  230C  120A  118A  	fcall	_latchClock_Col
+  1741  0247                     l117:	
+  1742  0247  0008               	return
+  1743  0248                     __end_of_setColumnas:	
+  1744                           
+  1745                           	psect	text8
+  1746  0306                     __ptext8:	
+  1747 ;; *************** function _shiftClock_Col *****************
+  1748 ;; Defined at:
+  1749 ;;		line 13 in file "columnas.c"
+  1750 ;; Parameters:    Size  Location     Type
+  1751 ;;		None
+  1752 ;; Auto vars:     Size  Location     Type
+  1753 ;;		None
+  1754 ;; Return value:  Size  Location     Type
+  1755 ;;                  1    wreg      void 
+  1756 ;; Registers used:
+  1757 ;;		None
+  1758 ;; Tracked objects:
+  1759 ;;		On entry : 0/0
+  1760 ;;		On exit  : 0/0
+  1761 ;;		Unchanged: 0/0
+  1762 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1763 ;;      Params:         0       0       0       0       0
+  1764 ;;      Locals:         0       0       0       0       0
+  1765 ;;      Temps:          0       0       0       0       0
+  1766 ;;      Totals:         0       0       0       0       0
+  1767 ;;Total ram usage:        0 bytes
+  1768 ;; Hardware stack levels used:    1
+  1769 ;; Hardware stack levels required when called:    1
+  1770 ;; This function calls:
+  1771 ;;		Nothing
+  1772 ;; This function is called by:
+  1773 ;;		_setColumnas
+  1774 ;;		_shiftBitColumna
+  1775 ;; This function uses a non-reentrant model
+  1776 ;;
+  1777                           
+  1778                           
+  1779                           ;psect for function _shiftClock_Col
+  1780  0306                     _shiftClock_Col:	
+  1781  0306                     l1126:	
+  1782                           ;incstack = 0
+  1783                           ; Regs used in _shiftClock_Col: []
+  1784                           
+  1785                           
+  1786                           ;columnas.c: 14:     PORTBbits.RB5 = 0;
+  1787  0306  1283               	bcf	3,5	;RP0=0, select bank0
+  1788  0307  1303               	bcf	3,6	;RP1=0, select bank0
+  1789  0308  1286               	bcf	6,5	;volatile
+  1790                           
+  1791                           ;columnas.c: 15:     PORTBbits.RB5 = 1;
+  1792  0309  1686               	bsf	6,5	;volatile
+  1793                           
+  1794                           ;columnas.c: 17:     PORTBbits.RB5 = 0;
+  1795  030A  1286               	bcf	6,5	;volatile
+  1796  030B                     l112:	
+  1797  030B  0008               	return
+  1798  030C                     __end_of_shiftClock_Col:	
+  1799                           
+  1800                           	psect	text9
+  1801  030C                     __ptext9:	
+  1802 ;; *************** function _latchClock_Col *****************
+  1803 ;; Defined at:
+  1804 ;;		line 7 in file "columnas.c"
+  1805 ;; Parameters:    Size  Location     Type
+  1806 ;;		None
+  1807 ;; Auto vars:     Size  Location     Type
+  1808 ;;		None
+  1809 ;; Return value:  Size  Location     Type
+  1810 ;;                  1    wreg      void 
+  1811 ;; Registers used:
+  1812 ;;		None
+  1813 ;; Tracked objects:
+  1814 ;;		On entry : 0/0
+  1815 ;;		On exit  : 0/0
+  1816 ;;		Unchanged: 0/0
+  1817 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1818 ;;      Params:         0       0       0       0       0
+  1819 ;;      Locals:         0       0       0       0       0
+  1820 ;;      Temps:          0       0       0       0       0
+  1821 ;;      Totals:         0       0       0       0       0
+  1822 ;;Total ram usage:        0 bytes
+  1823 ;; Hardware stack levels used:    1
+  1824 ;; Hardware stack levels required when called:    1
+  1825 ;; This function calls:
+  1826 ;;		Nothing
+  1827 ;; This function is called by:
+  1828 ;;		_setColumnas
+  1829 ;;		_shiftBitColumna
+  1830 ;; This function uses a non-reentrant model
+  1831 ;;
+  1832                           
+  1833                           
+  1834                           ;psect for function _latchClock_Col
+  1835  030C                     _latchClock_Col:	
+  1836  030C                     l1124:	
+  1837                           ;incstack = 0
+  1838                           ; Regs used in _latchClock_Col: []
+  1839                           
+  1840                           
+  1841                           ;columnas.c: 8:     PORTBbits.RB4 = 1;
+  1842  030C  1283               	bcf	3,5	;RP0=0, select bank0
+  1843  030D  1303               	bcf	3,6	;RP1=0, select bank0
+  1844  030E  1606               	bsf	6,4	;volatile
+  1845                           
+  1846                           ;columnas.c: 10:     PORTBbits.RB4 = 0;
+  1847  030F  1206               	bcf	6,4	;volatile
+  1848  0310                     l109:	
+  1849  0310  0008               	return
+  1850  0311                     __end_of_latchClock_Col:	
+  1851                           
+  1852                           	psect	text10
+  1853  02CC                     __ptext10:	
+  1854 ;; *************** function _init_timer *****************
+  1855 ;; Defined at:
+  1856 ;;		line 37 in file "init.c"
+  1857 ;; Parameters:    Size  Location     Type
+  1858 ;;		None
+  1859 ;; Auto vars:     Size  Location     Type
+  1860 ;;		None
+  1861 ;; Return value:  Size  Location     Type
+  1862 ;;                  1    wreg      void 
+  1863 ;; Registers used:
+  1864 ;;		status,2
+  1865 ;; Tracked objects:
+  1866 ;;		On entry : 0/0
+  1867 ;;		On exit  : 0/0
+  1868 ;;		Unchanged: 0/0
+  1869 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1870 ;;      Params:         0       0       0       0       0
+  1871 ;;      Locals:         0       0       0       0       0
+  1872 ;;      Temps:          0       0       0       0       0
+  1873 ;;      Totals:         0       0       0       0       0
+  1874 ;;Total ram usage:        0 bytes
+  1875 ;; Hardware stack levels used:    1
+  1876 ;; Hardware stack levels required when called:    1
+  1877 ;; This function calls:
+  1878 ;;		Nothing
+  1879 ;; This function is called by:
+  1880 ;;		_main
+  1881 ;; This function uses a non-reentrant model
+  1882 ;;
+  1883                           
+  1884                           
+  1885                           ;psect for function _init_timer
+  1886  02CC                     _init_timer:	
+  1887  02CC                     l952:	
+  1888                           ;incstack = 0
+  1889                           ; Regs used in _init_timer: [status,2]
+  1890                           
+  1891                           
+  1892                           ;init.c: 39:     TMR0=0;
+  1893  02CC  1283               	bcf	3,5	;RP0=0, select bank0
+  1894  02CD  1303               	bcf	3,6	;RP1=0, select bank0
+  1895  02CE  0181               	clrf	1	;volatile
+  1896  02CF                     l954:	
+  1897                           
+  1898                           ;init.c: 47:     INTCONbits.GIE = 1;
+  1899  02CF  178B               	bsf	11,7	;volatile
+  1900  02D0                     l956:	
+  1901                           
+  1902                           ;init.c: 48:     INTCONbits.TMR0IE = 1;
+  1903  02D0  168B               	bsf	11,5	;volatile
+  1904  02D1                     l958:	
+  1905                           
+  1906                           ;init.c: 49:     INTCONbits.TMR0IF = 0;
+  1907  02D1  110B               	bcf	11,2	;volatile
+  1908  02D2                     l960:	
+  1909                           
+  1910                           ;init.c: 58:     OPTION_REGbits.PSA = 1;
+  1911  02D2  1683               	bsf	3,5	;RP0=1, select bank1
+  1912  02D3  1303               	bcf	3,6	;RP1=0, select bank1
+  1913  02D4  1581               	bsf	1,3	;volatile
+  1914  02D5                     l962:	
+  1915                           
+  1916                           ;init.c: 59:     OPTION_REGbits.PS0 = 1;
+  1917  02D5  1401               	bsf	1,0	;volatile
+  1918  02D6                     l964:	
+  1919                           
+  1920                           ;init.c: 60:     OPTION_REGbits.PS1 = 1;
+  1921  02D6  1481               	bsf	1,1	;volatile
+  1922  02D7                     l966:	
+  1923                           
+  1924                           ;init.c: 61:     OPTION_REGbits.PS2 = 1;
+  1925  02D7  1501               	bsf	1,2	;volatile
+  1926  02D8                     l968:	
+  1927                           
+  1928                           ;init.c: 62:     OPTION_REGbits.T0CS = 0;
+  1929  02D8  1281               	bcf	1,5	;volatile
+  1930  02D9                     l26:	
+  1931  02D9  0008               	return
+  1932  02DA                     __end_of_init_timer:	
+  1933                           
+  1934                           	psect	text11
+  1935  02E7                     __ptext11:	
+  1936 ;; *************** function _init_pines *****************
+  1937 ;; Defined at:
+  1938 ;;		line 30 in file "init.c"
+  1939 ;; Parameters:    Size  Location     Type
+  1940 ;;		None
+  1941 ;; Auto vars:     Size  Location     Type
+  1942 ;;		None
+  1943 ;; Return value:  Size  Location     Type
+  1944 ;;                  1    wreg      void 
+  1945 ;; Registers used:
+  1946 ;;		status,2, status,0, pclath, cstack
+  1947 ;; Tracked objects:
+  1948 ;;		On entry : 0/0
+  1949 ;;		On exit  : 0/0
+  1950 ;;		Unchanged: 0/0
+  1951 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1952 ;;      Params:         0       0       0       0       0
+  1953 ;;      Locals:         0       0       0       0       0
+  1954 ;;      Temps:          0       0       0       0       0
+  1955 ;;      Totals:         0       0       0       0       0
+  1956 ;;Total ram usage:        0 bytes
+  1957 ;; Hardware stack levels used:    1
+  1958 ;; Hardware stack levels required when called:    2
+  1959 ;; This function calls:
+  1960 ;;		_init_pines_col
+  1961 ;;		_init_pines_fil
+  1962 ;; This function is called by:
+  1963 ;;		_main
+  1964 ;; This function uses a non-reentrant model
+  1965 ;;
+  1966                           
+  1967                           
+  1968                           ;psect for function _init_pines
+  1969  02E7                     _init_pines:	
+  1970  02E7                     l950:	
+  1971                           ;incstack = 0
+  1972                           ; Regs used in _init_pines: [status,2+status,0+pclath+cstack]
+  1973                           
+  1974                           
+  1975                           ;init.c: 32:     init_pines_fil();
+  1976  02E7  120A  118A  22DA  120A  118A  	fcall	_init_pines_fil
+  1977                           
+  1978                           ;init.c: 33:     init_pines_col();
+  1979  02EC  120A  118A  22BD  120A  118A  	fcall	_init_pines_col
+  1980  02F1                     l23:	
+  1981  02F1  0008               	return
+  1982  02F2                     __end_of_init_pines:	
+  1983                           
+  1984                           	psect	text12
+  1985  02DA                     __ptext12:	
+  1986 ;; *************** function _init_pines_fil *****************
+  1987 ;; Defined at:
+  1988 ;;		line 4 in file "init.c"
+  1989 ;; Parameters:    Size  Location     Type
+  1990 ;;		None
+  1991 ;; Auto vars:     Size  Location     Type
+  1992 ;;		None
+  1993 ;; Return value:  Size  Location     Type
+  1994 ;;                  1    wreg      void 
+  1995 ;; Registers used:
+  1996 ;;		None
+  1997 ;; Tracked objects:
+  1998 ;;		On entry : 0/0
+  1999 ;;		On exit  : 0/0
+  2000 ;;		Unchanged: 0/0
+  2001 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2002 ;;      Params:         0       0       0       0       0
+  2003 ;;      Locals:         0       0       0       0       0
+  2004 ;;      Temps:          0       0       0       0       0
+  2005 ;;      Totals:         0       0       0       0       0
+  2006 ;;Total ram usage:        0 bytes
+  2007 ;; Hardware stack levels used:    1
+  2008 ;; Hardware stack levels required when called:    1
+  2009 ;; This function calls:
+  2010 ;;		Nothing
+  2011 ;; This function is called by:
+  2012 ;;		_init_pines
+  2013 ;; This function uses a non-reentrant model
+  2014 ;;
+  2015                           
+  2016                           
+  2017                           ;psect for function _init_pines_fil
+  2018  02DA                     _init_pines_fil:	
+  2019  02DA                     l920:	
+  2020                           ;incstack = 0
+  2021                           ; Regs used in _init_pines_fil: []
+  2022                           
+  2023                           
+  2024                           ;init.c: 6:     TRISDbits.TRISD2 = 0;
+  2025  02DA  1683               	bsf	3,5	;RP0=1, select bank1
+  2026  02DB  1303               	bcf	3,6	;RP1=0, select bank1
+  2027  02DC  1108               	bcf	8,2	;volatile
+  2028                           
+  2029                           ;init.c: 7:     TRISDbits.TRISD3 = 0;
+  2030  02DD  1188               	bcf	8,3	;volatile
+  2031                           
+  2032                           ;init.c: 8:     TRISDbits.TRISD4 = 0;
+  2033  02DE  1208               	bcf	8,4	;volatile
+  2034                           
+  2035                           ;init.c: 9:     TRISDbits.TRISD5 = 0;
+  2036  02DF  1288               	bcf	8,5	;volatile
+  2037                           
+  2038                           ;init.c: 11:     PORTDbits.RD2 = 0;
+  2039  02E0  1283               	bcf	3,5	;RP0=0, select bank0
+  2040  02E1  1303               	bcf	3,6	;RP1=0, select bank0
+  2041  02E2  1108               	bcf	8,2	;volatile
+  2042                           
+  2043                           ;init.c: 12:     PORTDbits.RD3 = 0;
+  2044  02E3  1188               	bcf	8,3	;volatile
+  2045                           
+  2046                           ;init.c: 13:     PORTDbits.RD4 = 0;
+  2047  02E4  1208               	bcf	8,4	;volatile
+  2048                           
+  2049                           ;init.c: 14:     PORTDbits.RD5 = 0;
+  2050  02E5  1288               	bcf	8,5	;volatile
+  2051  02E6                     l17:	
+  2052  02E6  0008               	return
+  2053  02E7                     __end_of_init_pines_fil:	
+  2054                           
+  2055                           	psect	text13
+  2056  02BD                     __ptext13:	
+  2057 ;; *************** function _init_pines_col *****************
+  2058 ;; Defined at:
+  2059 ;;		line 17 in file "init.c"
+  2060 ;; Parameters:    Size  Location     Type
+  2061 ;;		None
+  2062 ;; Auto vars:     Size  Location     Type
+  2063 ;;		None
+  2064 ;; Return value:  Size  Location     Type
+  2065 ;;                  1    wreg      void 
+  2066 ;; Registers used:
+  2067 ;;		None
+  2068 ;; Tracked objects:
+  2069 ;;		On entry : 0/0
+  2070 ;;		On exit  : 0/0
+  2071 ;;		Unchanged: 0/0
+  2072 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2073 ;;      Params:         0       0       0       0       0
+  2074 ;;      Locals:         0       0       0       0       0
+  2075 ;;      Temps:          0       0       0       0       0
+  2076 ;;      Totals:         0       0       0       0       0
+  2077 ;;Total ram usage:        0 bytes
+  2078 ;; Hardware stack levels used:    1
+  2079 ;; Hardware stack levels required when called:    1
+  2080 ;; This function calls:
+  2081 ;;		Nothing
+  2082 ;; This function is called by:
+  2083 ;;		_init_pines
+  2084 ;; This function uses a non-reentrant model
+  2085 ;;
+  2086                           
+  2087                           
+  2088                           ;psect for function _init_pines_col
+  2089  02BD                     _init_pines_col:	
+  2090  02BD                     l922:	
+  2091                           ;incstack = 0
+  2092                           ; Regs used in _init_pines_col: []
+  2093                           
+  2094                           
+  2095                           ;init.c: 18:     TRISBbits.TRISB0 = 0;
+  2096  02BD  1683               	bsf	3,5	;RP0=1, select bank1
+  2097  02BE  1303               	bcf	3,6	;RP1=0, select bank1
+  2098  02BF  1006               	bcf	6,0	;volatile
+  2099                           
+  2100                           ;init.c: 19:     TRISBbits.TRISB1 = 0;
+  2101  02C0  1086               	bcf	6,1	;volatile
+  2102                           
+  2103                           ;init.c: 20:     TRISBbits.TRISB2 = 0;
+  2104  02C1  1106               	bcf	6,2	;volatile
+  2105                           
+  2106                           ;init.c: 21:     TRISBbits.TRISB4 = 0;
+  2107  02C2  1206               	bcf	6,4	;volatile
+  2108                           
+  2109                           ;init.c: 22:     TRISBbits.TRISB5 = 0;
+  2110  02C3  1286               	bcf	6,5	;volatile
+  2111                           
+  2112                           ;init.c: 24:     PORTBbits.RB0 = 0;
+  2113  02C4  1283               	bcf	3,5	;RP0=0, select bank0
+  2114  02C5  1303               	bcf	3,6	;RP1=0, select bank0
+  2115  02C6  1006               	bcf	6,0	;volatile
+  2116                           
+  2117                           ;init.c: 25:     PORTBbits.RB1 = 0;
+  2118  02C7  1086               	bcf	6,1	;volatile
+  2119                           
+  2120                           ;init.c: 26:     PORTBbits.RB2 = 0;
+  2121  02C8  1106               	bcf	6,2	;volatile
+  2122                           
+  2123                           ;init.c: 27:     PORTBbits.RB4 = 0;
+  2124  02C9  1206               	bcf	6,4	;volatile
+  2125                           
+  2126                           ;init.c: 28:     PORTBbits.RB5 = 0;
+  2127  02CA  1286               	bcf	6,5	;volatile
+  2128  02CB                     l20:	
+  2129  02CB  0008               	return
+  2130  02CC                     __end_of_init_pines_col:	
+  2131                           
+  2132                           	psect	text14
+  2133  0248                     __ptext14:	
+  2134 ;; *************** function _Timer0_ISR *****************
+  2135 ;; Defined at:
+  2136 ;;		line 47 in file "mainsource.c"
+  2137 ;; Parameters:    Size  Location     Type
+  2138 ;;		None
+  2139 ;; Auto vars:     Size  Location     Type
+  2140 ;;		None
+  2141 ;; Return value:  Size  Location     Type
+  2142 ;;                  1    wreg      void 
+  2143 ;; Registers used:
+  2144 ;;		wreg, status,2, status,0, btemp+1
+  2145 ;; Tracked objects:
+  2146 ;;		On entry : 0/0
+  2147 ;;		On exit  : 0/0
+  2148 ;;		Unchanged: 0/0
+  2149 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2150 ;;      Params:         0       0       0       0       0
+  2151 ;;      Locals:         0       0       0       0       0
+  2152 ;;      Temps:          3       0       0       0       0
+  2153 ;;      Totals:         3       0       0       0       0
+  2154 ;;Total ram usage:        3 bytes
+  2155 ;; Hardware stack levels used:    1
+  2156 ;; This function calls:
+  2157 ;;		Nothing
+  2158 ;; This function is called by:
+  2159 ;;		Interrupt level 1
+  2160 ;; This function uses a non-reentrant model
+  2161 ;;
+  2162                           
+  2163                           
+  2164                           ;psect for function _Timer0_ISR
+  2165  0248                     _Timer0_ISR:	
+  2166  0248                     i1l1056:	
+  2167                           
+  2168                           ;mainsource.c: 49:     if(INTCONbits.TMR0IF){
+  2169  0248  1D0B               	btfss	11,2	;volatile
+  2170  0249  2A4B               	goto	u19_21
+  2171  024A  2A4C               	goto	u19_20
+  2172  024B                     u19_21:	
+  2173  024B  2A6D               	goto	i1l62
+  2174  024C                     u19_20:	
+  2175  024C                     i1l1058:	
+  2176                           
+  2177                           ;mainsource.c: 50:         INTCONbits.TMR0IF=0;
+  2178  024C  110B               	bcf	11,2	;volatile
+  2179  024D                     i1l1060:	
+  2180                           
+  2181                           ;mainsource.c: 51:         if(counter >= 3906){
+  2182  024D  0839               	movf	_counter+1,w
+  2183  024E  3A80               	xorlw	128
+  2184  024F  00FF               	movwf	btemp+1
+  2185  0250  308F               	movlw	143
+  2186  0251  027F               	subwf	btemp+1,w
+  2187  0252  1D03               	skipz
+  2188  0253  2A56               	goto	u20_25
+  2189  0254  3042               	movlw	66
+  2190  0255  0238               	subwf	_counter,w
+  2191  0256                     u20_25:	
+  2192  0256  1C03               	skipc
+  2193  0257  2A59               	goto	u20_21
+  2194  0258  2A5A               	goto	u20_20
+  2195  0259                     u20_21:	
+  2196  0259  2A65               	goto	i1l1068
+  2197  025A                     u20_20:	
+  2198  025A                     i1l1062:	
+  2199                           
+  2200                           ;mainsource.c: 52:             counter=0;
+  2201  025A  1283               	bcf	3,5	;RP0=0, select bank0
+  2202  025B  1303               	bcf	3,6	;RP1=0, select bank0
+  2203  025C  01B8               	clrf	_counter
+  2204  025D  01B9               	clrf	_counter+1
+  2205  025E                     i1l1064:	
+  2206                           
+  2207                           ;mainsource.c: 53:             PORTBbits.RB0 = led;
+  2208  025E  0C7A               	rrf	_led,w
+  2209  025F  1C03               	skipc
+  2210  0260  1006               	bcf	6,0	;volatile
+  2211  0261  1803               	skipnc
+  2212  0262  1406               	bsf	6,0	;volatile
+  2213  0263                     i1l1066:	
+  2214                           
+  2215                           ;mainsource.c: 54:             led= ~led;
+  2216  0263  09FA               	comf	_led,f
+  2217                           
+  2218                           ;mainsource.c: 55:         }else{
+  2219  0264  2A6D               	goto	i1l62
+  2220  0265                     i1l1068:	
+  2221                           
+  2222                           ;mainsource.c: 56:             counter ++;
+  2223  0265  3001               	movlw	1
+  2224  0266  1283               	bcf	3,5	;RP0=0, select bank0
+  2225  0267  1303               	bcf	3,6	;RP1=0, select bank0
+  2226  0268  07B8               	addwf	_counter,f
+  2227  0269  1803               	skipnc
+  2228  026A  0AB9               	incf	_counter+1,f
+  2229  026B  3000               	movlw	0
+  2230  026C  07B9               	addwf	_counter+1,f
+  2231  026D                     i1l62:	
+  2232  026D  0872               	movf	??_Timer0_ISR+2,w
+  2233  026E  00FF               	movwf	btemp+1
+  2234  026F  0871               	movf	??_Timer0_ISR+1,w
+  2235  0270  008A               	movwf	10
+  2236  0271  0E70               	swapf	??_Timer0_ISR^(0+4294967168),w
+  2237  0272  0083               	movwf	3
+  2238  0273  0EFE               	swapf	btemp,f
+  2239  0274  0E7E               	swapf	btemp,w
+  2240  0275  0009               	retfie
+  2241  0276                     __end_of_Timer0_ISR:	
+  2242  007E                     btemp	set	126	;btemp
+  2243  007E                     wtemp0	set	126
+  2244                           
+  2245                           	psect	intentry
+  2246  0004                     __pintentry:	
+  2247                           ;incstack = 0
+  2248                           ; Regs used in _Timer0_ISR: [wreg+status,2+status,0+btemp+1]
+  2249                           
+  2250  0004                     interrupt_function:	
+  2251  007E                     saved_w	set	btemp
+  2252  0004  00FE               	movwf	btemp
+  2253  0005  0E03               	swapf	3,w
+  2254  0006  00F0               	movwf	??_Timer0_ISR
+  2255  0007  080A               	movf	10,w
+  2256  0008  00F1               	movwf	??_Timer0_ISR+1
+  2257  0009  1283               	bcf	3,5	;RP0=0, select bank0
+  2258  000A  1303               	bcf	3,6	;RP1=0, select bank0
+  2259  000B  087F               	movf	btemp+1,w
+  2260  000C  00F2               	movwf	??_Timer0_ISR+2
+  2261  000D  120A  118A  2A48   	ljmp	_Timer0_ISR
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        26
+    BSS         19
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14      8      11
+    BANK0            80     18      60
+    BANK1            80      0       0
+    BANK3            96      0       0
+    BANK2            96      0       0
+
+Pointer List with Targets:
+
+    updateScreen@dibujo	PTR unsigned int  size(1) Largest target is 16
+		 -> dibujo(BANK0[16]), 
+
+
+Critical Paths under _main in COMMON
+
+    _main->_updateScreen
+    _updateScreen->_setFilas
+    _updateScreen->_shiftBitColumna
+
+Critical Paths under _Timer0_ISR in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_setFilas
+    _updateScreen->_setFilas
+
+Critical Paths under _Timer0_ISR in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _Timer0_ISR in BANK1
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _Timer0_ISR in BANK3
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _Timer0_ISR in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 8     4      4    2538
+                                             10 BANK0      8     4      4
+                         _init_pines
+                         _init_timer
+                        _setColumnas
+                           _setFilas
+                       _updateScreen
+ ---------------------------------------------------------------------------------
+ (1) _updateScreen                                         3     3      0    1292
+                                              5 COMMON     3     3      0
+                           _setFilas
+                    _shiftBitColumna
+ ---------------------------------------------------------------------------------
+ (2) _shiftBitColumna                                      2     2      0      31
+                                              3 COMMON     2     2      0
+                     _latchClock_Col
+                     _latchClock_Fil
+                     _shiftClock_Col
+ ---------------------------------------------------------------------------------
+ (3) _latchClock_Fil                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _setFilas                                            12    10      2     977
+                                              3 COMMON     2     0      2
+                                              0 BANK0     10    10      0
+                        _enableFilas
+                     _shiftClock_Fil
+ ---------------------------------------------------------------------------------
+ (3) _shiftClock_Fil                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (3) _enableFilas                                          0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _setColumnas                                          8     8      0     266
+                                              3 COMMON     3     3      0
+                                              0 BANK0      5     5      0
+                     _latchClock_Col
+                     _shiftClock_Col
+ ---------------------------------------------------------------------------------
+ (3) _shiftClock_Col                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (3) _latchClock_Col                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _init_timer                                           0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _init_pines                                           0     0      0       0
+                     _init_pines_col
+                     _init_pines_fil
+ ---------------------------------------------------------------------------------
+ (2) _init_pines_fil                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _init_pines_col                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (4) _Timer0_ISR                                           3     3      0       0
+                                              0 COMMON     3     3      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 4
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _init_pines
+     _init_pines_col
+     _init_pines_fil
+   _init_timer
+   _setColumnas
+     _latchClock_Col
+     _shiftClock_Col
+   _setFilas
+     _enableFilas
+     _shiftClock_Fil
+   _updateScreen
+     _setFilas
+       _enableFilas
+       _shiftClock_Fil
+     _shiftBitColumna
+       _latchClock_Col
+       _latchClock_Fil
+       _shiftClock_Col
+
+ _Timer0_ISR (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BANK3               60      0       0       9        0.0%
+BITBANK3            60      0       0       8        0.0%
+SFR3                 0      0       0       4        0.0%
+BITSFR3              0      0       0       4        0.0%
+BANK2               60      0       0      11        0.0%
+BITBANK2            60      0       0      10        0.0%
+SFR2                 0      0       0       5        0.0%
+BITSFR2              0      0       0       5        0.0%
+BANK1               50      0       0       7        0.0%
+BITBANK1            50      0       0       6        0.0%
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               50     12      3C       5       75.0%
+BITBANK0            50      0       0       4        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               E      8       B       1       78.6%
+BITCOMMON            E      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0      47      12        0.0%
+ABS                  0      0      47       3        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA             100      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.10 build 88905656 
+Symbol Table                                                                                   Fri May 01 16:11:10 2020
+
+                       pc 0002               __CFG_CP$OFF 0000                        l20 02CB  
+                      l23 02F1                        l17 02E6                        l26 02D9  
+                      l83 0142                        l94 02FF                        l88 0314  
+                      l97 0305                        fsr 0004          ??_init_pines_col 0073  
+        ??_init_pines_fil 0073                       l102 0204                       l112 030B  
+                     l120 0291                       l109 0310                       l117 0247  
+                     l920 02DA                       l922 02BD                       l950 02E7  
+                     l960 02D2                       l952 02CC                       l962 02D5  
+                     l954 02CF                       l964 02D6                       l956 02D0  
+                     l966 02D7                       l958 02D1                       l968 02D8  
+                     u300 0242                       u301 0241                       u305 023E  
+                     u250 01CB                       u251 01CA                       u315 0163  
+                     u325 0179                       u255 01C7                       u335 018E  
+                     u264 01D8                       u265 01D5                       u345 01A3  
+                     u274 01E5              __CFG_CPD$OFF 0000                       u275 01E2  
+                     u284 0212                       u285 0210                       u294 021C  
+                     u295 021A                       _led 007A                       fsr0 0004  
+                     indf 0000              __CFG_FOSC$XT 0000              __CFG_LVP$OFF 0000  
+                    l1120 02FA                      l1200 0092                      l1122 0300  
+                    l1130 01BE                      l1210 00C7                      l1202 00A4  
+                    l1124 030C                      l1220 00FB                      l1212 00CC  
+                    l1204 00AA                      l1126 0306                      l1118 0311  
+                    l1142 01FF                      l1134 01CC                      l1150 0287  
+                    l1222 0101                      l1214 00DE                      l1206 00AF  
+                    l1160 0208                      l1136 01F1                      l1128 01B8  
+                    l1152 028C                      l1224 0106                      l1216 00E4  
+                    l1208 00C1                      l1232 0123                      l1240 014D  
+                    l1170 0228                      l1154 0208                      l1138 01F6  
+                    l1146 0277                      l1226 0118                      l1218 00E9  
+                    l1250 0184                      l1242 014D                      l1172 022D  
+                    l1156 0208                      l1148 0282                      l1228 011E  
+                    l1180 003B                      l1252 0199                      l1244 0153  
+                    l1174 0235                      l1166 020A                      l1158 0208  
+                    l1190 006A                      l1182 003C                      l1254 01AE  
+                    l1246 015B                      l1238 0143                      l1176 0242  
+                    l1168 0223                      l1192 0070                      l1184 004D  
+                    l1248 016E                      l1194 0075                      l1186 0053  
+                    l1276 0128                      l1196 0087                      l1188 0058  
+                    l1198 008D                      i1l62 026D                      _TMR0 0001  
+            __CFG_WRT$OFF 0000                      _main 0143                      btemp 007E  
+           __CFG_BOREN$ON 0000                      start 0010        shiftBitColumna@bit 0074  
+                   ?_main 0054             __CFG_WDTE$OFF 0000                     u20_20 025A  
+                   u20_21 0259                     u20_25 0256                     u19_20 024C  
+                   u19_21 024B                     pclath 000A                     status 0003  
+                   wtemp0 007E           __initialization 0013              __end_of_main 01B8  
+          _latchClock_Fil 02FA            _latchClock_Col 030C   __size_of_shiftClock_Col 0006  
+ __size_of_shiftClock_Fil 0006              ?_setColumnas 0070                    ??_main 0058  
+    __size_of_enableFilas 0004                    i1l1060 024D                    i1l1062 025A  
+                  i1l1064 025E                    i1l1056 0248                    i1l1066 0263  
+                  i1l1058 024C                    i1l1068 0265            __CFG_PWRTE$OFF 0000  
+              _Timer0_ISR 0248    __end_of_latchClock_Col 0311    __end_of_latchClock_Fil 0300  
+                  _dibujo 003A                    _figura 0030          __end_of_setFilas 0205  
+            __pdataCOMMON 0078                    saved_w 007E   __end_of__initialization 0036  
+      updateScreen@dibujo 0077  __size_of_shiftBitColumna 001C           ?_latchClock_Col 0070  
+         ?_latchClock_Fil 0070            __pcstackCOMMON 0070              __pidataBANK0 0292  
+          _OPTION_REGbits 0081                __pbssBANK0 0038               ?_Timer0_ISR 0070  
+              __pmaintext 0143                __pintentry 0004            _shiftClock_Fil 0300  
+          _shiftClock_Col 0306      __size_of_setColumnas 0043                 ?_setFilas 0073  
+  __end_of_shiftClock_Col 030C    __end_of_shiftClock_Fil 0306         ??_shiftBitColumna 0073  
+              _init_pines 02E7                _init_timer 02CC                   __ptext1 003A  
+                 __ptext2 0276                   __ptext3 02FA                   __ptext4 01B8  
+                 __ptext5 0300                   __ptext6 0311                   __ptext7 0205  
+                 __ptext8 0306                   __ptext9 030C                   _columna 0078  
+                 _corazon 0020                   _counter 0038       __size_of_Timer0_ISR 002E  
+                 clrloop0 02F3      end_of_initialization 0036   __size_of_init_pines_col 000F  
+ __size_of_init_pines_fil 000D                ??_setFilas 004A           ?_shiftClock_Col 0070  
+         ?_shiftClock_Fil 0070                 _PORTBbits 0006             ??_enableFilas 0073  
+               _PORTDbits 0008                 _TRISBbits 0086                 _TRISDbits 0088  
+        ??_latchClock_Col 0073          ??_latchClock_Fil 0073             ?_updateScreen 0070  
+             ?_init_pines 0070             __pidataCOMMON 0315               ?_init_timer 0070  
+     start_initialization 0013       __end_of_enableFilas 0315            ??_updateScreen 0075  
+            ??_Timer0_ISR 0070         setFilas@reg_value 0073                init_fetch0 02AA  
+             __pdataBANK0 0020               __pbssCOMMON 007A                 ___latbits 0002  
+           __pcstackBANK0 004A        __end_of_Timer0_ISR 0276            _init_pines_fil 02DA  
+          _init_pines_col 02BD       __size_of_init_pines 000B           _shiftBitColumna 0276  
+     __size_of_init_timer 000E         __size_of_setFilas 004D              setColumnas@i 004D  
+           ??_setColumnas 0073               _enableFilas 0311    __end_of_init_pines_col 02CC  
+  __end_of_init_pines_fil 02E7         interrupt_function 0004          ??_shiftClock_Col 0073  
+        ??_shiftClock_Fil 0073                 clear_ram0 02F2          setColumnas@valor 004B  
+    __end_of_updateScreen 0143       __end_of_setColumnas 0248           ?_init_pines_col 0070  
+         ?_init_pines_fil 0070   __end_of_shiftBitColumna 0292              ??_init_pines 0073  
+            ??_init_timer 0073                 setFilas@i 0052                  __ptext10 02CC  
+                __ptext11 02E7                  __ptext12 02DA                  __ptext13 02BD  
+                __ptext14 0248             __size_of_main 0075        __end_of_init_pines 02F2  
+      __end_of_init_timer 02DA                  _setFilas 01B8                  main@argc 0054  
+                main@argv 0056               _setColumnas 0205                _INTCONbits 000B  
+                init_ram0 02AE          ?_shiftBitColumna 0070                  intlevel1 0000  
+    setColumnas@reg_value 004C   __size_of_latchClock_Col 0005   __size_of_latchClock_Fil 0006  
+   __size_of_updateScreen 0109              ?_enableFilas 0070              _updateScreen 003A  

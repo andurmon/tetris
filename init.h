@@ -11,8 +11,10 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    void init_pines_fil(void);
+    void init_pines_col(void);
     void init_pines(void);
-
+    void init_timer(void);
 
 
 #ifdef	__cplusplus
@@ -20,4 +22,3 @@ extern "C" {
 #endif
 
 #endif	/* INIT_H */
-

@@ -26,7 +26,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <xc.h>
 #include "init.h"
 #include "columnas.h"
 #include "filas.h"
@@ -34,73 +33,94 @@
 
 #define _XTAL_FREQ 4000000
 
-unsigned char value[8]={1,0,0,1,0,1,1,0};
-uint8_t value2 = 0b10010110;
-uint16_t value3 = 0b1001011010101010;
-uint16_t value4 = 0xffff;
-//unsigned char value[8]={1,0,0,0,0,0,0,0};
-uint16_t columna = 1;
+uint8_t columna = 1;
+//uint16_t corazon[8] = {0xffcf, 0xffb7, 0xffbb, 0xffdd, 0xffbb, 0xffb7, 0xffcf, 0xffff};
+uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
+uint16_t pantalla[8] =  {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
 
-void updateScreen(void);
+uint16_t figura[4]= {0x4, 0x4, 0x6, 0x0};//{0x4000, 0x4000, 0x6000, 0x0000};
+
+unsigned char led = 0;
+int counter = 0;
+void updateScreen(uint16_t dibujo[8]);
+
+void __interrupt() Timer0_ISR(void){
+    
+    if(INTCONbits.TMR0IF){
+        INTCONbits.TMR0IF=0;
+        counter ++;
+        if(counter >= 3906){
+            counter=0;
+            PORTBbits.RB0 = led;
+            led= ~led;
+        }
+    }
+}
 
 int main(int argc, char** argv) {
     
     init_pines();
-    
+    init_timer();
     int i=0;
 
     setColumnas(0x00);
     setFilas(0x0000);
-    PORTBbits.RB0 = 1;
+
+    pantalla[2]= pantalla[2] | figura[0]<<13;
+    pantalla[3]= pantalla[3] | figura[1]<<13;
+    pantalla[4]= pantalla[4] | figura[2]<<13;
+    pantalla[5]= pantalla[5] | figura[3]<<13;
     
     while(1){
-        updateScreen();
         
+        updateScreen(pantalla);
     }
     return (EXIT_SUCCESS); 
 }
 
-void updateScreen(void){
+
+
+void updateScreen(uint16_t dibujo[8]){
     switch(columna){
-            case 1:
-                setFilas(0xffcf);
-                shiftBitColumna(1);
-                columna=2;
-                break;
-            case 2:
-                setFilas(0xffb7);
-                shiftBitColumna(0);
-                columna=3;
-                break;            
-            case 3:
-                setFilas(0xffbb);
-                shiftBitColumna(0);
-                columna=4;
-                break;
-            case 4:
-                setFilas(0xffdd);
-                shiftBitColumna(0);
-                columna=5;
-                break;
-            case 5:
-                setFilas(0xffbb);
-                shiftBitColumna(0);
-                columna=6;
-                break;
-            case 6:
-                setFilas(0xffb7);
-                shiftBitColumna(0);
-                columna=7;
-                break;
-            case 7:
-                setFilas(0xffcf);
-                shiftBitColumna(0);
-                columna=8;
-                break;
-            case 8:
-                setFilas(0xffff);
-                shiftBitColumna(0);
-                columna=1;
-                break;
-        }
+        case 1:
+            setFilas(~dibujo[0]);
+            shiftBitColumna(1);
+            columna=2;
+            break;
+        case 2:
+            setFilas(~dibujo[1]);
+            shiftBitColumna(0);
+            columna=3;
+            break;            
+        case 3:
+            setFilas(~dibujo[2]);
+            shiftBitColumna(0);
+            columna=4;
+            break;
+        case 4:
+            setFilas(~dibujo[3]);
+            shiftBitColumna(0);
+            columna=5;
+            break;
+        case 5:
+            setFilas(~dibujo[4]);
+            shiftBitColumna(0);
+            columna=6;
+            break;
+        case 6:
+            setFilas(~dibujo[5]);
+            shiftBitColumna(0);
+            columna=7;
+            break;
+        case 7:
+            setFilas(~dibujo[6]);
+            shiftBitColumna(0);
+            columna=8;
+            break;
+        case 8:
+            setFilas(~dibujo[7]);
+            shiftBitColumna(0);
+            columna=1;
+            break;
+    }
 }
