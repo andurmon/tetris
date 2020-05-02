@@ -1,6 +1,6 @@
 /* 
  * File:   mainsource.c
- * Author: ASUS
+ * Author: Andres Uribe Montoya
  *
  * Created on 28 de febrero de 2020, 03:11 PM
  */
@@ -26,19 +26,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <time.h> 
+#include <string.h> 
 #include "init.h"
 #include "columnas.h"
 #include "filas.h"
+#include "screen.h"
+#include "control.h"
 #include <pic16f877a.h>
 
 #define _XTAL_FREQ 4000000
 
-uint8_t columna = 1;
-uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
-uint16_t test[8] =  {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
+/*struct controlSign {
+    uint8_t columna;
+    uint8_t tecla;
+    uint8_t led;
+    uint8_t ficha_Vpos;     //Posicion VERTICAL de la ficha que cae
+    uint8_t ficha_Hpos;     //Posicion HORIZONTAL de la ficha que cae
+    uint8_t ficha_actual;
+    uint8_t derecha;
+    uint8_t izquierda;
+};
 
-uint16_t pantalla[8] =  {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+struct controlSign con;
+
 uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
                         {0x0,0x3,0x2,0x2},
                         {0x1,0x3,0x2,0x0},
@@ -46,54 +56,36 @@ uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
                         {0x1,0x1,0x1,0x1},
                         {0x0, 0x3,0x3,0x0}};
 
-unsigned char led = 0;
-int counter = 0;
-uint8_t ficha_pos = 16;
-uint8_t ficha_actual = 0;
-void updateScreen(uint16_t screen[8]);
-uint8_t tecla = 0;
 
-void __interrupt() Timer0_ISR(void){
-            
-    if(INTCONbits.TMR0IF){
-        
-        INTCONbits.TMR0IF=0;
-        counter ++;
-        if(counter >= 3906){
-            PORTBbits.RB0 = led;
-            led= ~led;
-            ficha_pos--;
-            counter=0;
-            if(ficha_pos==0){
-                ficha_pos=16;
-                ficha_actual = rand() % 5;
-            }
-        }
-    }
-    else if(INTCONbits.RBIF){
-        if(PORTBbits.RB5 == 0){
-            ficha_pos=16;
-        }
-        INTCONbits.RBIF=0;
-        
-    }
-}
+uint16_t timerCount = 0;
+uint16_t pantalla[8] =  {0x0000};
+uint16_t fondo[8] = {0x0000};
+uint16_t ficha[8] = {0x0000};*/
+
+void updateScreen(uint16_t screen[8]);
+void drawFigure(void);
+void drawBground(void);
 
 int main(int argc, char** argv) {
     
-    //srand((unsigned) time(NULL));
+    //uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
+    //uint16_t test[8] =  {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
+    
     init_pines();
     init_interrupt();
     init_timer();
     int i=0;
-    setColumnas(0x00);
-    setFilas(0x0000);
+    con.columna = 1;
+    con.ficha_Vpos = 16;
+    con.ficha_Hpos = 2;
+    
+    drawBground();
     
     while(1){
-        pantalla[2]=  figuras[ficha_actual][0] << (ficha_pos-1);
-        pantalla[3]=  figuras[ficha_actual][1] << (ficha_pos-1);
-        pantalla[4]=  figuras[ficha_actual][2] << (ficha_pos-1);
-        pantalla[5]=  figuras[ficha_actual][3] << (ficha_pos-1);
+        drawFigure();
+        for(i=0; i<8; i++){
+            pantalla[i] = ficha[i] | fondo[i];
+        }
         
         updateScreen(pantalla);
         
@@ -101,17 +93,34 @@ int main(int argc, char** argv) {
     return (EXIT_SUCCESS); 
 }
 
-
-
-void updateScreen(uint16_t screen[8]){
-    if(columna == 9){
-        columna=1;
-        setFilas(~screen[columna-1]);
-        shiftBitColumna(1);
+void __interrupt() Timer0_ISR(void){
+            
+    if(INTCONbits.TMR0IF){
+        
+        INTCONbits.TMR0IF=0;
+        timerCount ++;
+        if(timerCount >= 3906){
+            PORTBbits.RB0 = con.led;
+            con.led= ~con.led;
+            con.ficha_Vpos--;
+            timerCount = 0;
+            if(con.ficha_Vpos==0){
+                con.ficha_Vpos = 16;
+                con.ficha_actual = rand() % 5;
+            }
+        }
     }
-    else{
-        columna++;
-        setFilas(~screen[columna-1]);
-        shiftBitColumna(0);
+    else if(INTCONbits.RBIF){
+        if(PORTBbits.RB5 == 0){
+            con.derecha = 1;
+            con.izquierda = 0;
+        }
+        if(PORTBbits.RB4 == 0){
+            con.derecha = 0;
+            con.izquierda = 1;
+        }
+        INTCONbits.RBIF=0;
+        
     }
 }
+

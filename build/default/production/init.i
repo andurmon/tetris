@@ -1727,12 +1727,11 @@ extern __bank0 __bit __timeout;
 void init_pines_in(void){
 
     TRISBbits.TRISB5 = 1;
+    TRISBbits.TRISB4 = 1;
 
-    TRISBbits.TRISB4 = 0;
     TRISBbits.TRISB6 = 0;
     TRISBbits.TRISB7 = 0;
 
-    PORTBbits.RB4 = 0;
     PORTBbits.RB6 = 0;
     PORTBbits.RB7 = 0;
 }
@@ -1768,7 +1767,7 @@ void init_pines(void){
 
     init_pines_fil();
     init_pines_col();
-
+    init_pines_in();
 }
 
 void init_interrupt(void){
@@ -1793,7 +1792,7 @@ void init_timer(void){
     INTCONbits.GIE = 1;
     INTCONbits.TMR0IE = 1;
     INTCONbits.TMR0IF = 0;
-# 81 "init.c"
+# 80 "init.c"
     OPTION_REGbits.PSA = 1;
     OPTION_REGbits.PS0 = 1;
     OPTION_REGbits.PS1 = 1;

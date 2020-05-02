@@ -2055,47 +2055,37 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 28 "mainsource.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\time.h" 1 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+# 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
 
 
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__unsupported.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\time.h" 2 3
-
-
-
-
-typedef long time_t;
-struct tm {
- int tm_sec;
- int tm_min;
- int tm_hour;
- int tm_mday;
- int tm_mon;
- int tm_year;
- int tm_wday;
- int tm_yday;
- int tm_isdst;
-};
-
-
-
-
-
-extern int time_zone;
-
-
-
-
-extern time_t time(time_t *);
-extern int stime(time_t *);
-# 47 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\time.h" 3
-extern char * asctime(const struct tm *) ;
-extern char * ctime(const time_t *) ;
-extern struct tm * gmtime(const time_t *) ;
-extern struct tm * localtime(const time_t *) ;
-extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
-extern time_t mktime(struct tm *);
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
 # 29 "mainsource.c" 2
 
 # 1 "./init.h" 1
@@ -2124,70 +2114,65 @@ void enableFilas(void);
 void disableFilas(void);
 # 32 "mainsource.c" 2
 
+# 1 "./screen.h" 1
+# 15 "./screen.h"
+    void updateScreen(uint16_t screen[8]);
+    void drawBground(void);
+    void drawFigure(void);
+# 33 "mainsource.c" 2
+
+# 1 "./control.h" 1
+# 14 "./control.h"
+    struct controlSign {
+        uint8_t columna;
+        uint8_t tecla;
+        uint8_t led;
+        uint8_t ficha_Vpos;
+        uint8_t ficha_Hpos;
+        uint8_t ficha_actual;
+        uint8_t derecha;
+        uint8_t izquierda;
+    };
+    struct controlSign con;
+
+    uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
+                            {0x0,0x3,0x2,0x2},
+                            {0x1,0x3,0x2,0x0},
+                            {0x0, 0x2, 0x3, 0x1},
+                            {0x1,0x1,0x1,0x1},
+                            {0x0, 0x3,0x3,0x0}};
 
 
-
-
-uint8_t columna = 1;
-uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
-uint16_t test[8] = {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
-
-uint16_t pantalla[8] = {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
-uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
-                        {0x0,0x3,0x2,0x2},
-                        {0x1,0x3,0x2,0x0},
-                        {0x0, 0x2, 0x3, 0x1},
-                        {0x1,0x1,0x1,0x1},
-                        {0x0, 0x3,0x3,0x0}};
-
-unsigned char led = 0;
-int counter = 0;
-uint8_t ficha_pos = 16;
-uint8_t ficha_actual = 0;
+    uint16_t timerCount = 0;
+    uint16_t pantalla[8] = {0x0000};
+    uint16_t fondo[8] = {0x0000};
+    uint16_t ficha[8] = {0x0000};
+# 34 "mainsource.c" 2
+# 65 "mainsource.c"
 void updateScreen(uint16_t screen[8]);
-uint8_t tecla = 0;
-
-void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
-
-    if(INTCONbits.TMR0IF){
-
-        INTCONbits.TMR0IF=0;
-        counter ++;
-        if(counter >= 3906){
-            PORTBbits.RB0 = led;
-            led= ~led;
-            ficha_pos--;
-            counter=0;
-            if(ficha_pos==0){
-                ficha_pos=16;
-                ficha_actual = rand() % 5;
-            }
-        }
-    }
-    else if(INTCONbits.RBIF){
-        if(PORTBbits.RB5 == 0){
-            ficha_pos=16;
-        }
-        INTCONbits.RBIF=0;
-
-    }
-}
+void drawFigure(void);
+void drawBground(void);
 
 int main(int argc, char** argv) {
+
+
 
 
     init_pines();
     init_interrupt();
     init_timer();
     int i=0;
-    setColumnas(0x00);
-    setFilas(0x0000);
+    con.columna = 1;
+    con.ficha_Vpos = 16;
+    con.ficha_Hpos = 2;
+
+    drawBground();
 
     while(1){
-        pantalla[2]= figuras[ficha_actual][0] << (ficha_pos-1);
-        pantalla[3]= figuras[ficha_actual][1] << (ficha_pos-1);
-        pantalla[4]= figuras[ficha_actual][2] << (ficha_pos-1);
-        pantalla[5]= figuras[ficha_actual][3] << (ficha_pos-1);
+        drawFigure();
+        for(i=0; i<8; i++){
+            pantalla[i] = ficha[i] | fondo[i];
+        }
 
         updateScreen(pantalla);
 
@@ -2195,17 +2180,33 @@ int main(int argc, char** argv) {
     return (0);
 }
 
+void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
 
+    if(INTCONbits.TMR0IF){
 
-void updateScreen(uint16_t screen[8]){
-    if(columna == 9){
-        columna=1;
-        setFilas(~screen[columna-1]);
-        shiftBitColumna(1);
+        INTCONbits.TMR0IF=0;
+        timerCount ++;
+        if(timerCount >= 3906){
+            PORTBbits.RB0 = con.led;
+            con.led= ~con.led;
+            con.ficha_Vpos--;
+            timerCount = 0;
+            if(con.ficha_Vpos==0){
+                con.ficha_Vpos = 16;
+                con.ficha_actual = rand() % 5;
+            }
+        }
     }
-    else{
-        columna++;
-        setFilas(~screen[columna-1]);
-        shiftBitColumna(0);
+    else if(INTCONbits.RBIF){
+        if(PORTBbits.RB5 == 0){
+            con.derecha = 1;
+            con.izquierda = 0;
+        }
+        if(PORTBbits.RB4 == 0){
+            con.derecha = 0;
+            con.izquierda = 1;
+        }
+        INTCONbits.RBIF=0;
+
     }
 }
