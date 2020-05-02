@@ -1,37 +1,60 @@
 #include <xc.h>
 #include <pic16f877a.h>
 
+void init_pines_in(void){
+    //TRISBbits.TRISB4 = 1;
+    TRISBbits.TRISB5 = 1;
+    
+    TRISBbits.TRISB4 = 0;  
+    TRISBbits.TRISB6 = 0;  
+    TRISBbits.TRISB7 = 0;  
+    
+    PORTBbits.RB4 = 0;
+    PORTBbits.RB6 = 0;
+    PORTBbits.RB7 = 0;
+}
+
 void init_pines_fil(void){
     
-    TRISDbits.TRISD2 = 0;
-    TRISDbits.TRISD3 = 0;
-    TRISDbits.TRISD4 = 0;
-    TRISDbits.TRISD5 = 0;
+    TRISCbits.TRISC4 = 0;
+    TRISCbits.TRISC5 = 0;
+    TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
     
-    PORTDbits.RD2 = 0;
-    PORTDbits.RD3 = 0;
-    PORTDbits.RD4 = 0;
-    PORTDbits.RD5 = 0;
+    PORTCbits.RC4 = 0;
+    PORTCbits.RC5 = 0;
+    PORTCbits.RC6 = 0;
+    PORTCbits.RC7 = 0;
 }
 
 void init_pines_col(void){
     TRISBbits.TRISB0 = 0;
-    TRISBbits.TRISB1 = 0;
-    TRISBbits.TRISB2 = 0;
-    TRISBbits.TRISB4 = 0;
-    TRISBbits.TRISB5 = 0;
-    
     PORTBbits.RB0 = 0;
-    PORTBbits.RB1 = 0;
-    PORTBbits.RB2 = 0;
-    PORTBbits.RB4 = 0;
-    PORTBbits.RB5 = 0;
+    
+    TRISDbits.TRISD4 = 0; //Data
+    TRISDbits.TRISD5 = 0; //OE
+    TRISDbits.TRISD6 = 0; //Latch
+    TRISDbits.TRISD7 = 0; //Shift
+
+    PORTDbits.RD4 = 0;
+    PORTDbits.RD5 = 0;
+    PORTDbits.RD6 = 0;
+    PORTDbits.RD7 = 0;
 }
 void init_pines(void){
     
     init_pines_fil();
     init_pines_col();
     
+}
+
+void init_interrupt(void){
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    INTCONbits.RBIE = 1;
+    INTCONbits.RBIF = 0;
+    
+    OPTION_REGbits.nRBPU = 0;
 }
 
 void init_timer(void){

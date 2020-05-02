@@ -190,113 +190,106 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"8 filas.c
-[; ;filas.c: 8: void enableFilas(void){
+"7 filas.c
+[; ;filas.c: 7: void enableFilas(void){
 [v _enableFilas `(v ~T0 @X0 1 ef ]
 {
 [e :U _enableFilas ]
 [f ]
-"9
-[; ;filas.c: 9:     PORTDbits.RD3 = 0;
+"8
+[; ;filas.c: 8:     PORTDbits.RD3 = 0;
 [e = . . _PORTDbits 0 3 -> -> 0 `i `uc ]
-"10
-[; ;filas.c: 10: }
+"9
+[; ;filas.c: 9: }
 [e :UE 100 ]
 }
-"12
-[; ;filas.c: 12: void disableFilas(void){
+"11
+[; ;filas.c: 11: void disableFilas(void){
 [v _disableFilas `(v ~T0 @X0 1 ef ]
 {
 [e :U _disableFilas ]
 [f ]
-"13
-[; ;filas.c: 13:     PORTDbits.RD3 = 1;
+"12
+[; ;filas.c: 12:     PORTDbits.RD3 = 1;
 [e = . . _PORTDbits 0 3 -> -> 1 `i `uc ]
-"14
-[; ;filas.c: 14: }
+"13
+[; ;filas.c: 13: }
 [e :UE 101 ]
 }
-"16
-[; ;filas.c: 16: void latchClock_Fil(void){
+"15
+[; ;filas.c: 15: void latchClock_Fil(void){
 [v _latchClock_Fil `(v ~T0 @X0 1 ef ]
 {
 [e :U _latchClock_Fil ]
 [f ]
+"16
+[; ;filas.c: 16:     PORTDbits.RD4 = 0;
+[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
 "17
-[; ;filas.c: 17:     PORTDbits.RD4 = 0;
+[; ;filas.c: 17:     PORTDbits.RD4 = 1;
+[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
+"18
+[; ;filas.c: 18:     PORTDbits.RD4 = 0;
 [e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
 "19
-[; ;filas.c: 19:     PORTDbits.RD4 = 1;
-[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
-"21
-[; ;filas.c: 21:     PORTDbits.RD4 = 0;
-[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
-"22
-[; ;filas.c: 22: }
+[; ;filas.c: 19: }
 [e :UE 102 ]
 }
-"24
-[; ;filas.c: 24: void shiftClock_Fil(void){
+"21
+[; ;filas.c: 21: void shiftClock_Fil(void){
 [v _shiftClock_Fil `(v ~T0 @X0 1 ef ]
 {
 [e :U _shiftClock_Fil ]
 [f ]
-"25
-[; ;filas.c: 25:     PORTDbits.RD5 = 0;
+"22
+[; ;filas.c: 22:     PORTDbits.RD5 = 0;
 [e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
-"27
-[; ;filas.c: 27:     PORTDbits.RD5 = 1;
+"23
+[; ;filas.c: 23:     PORTDbits.RD5 = 1;
 [e = . . _PORTDbits 0 5 -> -> 1 `i `uc ]
-"29
-[; ;filas.c: 29:     PORTDbits.RD5 = 0;
+"24
+[; ;filas.c: 24:     PORTDbits.RD5 = 0;
 [e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
-"30
-[; ;filas.c: 30: }
+"25
+[; ;filas.c: 25: }
 [e :UE 103 ]
 }
-"32
-[; ;filas.c: 32: void setFilas(uint16_t reg_value){
+"27
+[; ;filas.c: 27: void setFilas(uint16_t reg_value){
 [v _setFilas `(v ~T0 @X0 1 ef1`ui ]
 {
 [e :U _setFilas ]
 [v _reg_value `ui ~T0 @X0 1 r1 ]
 [f ]
-"34
-[; ;filas.c: 34:     int i = 0;
+"28
+[; ;filas.c: 28:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"35
-[; ;filas.c: 35:     uint16_t valor = 0;
-[v _valor `ui ~T0 @X0 1 a ]
-[e = _valor -> -> 0 `i `ui ]
-"43
-[; ;filas.c: 43:     for(i=0;i<16;i++){
+"29
+[; ;filas.c: 29:     for(i=0;i<16;i++){
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 16 `i 105  ]
 [e $U 106  ]
 [e :U 105 ]
 {
-"45
-[; ;filas.c: 45:         PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
+"30
+[; ;filas.c: 30:         PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
 [e = . . _PORTDbits 0 2 -> >> & _reg_value -> << -> 1 `i _i `ui _i `uc ]
-"47
-[; ;filas.c: 47:         shiftClock_Fil();
+"31
+[; ;filas.c: 31:         shiftClock_Fil();
 [e ( _shiftClock_Fil ..  ]
-"49
-[; ;filas.c: 49:     }
+"32
+[; ;filas.c: 32:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 16 `i 105  ]
 [e :U 106 ]
 }
-"51
-[; ;filas.c: 51:     enableFilas();
-[e ( _enableFilas ..  ]
-"52
-[; ;filas.c: 52:     return;
+"33
+[; ;filas.c: 33:     return;
 [e $UE 104  ]
-"53
-[; ;filas.c: 53: }
+"34
+[; ;filas.c: 34: }
 [e :UE 104 ]
 }

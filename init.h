@@ -15,6 +15,7 @@ extern "C" {
     void init_pines_col(void);
     void init_pines(void);
     void init_timer(void);
+    void init_interrupt(void);
 
 
 #ifdef	__cplusplus

@@ -2051,7 +2051,6 @@ extern __bank0 __bit __timeout;
 
 
 
-
 void enableFilas(void){
     PORTDbits.RD3 = 0;
 }
@@ -2062,39 +2061,21 @@ void disableFilas(void){
 
 void latchClock_Fil(void){
     PORTDbits.RD4 = 0;
-
     PORTDbits.RD4 = 1;
-
     PORTDbits.RD4 = 0;
 }
 
 void shiftClock_Fil(void){
     PORTDbits.RD5 = 0;
-
     PORTDbits.RD5 = 1;
-
     PORTDbits.RD5 = 0;
 }
 
 void setFilas(uint16_t reg_value){
-
     int i = 0;
-    uint16_t valor = 0;
-
-
-
-
-
-
-
     for(i=0;i<16;i++){
-
         PORTDbits.RD2 = (reg_value & (1<<i) )>>i;
-
         shiftClock_Fil();
-
     }
-
-    enableFilas();
     return;
 }

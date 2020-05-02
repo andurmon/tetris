@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <time.h> 
 #include "init.h"
 #include "columnas.h"
 #include "filas.h"
@@ -34,93 +35,83 @@
 #define _XTAL_FREQ 4000000
 
 uint8_t columna = 1;
-//uint16_t corazon[8] = {0xffcf, 0xffb7, 0xffbb, 0xffdd, 0xffbb, 0xffb7, 0xffcf, 0xffff};
 uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
-uint16_t pantalla[8] =  {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+uint16_t test[8] =  {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
 
-uint16_t figura[4]= {0x4, 0x4, 0x6, 0x0};//{0x4000, 0x4000, 0x6000, 0x0000};
+uint16_t pantalla[8] =  {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
+                        {0x0,0x3,0x2,0x2},
+                        {0x1,0x3,0x2,0x0},
+                        {0x0, 0x2, 0x3, 0x1},
+                        {0x1,0x1,0x1,0x1},
+                        {0x0, 0x3,0x3,0x0}};
 
 unsigned char led = 0;
 int counter = 0;
-void updateScreen(uint16_t dibujo[8]);
+uint8_t ficha_pos = 16;
+uint8_t ficha_actual = 0;
+void updateScreen(uint16_t screen[8]);
+uint8_t tecla = 0;
 
 void __interrupt() Timer0_ISR(void){
-    
+            
     if(INTCONbits.TMR0IF){
+        
         INTCONbits.TMR0IF=0;
         counter ++;
         if(counter >= 3906){
-            counter=0;
             PORTBbits.RB0 = led;
             led= ~led;
+            ficha_pos--;
+            counter=0;
+            if(ficha_pos==0){
+                ficha_pos=16;
+                ficha_actual = rand() % 5;
+            }
         }
+    }
+    else if(INTCONbits.RBIF){
+        if(PORTBbits.RB5 == 0){
+            ficha_pos=16;
+        }
+        INTCONbits.RBIF=0;
+        
     }
 }
 
 int main(int argc, char** argv) {
     
+    //srand((unsigned) time(NULL));
     init_pines();
+    init_interrupt();
     init_timer();
     int i=0;
-
     setColumnas(0x00);
     setFilas(0x0000);
-
-    pantalla[2]= pantalla[2] | figura[0]<<13;
-    pantalla[3]= pantalla[3] | figura[1]<<13;
-    pantalla[4]= pantalla[4] | figura[2]<<13;
-    pantalla[5]= pantalla[5] | figura[3]<<13;
     
     while(1){
+        pantalla[2]=  figuras[ficha_actual][0] << (ficha_pos-1);
+        pantalla[3]=  figuras[ficha_actual][1] << (ficha_pos-1);
+        pantalla[4]=  figuras[ficha_actual][2] << (ficha_pos-1);
+        pantalla[5]=  figuras[ficha_actual][3] << (ficha_pos-1);
         
         updateScreen(pantalla);
+        
     }
     return (EXIT_SUCCESS); 
 }
 
 
 
-void updateScreen(uint16_t dibujo[8]){
-    switch(columna){
-        case 1:
-            setFilas(~dibujo[0]);
-            shiftBitColumna(1);
-            columna=2;
-            break;
-        case 2:
-            setFilas(~dibujo[1]);
-            shiftBitColumna(0);
-            columna=3;
-            break;            
-        case 3:
-            setFilas(~dibujo[2]);
-            shiftBitColumna(0);
-            columna=4;
-            break;
-        case 4:
-            setFilas(~dibujo[3]);
-            shiftBitColumna(0);
-            columna=5;
-            break;
-        case 5:
-            setFilas(~dibujo[4]);
-            shiftBitColumna(0);
-            columna=6;
-            break;
-        case 6:
-            setFilas(~dibujo[5]);
-            shiftBitColumna(0);
-            columna=7;
-            break;
-        case 7:
-            setFilas(~dibujo[6]);
-            shiftBitColumna(0);
-            columna=8;
-            break;
-        case 8:
-            setFilas(~dibujo[7]);
-            shiftBitColumna(0);
-            columna=1;
-            break;
+void updateScreen(uint16_t screen[8]){
+    if(columna == 9){
+        columna=1;
+        setFilas(~screen[columna-1]);
+        shiftBitColumna(1);
+    }
+    else{
+        columna++;
+        setFilas(~screen[columna-1]);
+        shiftBitColumna(0);
     }
 }

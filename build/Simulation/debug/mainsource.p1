@@ -16,7 +16,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "477
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 477: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
 [v _INTCONbits `VS17 ~T0 @X0 0 e@11 ]
-"222
+"45 mainsource.c
+[; ;mainsource.c: 45: void updateScreen(void);
+[v _updateScreen `(v ~T0 @X0 0 ef ]
+"222 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 222:     struct {
 [s S8 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S8 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
@@ -40,9 +43,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17 ./filas.h
 [; ;./filas.h: 17: void setFilas(uint16_t reg_value);
 [v _setFilas `(v ~T0 @X0 0 ef1`ui ]
-"45 mainsource.c
-[; ;mainsource.c: 45: void updateScreen(uint16_t dibujo[8]);
-[v _updateScreen `(v ~T0 @X0 0 ef1`*ui ]
 "18 ./columnas.h
 [; ;./columnas.h: 18:     void shiftBitColumna(uint8_t bit);
 [v _shiftBitColumna `(v ~T0 @X0 0 ef1`uc ]
@@ -243,10 +243,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "36 mainsource.c
-[; ;mainsource.c: 36: uint16_t columna = 1;
-[v _columna `ui ~T0 @X0 1 e ]
+[; ;mainsource.c: 36: uint8_t columna = 1;
+[v _columna `uc ~T0 @X0 1 e ]
 [i _columna
--> -> 1 `i `ui
+-> -> 1 `i `uc
 ]
 "38
 [; ;mainsource.c: 38: uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
@@ -264,9 +264,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "39
-[; ;mainsource.c: 39: uint16_t dibujo[8] = {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
-[v _dibujo `ui ~T0 @X0 -> 8 `i e ]
-[i _dibujo
+[; ;mainsource.c: 39: uint16_t pantalla[8] = {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+[v _pantalla `ui ~T0 @X0 -> 8 `i e ]
+[i _pantalla
 :U ..
 -> -> 0 `i `ui
 -> -> 0 `i `ui
@@ -319,12 +319,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mainsource.c: 51:         counter ++;
 [e ++ _counter -> 1 `i ]
 "52
-[; ;mainsource.c: 52:         if(counter >= 3906){
+[; ;mainsource.c: 52:         updateScreen();
+[e ( _updateScreen ..  ]
+"53
+[; ;mainsource.c: 53:         if(counter >= 3906){
 [e $ ! >= _counter -> 3906 `i 102  ]
 {
-"53
-[; ;mainsource.c: 53:             counter=0;
-[e = _counter -> 0 `i ]
 "54
 [; ;mainsource.c: 54:             PORTBbits.RB0 = led;
 [e = . . _PORTBbits 0 0 _led ]
@@ -332,222 +332,116 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mainsource.c: 55:             led= ~led;
 [e = _led -> ~ -> _led `i `uc ]
 "56
-[; ;mainsource.c: 56:         }
+[; ;mainsource.c: 56:             counter=0;
+[e = _counter -> 0 `i ]
+"57
+[; ;mainsource.c: 57:         }
 }
 [e :U 102 ]
-"57
-[; ;mainsource.c: 57:     }
+"58
+[; ;mainsource.c: 58:     }
 }
 [e :U 101 ]
-"64
-[; ;mainsource.c: 64: }
+"59
+[; ;mainsource.c: 59: }
 [e :UE 100 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"66
-[; ;mainsource.c: 66: int main(int argc, char** argv) {
+"61
+[; ;mainsource.c: 61: int main(int argc, char** argv) {
 [v _main `(i ~T0 @X0 1 ef2`i`**uc ]
 {
 [e :U _main ]
 [v _argc `i ~T0 @X0 1 r1 ]
 [v _argv `**uc ~T0 @X0 1 r2 ]
 [f ]
-"68
-[; ;mainsource.c: 68:     init_pines();
+"63
+[; ;mainsource.c: 63:     init_pines();
 [e ( _init_pines ..  ]
-"69
-[; ;mainsource.c: 69:     init_timer();
+"64
+[; ;mainsource.c: 64:     init_timer();
 [e ( _init_timer ..  ]
-"70
-[; ;mainsource.c: 70:     int i=0;
+"65
+[; ;mainsource.c: 65:     int i=0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"72
-[; ;mainsource.c: 72:     setColumnas(0x00);
+"67
+[; ;mainsource.c: 67:     setColumnas(0x00);
 [e ( _setColumnas (1 -> -> 0 `i `uc ]
-"73
-[; ;mainsource.c: 73:     setFilas(0x0000);
+"68
+[; ;mainsource.c: 68:     setFilas(0x0000);
 [e ( _setFilas (1 -> -> 0 `i `ui ]
+"70
+[; ;mainsource.c: 70:     pantalla[2]= pantalla[2] | figura[0]<<13;
+[e = *U + &U _pantalla * -> -> -> 2 `i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _pantalla * -> -> -> 2 `i `ui `ux -> -> # *U &U _pantalla `ui `ux << *U + &U _figura * -> -> -> 0 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
+"71
+[; ;mainsource.c: 71:     pantalla[3]= pantalla[3] | figura[1]<<13;
+[e = *U + &U _pantalla * -> -> -> 3 `i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _pantalla * -> -> -> 3 `i `ui `ux -> -> # *U &U _pantalla `ui `ux << *U + &U _figura * -> -> -> 1 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
+"72
+[; ;mainsource.c: 72:     pantalla[4]= pantalla[4] | figura[2]<<13;
+[e = *U + &U _pantalla * -> -> -> 4 `i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _pantalla * -> -> -> 4 `i `ui `ux -> -> # *U &U _pantalla `ui `ux << *U + &U _figura * -> -> -> 2 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
+"73
+[; ;mainsource.c: 73:     pantalla[5]= pantalla[5] | figura[3]<<13;
+[e = *U + &U _pantalla * -> -> -> 5 `i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _pantalla * -> -> -> 5 `i `ui `ux -> -> # *U &U _pantalla `ui `ux << *U + &U _figura * -> -> -> 3 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
 "75
-[; ;mainsource.c: 75:     dibujo[2]= dibujo[2] | figura[0]<<13;
-[e = *U + &U _dibujo * -> -> -> 2 `i `ui `ux -> -> # *U &U _dibujo `ui `ux | *U + &U _dibujo * -> -> -> 2 `i `ui `ux -> -> # *U &U _dibujo `ui `ux << *U + &U _figura * -> -> -> 0 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
-"76
-[; ;mainsource.c: 76:     dibujo[3]= dibujo[3] | figura[1]<<13;
-[e = *U + &U _dibujo * -> -> -> 3 `i `ui `ux -> -> # *U &U _dibujo `ui `ux | *U + &U _dibujo * -> -> -> 3 `i `ui `ux -> -> # *U &U _dibujo `ui `ux << *U + &U _figura * -> -> -> 1 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
-"77
-[; ;mainsource.c: 77:     dibujo[4]= dibujo[4] | figura[2]<<13;
-[e = *U + &U _dibujo * -> -> -> 4 `i `ui `ux -> -> # *U &U _dibujo `ui `ux | *U + &U _dibujo * -> -> -> 4 `i `ui `ux -> -> # *U &U _dibujo `ui `ux << *U + &U _figura * -> -> -> 2 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
-"78
-[; ;mainsource.c: 78:     dibujo[5]= dibujo[5] | figura[3]<<13;
-[e = *U + &U _dibujo * -> -> -> 5 `i `ui `ux -> -> # *U &U _dibujo `ui `ux | *U + &U _dibujo * -> -> -> 5 `i `ui `ux -> -> # *U &U _dibujo `ui `ux << *U + &U _figura * -> -> -> 3 `i `ui `ux -> -> # *U &U _figura `ui `ux -> 13 `i ]
-"80
-[; ;mainsource.c: 80:     while(1){
+[; ;mainsource.c: 75:     while(1){
 [e :U 105 ]
 {
-"82
-[; ;mainsource.c: 82:         updateScreen(dibujo);
-[e ( _updateScreen (1 &U _dibujo ]
-"84
-[; ;mainsource.c: 84:     }
+"78
+[; ;mainsource.c: 78:     }
 }
 [e :U 104 ]
 [e $U 105  ]
 [e :U 106 ]
-"85
-[; ;mainsource.c: 85:     return (0);
+"79
+[; ;mainsource.c: 79:     return (0);
 [e ) -> 0 `i ]
 [e $UE 103  ]
-"86
-[; ;mainsource.c: 86: }
+"80
+[; ;mainsource.c: 80: }
 [e :UE 103 ]
 }
-"90
-[; ;mainsource.c: 90: void updateScreen(uint16_t dibujo[8]){
-[v _updateScreen `(v ~T0 @X0 1 ef1`*ui ]
+"84
+[; ;mainsource.c: 84: void updateScreen(void){
+[v _updateScreen `(v ~T0 @X0 1 ef ]
 {
 [e :U _updateScreen ]
-[v _dibujo `*ui ~T0 @X0 1 r1 ]
 [f ]
-"91
-[; ;mainsource.c: 91:     switch(columna){
-[e $U 109  ]
+"85
+[; ;mainsource.c: 85:     if(columna == 9){
+[e $ ! == -> _columna `i -> 9 `i 108  ]
 {
-"92
-[; ;mainsource.c: 92:         case 1:
-[e :U 110 ]
-"93
-[; ;mainsource.c: 93:             setFilas(~dibujo[0]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 0 `i `x -> -> # *U _dibujo `i `x ]
-"94
-[; ;mainsource.c: 94:             shiftBitColumna(1);
+"86
+[; ;mainsource.c: 86:         columna=1;
+[e = _columna -> -> 1 `i `uc ]
+"87
+[; ;mainsource.c: 87:         setFilas(~pantalla[columna-1]);
+[e ( _setFilas (1 ~ *U + &U _pantalla * -> -> - -> _columna `i -> 1 `i `ui `ux -> -> # *U &U _pantalla `ui `ux ]
+"88
+[; ;mainsource.c: 88:         shiftBitColumna(1);
 [e ( _shiftBitColumna (1 -> -> 1 `i `uc ]
-"95
-[; ;mainsource.c: 95:             columna=2;
-[e = _columna -> -> 2 `i `ui ]
-"96
-[; ;mainsource.c: 96:             break;
-[e $U 108  ]
-"97
-[; ;mainsource.c: 97:         case 2:
-[e :U 111 ]
-"98
-[; ;mainsource.c: 98:             setFilas(~dibujo[1]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 1 `i `x -> -> # *U _dibujo `i `x ]
-"99
-[; ;mainsource.c: 99:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"100
-[; ;mainsource.c: 100:             columna=3;
-[e = _columna -> -> 3 `i `ui ]
-"101
-[; ;mainsource.c: 101:             break;
-[e $U 108  ]
-"102
-[; ;mainsource.c: 102:         case 3:
-[e :U 112 ]
-"103
-[; ;mainsource.c: 103:             setFilas(~dibujo[2]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 2 `i `x -> -> # *U _dibujo `i `x ]
-"104
-[; ;mainsource.c: 104:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"105
-[; ;mainsource.c: 105:             columna=4;
-[e = _columna -> -> 4 `i `ui ]
-"106
-[; ;mainsource.c: 106:             break;
-[e $U 108  ]
-"107
-[; ;mainsource.c: 107:         case 4:
-[e :U 113 ]
-"108
-[; ;mainsource.c: 108:             setFilas(~dibujo[3]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 3 `i `x -> -> # *U _dibujo `i `x ]
-"109
-[; ;mainsource.c: 109:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"110
-[; ;mainsource.c: 110:             columna=5;
-[e = _columna -> -> 5 `i `ui ]
-"111
-[; ;mainsource.c: 111:             break;
-[e $U 108  ]
-"112
-[; ;mainsource.c: 112:         case 5:
-[e :U 114 ]
-"113
-[; ;mainsource.c: 113:             setFilas(~dibujo[4]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 4 `i `x -> -> # *U _dibujo `i `x ]
-"114
-[; ;mainsource.c: 114:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"115
-[; ;mainsource.c: 115:             columna=6;
-[e = _columna -> -> 6 `i `ui ]
-"116
-[; ;mainsource.c: 116:             break;
-[e $U 108  ]
-"117
-[; ;mainsource.c: 117:         case 6:
-[e :U 115 ]
-"118
-[; ;mainsource.c: 118:             setFilas(~dibujo[5]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 5 `i `x -> -> # *U _dibujo `i `x ]
-"119
-[; ;mainsource.c: 119:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"120
-[; ;mainsource.c: 120:             columna=7;
-[e = _columna -> -> 7 `i `ui ]
-"121
-[; ;mainsource.c: 121:             break;
-[e $U 108  ]
-"122
-[; ;mainsource.c: 122:         case 7:
-[e :U 116 ]
-"123
-[; ;mainsource.c: 123:             setFilas(~dibujo[6]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 6 `i `x -> -> # *U _dibujo `i `x ]
-"124
-[; ;mainsource.c: 124:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"125
-[; ;mainsource.c: 125:             columna=8;
-[e = _columna -> -> 8 `i `ui ]
-"126
-[; ;mainsource.c: 126:             break;
-[e $U 108  ]
-"127
-[; ;mainsource.c: 127:         case 8:
-[e :U 117 ]
-"128
-[; ;mainsource.c: 128:             setFilas(~dibujo[7]);
-[e ( _setFilas (1 ~ *U + _dibujo * -> -> 7 `i `x -> -> # *U _dibujo `i `x ]
-"129
-[; ;mainsource.c: 129:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"130
-[; ;mainsource.c: 130:             columna=1;
-[e = _columna -> -> 1 `i `ui ]
-"131
-[; ;mainsource.c: 131:             break;
-[e $U 108  ]
-"132
-[; ;mainsource.c: 132:     }
+"89
+[; ;mainsource.c: 89:     }
 }
-[e $U 108  ]
-[e :U 109 ]
-[e [\ _columna , $ -> -> 1 `i `ui 110
- , $ -> -> 2 `i `ui 111
- , $ -> -> 3 `i `ui 112
- , $ -> -> 4 `i `ui 113
- , $ -> -> 5 `i `ui 114
- , $ -> -> 6 `i `ui 115
- , $ -> -> 7 `i `ui 116
- , $ -> -> 8 `i `ui 117
- 108 ]
+[e $U 109  ]
+"90
+[; ;mainsource.c: 90:     else{
 [e :U 108 ]
-"133
-[; ;mainsource.c: 133: }
+{
+"91
+[; ;mainsource.c: 91:         setFilas(~pantalla[columna-1]);
+[e ( _setFilas (1 ~ *U + &U _pantalla * -> -> - -> _columna `i -> 1 `i `ui `ux -> -> # *U &U _pantalla `ui `ux ]
+"92
+[; ;mainsource.c: 92:         shiftBitColumna(0);
+[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
+"93
+[; ;mainsource.c: 93:         columna++;
+[e ++ _columna -> -> 1 `i `uc ]
+"94
+[; ;mainsource.c: 94:     }
+}
+[e :U 109 ]
+"138
+[; ;mainsource.c: 138: }
 [e :UE 107 ]
 }
