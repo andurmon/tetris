@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <string.h> 
+#include <string.h>
 #include "init.h"
 #include "columnas.h"
 #include "filas.h"
@@ -42,20 +42,22 @@ int main(int argc, char** argv) {
     
     //uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
     //uint16_t test[8] =  {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
-    
+    init_timer();
     init_pines();
     init_interrupt();
-    init_timer();
+    
     int i=0, j=0;
     con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
-    
-    drawBground();
+    srand(TMR0);
+    con.ficha_actual = rand() % 7;
+    //drawBground();
     
     while(1){
+        srand(TMR0);
         checkCount();
-               
+             
         updateScreen(pantalla);
         
     }
@@ -64,42 +66,82 @@ int main(int argc, char** argv) {
 
 void checkCount(void){
     if(con.check_count == 1){
+        //drawFigure(); 
+        int i=0, j=0;
         if(timerCount >= 3906){
+            
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
             con.ficha_Vpos--;
             timerCount = 0;
             if(con.ficha_Vpos==0){
+                for(j=0; j<8; j++){
+                    fondo[j] = fondo[j] | ficha[j];
+                }
                 con.ficha_Vpos = 16;
-                con.ficha_actual = rand() % 5;
+                con.ficha_actual = rand() % 7;
             }
             
             drawFigure();
             
-            int i=0, j=0;
-            uint16_t condicion = 0;
+            /*
+             * Hace una OR entre la ficha y el fondo para obtener lo que se
+             * mostrara en pantalla. Esto me permite poder borrar todo lo otro
+             * y que no queden remanentes del movimiento de la figura
+             */
             for(i=0; i<8; i++){
                 pantalla[i] = ficha[i] | fondo[i];
             }
             
+            /*
+             * Este for se encarga de verificar si la figura se choca con el
+             * fondo o no. Lo hace evaluando si la siguiente posicion vertical
+             * coincide con un pedazo del fondo
+             */
             for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-                condicion = ficha[i]>>1 & fondo[i];
-                if(condicion != 0){
+                if((ficha[i]>>1 & fondo[i]) != 0){
                     for(j=0; j<8; j++){
                         fondo[j] = fondo[j] | ficha[j];
                     }
                     con.ficha_Vpos = 16;
-                    con.ficha_actual = rand() % 5;
+                    con.ficha_actual = rand() % 7;
                     break;
                 }
+            }
+            
+            /*
+             * Este for permite saber si el usuario ha perdido, comparando el
+             * bit de mas arriba del tablero.
+             */
+            for(i=0; i<8; i++){
+                if((fondo[i] & 0x8000) != 0){
+                    memset(ficha, 0, sizeof(ficha));
+                    memset(fondo, 0, sizeof(fondo));
+                    con.ficha_Vpos = 16;
+                    con.ficha_actual = rand() % 7;
+                    break;
+                }
+                
+            }
+            
+            /*
+             * Con este for se busca que pueda detectar si se lleno toda una
+             * fila para borrarla y bajar las demás.
+             */
+            for (i=0; i<16; i++){
+                for(j=0; j<8; j++){
+                   if( (fondo[i] & (1<<j)) == 0){
+                       break;
+                   } 
+                }
+                
             }
             
         }
         con.check_count = 0;
     }
 }
-void __interrupt() Timer0_ISR(void){
-            
+void __interrupt() Timer0_ISR(void){      
     if(INTCONbits.TMR0IF){  
         INTCONbits.TMR0IF=0;
         timerCount ++;

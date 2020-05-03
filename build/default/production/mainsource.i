@@ -2136,12 +2136,15 @@ void disableFilas(void);
     };
     struct controlSign con;
 
-    uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
-                            {0x0,0x3,0x2,0x2},
-                            {0x1,0x3,0x2,0x0},
-                            {0x0, 0x2, 0x3, 0x1},
-                            {0x1,0x1,0x1,0x1},
-                            {0x0, 0x3,0x3,0x0}};
+    uint16_t figuras[7][4]= {
+        {0x2, 0x2, 0x3, 0x0},
+        {0x3, 0x2, 0x2, 0x0},
+        {0x1, 0x3, 0x2, 0x0},
+        {0x2, 0x3, 0x1, 0x0},
+        {0x1, 0x1, 0x1, 0x1},
+        {0x3, 0x3, 0x0, 0x0},
+        {0x1, 0x3, 0x1, 0x0}
+    };
 
 
     uint16_t timerCount = 0;
@@ -2160,18 +2163,20 @@ int main(int argc, char** argv) {
 
 
 
-
+    init_timer();
     init_pines();
     init_interrupt();
-    init_timer();
+
     int i=0, j=0;
     con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
+    srand(TMR0);
+    con.ficha_actual = rand() % 7;
 
-    drawBground();
 
     while(1){
+        srand(TMR0);
         checkCount();
 
         updateScreen(pantalla);
@@ -2182,45 +2187,68 @@ int main(int argc, char** argv) {
 
 void checkCount(void){
     if(con.check_count == 1){
+
+        int i=0, j=0;
         if(timerCount >= 3906){
+
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
             con.ficha_Vpos--;
             timerCount = 0;
             if(con.ficha_Vpos==0){
+                for(j=0; j<8; j++){
+                    fondo[j] = fondo[j] | ficha[j];
+                }
                 con.ficha_Vpos = 16;
-                con.ficha_actual = rand() % 5;
+                con.ficha_actual = rand() % 7;
             }
-
-            drawFigure();
-
-            int i=0, j=0;
-            uint16_t condicion = 0;
             for(i=0; i<8; i++){
                 pantalla[i] = ficha[i] | fondo[i];
             }
 
             for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-                condicion = ficha[i]>>1 & fondo[i];
-                if(condicion != 0){
+                if((ficha[i]>>1 & fondo[i]) != 0){
                     for(j=0; j<8; j++){
                         fondo[j] = fondo[j] | ficha[j];
                     }
                     con.ficha_Vpos = 16;
-                    con.ficha_actual = rand() % 5;
+                    con.ficha_actual = rand() % 7;
                     break;
                 }
             }
 
+            for(i=0; i<8; i++){
+                if((fondo[i] & 0x8000) != 0){
+                    memset(ficha, 0, sizeof(ficha));
+                    memset(fondo, 0, sizeof(fondo));
+                    con.ficha_Vpos = 16;
+                    con.ficha_actual = rand() % 7;
+                    break;
+                }
+
+            }
+            for (i=0; i<16; i++){
+                for(j=0; j<8; j++){
+                   if( (fondo[i] & (1<<j)) == 0){
+                       break;
+                   }
+                }
+
+            }
+
+
         }
+        drawFigure();
+
+
         con.check_count = 0;
     }
 }
 void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
-
     if(INTCONbits.TMR0IF){
         INTCONbits.TMR0IF=0;
         timerCount ++;
+
         con.check_count = 1;
     }
     else if(INTCONbits.RBIF){
