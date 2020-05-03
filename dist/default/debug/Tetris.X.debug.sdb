@@ -185,7 +185,7 @@
 {
 [v updateScreen@screen screen `*.4ui  1 a 1 wreg ]
 [v updateScreen@screen screen `*.4ui  1 a 1 wreg ]
-[v updateScreen@screen screen `*.4ui  1 a 1 4 ]
+[v updateScreen@screen screen `*.4ui  1 a 1 10 ]
 "23
 } 0
 "32 C:\Users\ASUS\MPLABXProjects\Tetris.X\columnas.c
@@ -215,7 +215,7 @@
 [v _setFilas setFilas `(v  1 e 1 0 ]
 {
 "20
-[v setFilas@i i `i  1 a 2 10 ]
+[v setFilas@i i `i  1 a 2 0 ]
 "19
 [v setFilas@reg_value reg_value `ui  1 p 2 2 ]
 "26
@@ -265,8 +265,8 @@
 [v _checkCount checkCount `(v  1 e 1 0 ]
 {
 "70
-[v checkCount@i i `i  1 a 2 28 ]
-[v checkCount@j j `i  1 a 2 26 ]
+[v checkCount@i i `i  1 a 2 29 ]
+[v checkCount@j j `i  1 a 2 27 ]
 "143
 } 0
 "12 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\rand.c
@@ -307,8 +307,8 @@
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v ___awmod@sign sign `uc  1 a 1 16 ]
-[v ___awmod@counter counter `uc  1 a 1 15 ]
+[v ___awmod@sign sign `uc  1 a 1 17 ]
+[v ___awmod@counter counter `uc  1 a 1 16 ]
 "5
 [v ___awmod@divisor divisor `i  1 p 2 11 ]
 [v ___awmod@dividend dividend `i  1 p 2 13 ]

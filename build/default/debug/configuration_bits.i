@@ -1,4 +1,4 @@
-# 1 "init.c"
+# 1 "configuration_bits.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,11 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "init.c" 2
+# 1 "configuration_bits.c" 2
+
+
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1720,82 +1724,17 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 1 "init.c" 2
-
-
-
-void init_pines_in(void){
-
-    TRISBbits.TRISB5 = 1;
-    TRISBbits.TRISB4 = 1;
-
-    TRISBbits.TRISB6 = 0;
-    TRISBbits.TRISB7 = 0;
-
-    PORTBbits.RB6 = 0;
-    PORTBbits.RB7 = 0;
-}
-
-void init_pines_fil(void){
-
-    TRISCbits.TRISC4 = 0;
-    TRISCbits.TRISC5 = 0;
-    TRISCbits.TRISC6 = 0;
-    TRISCbits.TRISC7 = 0;
-
-    PORTCbits.RC4 = 0;
-    PORTCbits.RC5 = 0;
-    PORTCbits.RC6 = 0;
-    PORTCbits.RC7 = 0;
-}
-
-void init_pines_col(void){
-    TRISBbits.TRISB0 = 0;
-    PORTBbits.RB0 = 0;
-
-    TRISDbits.TRISD4 = 0;
-    TRISDbits.TRISD5 = 0;
-    TRISDbits.TRISD6 = 0;
-    TRISDbits.TRISD7 = 0;
-
-    PORTDbits.RD4 = 0;
-    PORTDbits.RD5 = 0;
-    PORTDbits.RD6 = 0;
-    PORTDbits.RD7 = 0;
-}
-void init_pines(void){
-
-    init_pines_fil();
-    init_pines_col();
-    init_pines_in();
-}
-
-void init_interrupt(void){
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-
-    OPTION_REGbits.nRBPU = 0;
-}
-
-void init_timer(void){
-
-    TMR0=0;
+# 5 "configuration_bits.c" 2
 
 
 
 
+#pragma config FOSC = XT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config BOREN = ON
+#pragma config LVP = OFF
+#pragma config CPD = OFF
+#pragma config WRT = OFF
+#pragma config CP = OFF
 
-
-
-    INTCONbits.GIE = 1;
-    INTCONbits.TMR0IE = 1;
-    INTCONbits.TMR0IF = 0;
-# 80 "init.c"
-    OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS0 = 1;
-    OPTION_REGbits.PS1 = 1;
-    OPTION_REGbits.PS2 = 1;
-    OPTION_REGbits.T0CS = 0;
-}

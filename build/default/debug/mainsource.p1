@@ -16,7 +16,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "76 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h: 76: extern void srand(unsigned int);
 [v _srand `(v ~T0 @X0 0 ef1`ui ]
-"75
+"59 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 59: extern volatile unsigned char TMR0 __attribute__((address(0x001)));
+[v _TMR0 `Vuc ~T0 @X0 0 e@1 ]
+"75 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h: 75: extern int rand(void);
 [v _rand `(i ~T0 @X0 0 ef ]
 "39 mainsource.c
@@ -372,8 +375,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mainsource.c: 52:     con.ficha_Hpos = 2;
 [e = . _con 4 -> -> 2 `i `uc ]
 "53
-[; ;mainsource.c: 53:     srand(1);
-[e ( _srand (1 -> -> 1 `i `ui ]
+[; ;mainsource.c: 53:     srand(TMR0);
+[e ( _srand (1 -> _TMR0 `ui ]
 "54
 [; ;mainsource.c: 54:     con.ficha_actual = rand() % 7;
 [e = . _con 5 -> % ( _rand ..  -> 7 `i `uc ]
@@ -381,6 +384,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mainsource.c: 57:     while(1){
 [e :U 103 ]
 {
+"58
+[; ;mainsource.c: 58:         srand(TMR0);
+[e ( _srand (1 -> _TMR0 `ui ]
 "59
 [; ;mainsource.c: 59:         checkCount();
 [e ( _checkCount ..  ]
@@ -418,8 +424,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _j `i ~T0 @X0 1 a ]
 [e = _j -> 0 `i ]
 "71
-[; ;mainsource.c: 71:         if(timerCount >= 15){
-[e $ ! >= _timerCount -> -> -> 15 `i `l `ul 107  ]
+[; ;mainsource.c: 71:         if(timerCount >= 3906){
+[e $ ! >= _timerCount -> -> -> 3906 `i `l `ul 107  ]
 {
 "73
 [; ;mainsource.c: 73:             PORTBbits.RB0 = con.led;

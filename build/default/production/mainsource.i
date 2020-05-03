@@ -2147,7 +2147,7 @@ void disableFilas(void);
     };
 
 
-    uint16_t timerCount = 0;
+    uint32_t timerCount = 0;
     uint16_t pantalla[8] = {0x0000};
     uint16_t fondo[8] = {0x0000};
     uint16_t ficha[8] = {0x0000};
@@ -2167,16 +2167,16 @@ int main(int argc, char** argv) {
     init_pines();
     init_interrupt();
 
-    int i=0, j=0;
+    int i=0, j=5;
     con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
-    srand(TMR0);
+    srand(1);
     con.ficha_actual = rand() % 7;
 
 
     while(1){
-        srand(TMR0);
+
         checkCount();
 
         updateScreen(pantalla);
@@ -2189,7 +2189,7 @@ void checkCount(void){
     if(con.check_count == 1){
 
         int i=0, j=0;
-        if(timerCount >= 3906){
+        if(timerCount >= 15){
 
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
@@ -2202,9 +2202,22 @@ void checkCount(void){
                 con.ficha_Vpos = 16;
                 con.ficha_actual = rand() % 7;
             }
+
+            drawFigure();
+
+
+
+
+
+
             for(i=0; i<8; i++){
                 pantalla[i] = ficha[i] | fondo[i];
             }
+
+
+
+
+
 
             for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
                 if((ficha[i]>>1 & fondo[i]) != 0){
@@ -2217,6 +2230,10 @@ void checkCount(void){
                 }
             }
 
+
+
+
+
             for(i=0; i<8; i++){
                 if((fondo[i] & 0x8000) != 0){
                     memset(ficha, 0, sizeof(ficha));
@@ -2227,6 +2244,11 @@ void checkCount(void){
                 }
 
             }
+
+
+
+
+
             for (i=0; i<16; i++){
                 for(j=0; j<8; j++){
                    if( (fondo[i] & (1<<j)) == 0){
@@ -2236,11 +2258,7 @@ void checkCount(void){
 
             }
 
-
         }
-        drawFigure();
-
-
         con.check_count = 0;
     }
 }
@@ -2248,7 +2266,6 @@ void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
     if(INTCONbits.TMR0IF){
         INTCONbits.TMR0IF=0;
         timerCount ++;
-
         con.check_count = 1;
     }
     else if(INTCONbits.RBIF){

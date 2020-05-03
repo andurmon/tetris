@@ -35,7 +35,7 @@ extern "C" {
     };
 
 
-    uint16_t timerCount = 0;
+    uint32_t timerCount = 0;
     uint16_t pantalla[8] =  {0x0000};
     uint16_t fondo[8] = {0x0000};
     uint16_t ficha[8] = {0x0000};

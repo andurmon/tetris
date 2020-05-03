@@ -1794,8 +1794,8 @@ void init_timer(void){
     INTCONbits.TMR0IF = 0;
 # 80 "init.c"
     OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS0 = 1;
-    OPTION_REGbits.PS1 = 1;
-    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.PS0 = 0;
+    OPTION_REGbits.PS1 = 0;
+    OPTION_REGbits.PS2 = 0;
     OPTION_REGbits.T0CS = 0;
 }

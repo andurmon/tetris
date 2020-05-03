@@ -1,17 +1,18 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"14 ./control.h
-[; ;./control.h: 14:     struct controlSign {
-[s S100 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S100 controlSign columna tecla led ficha_Vpos ficha_Hpos ficha_actual derecha izquierda check_count ]
-"17 ./filas.h
-[; ;./filas.h: 17: void setFilas(uint16_t reg_value);
-[v _setFilas `(v ~T0 @X0 0 ef1`ui ]
-"18 ./columnas.h
-[; ;./columnas.h: 18:     void shiftBitColumna(uint8_t bit);
-[v _shiftBitColumna `(v ~T0 @X0 0 ef1`uc ]
-"16 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h: 16: extern void * memset(void *, int, size_t);
-[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
+"346 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 346:     struct {
+[s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S17 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"345
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 345: typedef union {
+[u S16 `S17 1 ]
+[n S16 . . ]
+"357
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 357: extern volatile PORTDbits_t PORTDbits __attribute__((address(0x008)));
+[v _PORTDbits `VS16 ~T0 @X0 0 e@8 ]
+"15 ./filas.h
+[; ;./filas.h: 15: void latchClock_Fil(void);
+[v _latchClock_Fil `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -192,218 +193,114 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"25 ./control.h
-[; ;./control.h: 25:     struct controlSign con;
-[v _con `S100 ~T0 @X0 1 e ]
-[v F1172 `ui ~T0 @X0 -> 4 `i t ]
-"27
-[; ;./control.h: 27:     uint16_t figuras[7][4]= {
-[v _figuras `F1172 ~T0 @X0 -> 7 `i e ]
-[i _figuras
-:U ..
-:U ..
--> -> 2 `i `ui
--> -> 2 `i `ui
--> -> 3 `i `ui
--> -> 0 `i `ui
-..
-:U ..
--> -> 3 `i `ui
--> -> 2 `i `ui
--> -> 2 `i `ui
--> -> 0 `i `ui
-..
-:U ..
--> -> 1 `i `ui
--> -> 3 `i `ui
--> -> 2 `i `ui
--> -> 0 `i `ui
-..
-:U ..
--> -> 2 `i `ui
--> -> 3 `i `ui
--> -> 1 `i `ui
--> -> 0 `i `ui
-..
-:U ..
--> -> 1 `i `ui
--> -> 1 `i `ui
--> -> 1 `i `ui
--> -> 1 `i `ui
-..
-:U ..
--> -> 3 `i `ui
--> -> 3 `i `ui
--> -> 0 `i `ui
--> -> 0 `i `ui
-..
-:U ..
--> -> 1 `i `ui
--> -> 3 `i `ui
--> -> 1 `i `ui
--> -> 0 `i `ui
-..
-..
-]
-"38
-[; ;./control.h: 38:     uint32_t timerCount = 0;
-[v _timerCount `ul ~T0 @X0 1 e ]
-[i _timerCount
--> -> -> 0 `i `l `ul
-]
-"39
-[; ;./control.h: 39:     uint16_t pantalla[8] = {0x0000};
-[v _pantalla `ui ~T0 @X0 -> 8 `i e ]
-[i _pantalla
-:U ..
--> -> 0 `i `ui
-..
-]
-"40
-[; ;./control.h: 40:     uint16_t fondo[8] = {0x0000};
-[v _fondo `ui ~T0 @X0 -> 8 `i e ]
-[i _fondo
-:U ..
--> -> 0 `i `ui
-..
-]
-"41
-[; ;./control.h: 41:     uint16_t ficha[8] = {0x0000};
-[v _ficha `ui ~T0 @X0 -> 8 `i e ]
-[i _ficha
-:U ..
--> -> 0 `i `ui
-..
-]
-"12 screen.c
-[; ;screen.c: 12: void updateScreen(uint16_t screen[8]){
-[v _updateScreen `(v ~T0 @X0 1 ef1`*ui ]
+"7 columnas.c
+[; ;columnas.c: 7: void latchClock_Col(void){
+[v _latchClock_Col `(v ~T0 @X0 1 ef ]
 {
-[e :U _updateScreen ]
-[v _screen `*ui ~T0 @X0 1 r1 ]
+[e :U _latchClock_Col ]
+[f ]
+"8
+[; ;columnas.c: 8:     PORTDbits.RD6 = 1;
+[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
+"9
+[; ;columnas.c: 9:     PORTDbits.RD6 = 0;
+[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
+"10
+[; ;columnas.c: 10: }
+[e :UE 100 ]
+}
+"12
+[; ;columnas.c: 12: void shiftClock_Col(void){
+[v _shiftClock_Col `(v ~T0 @X0 1 ef ]
+{
+[e :U _shiftClock_Col ]
 [f ]
 "13
-[; ;screen.c: 13:     if(con.columna == 9){
-[e $ ! == -> . _con 0 `i -> 9 `i 102  ]
-{
+[; ;columnas.c: 13:     PORTDbits.RD7 = 0;
+[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
 "14
-[; ;screen.c: 14:         con.columna = 1;
-[e = . _con 0 -> -> 1 `i `uc ]
+[; ;columnas.c: 14:     PORTDbits.RD7 = 1;
+[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
 "15
-[; ;screen.c: 15:         setFilas(~screen[con.columna-1]);
-[e ( _setFilas (1 ~ *U + _screen * -> - -> . _con 0 `i -> 1 `i `x -> -> # *U _screen `i `x ]
+[; ;columnas.c: 15:     PORTDbits.RD7 = 0;
+[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
 "16
-[; ;screen.c: 16:         shiftBitColumna(1);
-[e ( _shiftBitColumna (1 -> -> 1 `i `uc ]
-"17
-[; ;screen.c: 17:     }
-}
-[e $U 103  ]
-"18
-[; ;screen.c: 18:     else{
-[e :U 102 ]
-{
-"19
-[; ;screen.c: 19:         con.columna++;
-[e ++ . _con 0 -> -> 1 `i `uc ]
-"20
-[; ;screen.c: 20:         setFilas(~screen[con.columna-1]);
-[e ( _setFilas (1 ~ *U + _screen * -> - -> . _con 0 `i -> 1 `i `x -> -> # *U _screen `i `x ]
-"21
-[; ;screen.c: 21:         shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"22
-[; ;screen.c: 22:     }
-}
-[e :U 103 ]
-"23
-[; ;screen.c: 23: }
+[; ;columnas.c: 16: }
 [e :UE 101 ]
 }
+"18
+[; ;columnas.c: 18: void setColumnas(uint8_t reg_value){
+[v _setColumnas `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _setColumnas ]
+[v _reg_value `uc ~T0 @X0 1 r1 ]
+[f ]
+"19
+[; ;columnas.c: 19:     int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"20
+[; ;columnas.c: 20:     uint8_t indice = (1<<2);
+[v _indice `uc ~T0 @X0 1 a ]
+[e = _indice -> << -> 1 `i -> 2 `i `uc ]
+"21
+[; ;columnas.c: 21:     uint8_t valor = reg_value & indice;
+[v _valor `uc ~T0 @X0 1 a ]
+[e = _valor -> & -> _reg_value `i -> _indice `i `uc ]
+"22
+[; ;columnas.c: 22:     for(i=0;i<8;i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 103  ]
+[e $U 104  ]
+[e :U 103 ]
+{
+"23
+[; ;columnas.c: 23:         valor = (reg_value & (1<<i) )>>i;
+[e = _valor -> >> & -> _reg_value `i << -> 1 `i _i _i `uc ]
+"24
+[; ;columnas.c: 24:         PORTDbits.RD4 = valor;
+[e = . . _PORTDbits 0 4 _valor ]
 "25
-[; ;screen.c: 25: void drawBground(void){
-[v _drawBground `(v ~T0 @X0 1 ef ]
-{
-[e :U _drawBground ]
-[f ]
+[; ;columnas.c: 25:         shiftClock_Col();
+[e ( _shiftClock_Col ..  ]
 "26
-[; ;screen.c: 26:     fondo[0] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 0 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
+[; ;columnas.c: 26:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 103  ]
+[e :U 104 ]
+}
 "27
-[; ;screen.c: 27:     fondo[1] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 1 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
+[; ;columnas.c: 27:     latchClock_Col();
+[e ( _latchClock_Col ..  ]
 "28
-[; ;screen.c: 28:     fondo[2] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 2 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
+[; ;columnas.c: 28:     return;
+[e $UE 102  ]
 "29
-[; ;screen.c: 29:     fondo[3] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 3 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
-"30
-[; ;screen.c: 30:     fondo[4] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 4 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
-"31
-[; ;screen.c: 31:     fondo[5] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 5 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
+[; ;columnas.c: 29: }
+[e :UE 102 ]
+}
 "32
-[; ;screen.c: 32:     fondo[6] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 6 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
-"33
-[; ;screen.c: 33:     fondo[7] = 0x0003;
-[e = *U + &U _fondo * -> -> -> 7 `i `ui `ux -> -> # *U &U _fondo `ui `ux -> -> 3 `i `ui ]
-"34
-[; ;screen.c: 34: }
-[e :UE 104 ]
-}
-"36
-[; ;screen.c: 36: void drawFigure(void){
-[v _drawFigure `(v ~T0 @X0 1 ef ]
+[; ;columnas.c: 32: void shiftBitColumna(uint8_t bit){
+[v _shiftBitColumna `(v ~T0 @X0 1 ef1`uc ]
 {
-[e :U _drawFigure ]
+[e :U _shiftBitColumna ]
+[v _bit `uc ~T0 @X0 1 r1 ]
 [f ]
+"33
+[; ;columnas.c: 33:     PORTDbits.RD4= bit & 0x01;
+[e = . . _PORTDbits 0 4 -> & -> _bit `i -> 1 `i `uc ]
+"34
+[; ;columnas.c: 34:     shiftClock_Col();
+[e ( _shiftClock_Col ..  ]
+"35
+[; ;columnas.c: 35:     latchClock_Col();
+[e ( _latchClock_Col ..  ]
+"36
+[; ;columnas.c: 36:     latchClock_Fil();
+[e ( _latchClock_Fil ..  ]
 "37
-[; ;screen.c: 37:     memset(ficha, 0, sizeof(ficha));
-[e ( _memset (3 , , -> &U _ficha `*v -> 0 `i -> # _ficha `ui ]
-"38
-[; ;screen.c: 38:     if(con.derecha == 1 && con.ficha_Hpos<4){
-[e $ ! && == -> . _con 6 `i -> 1 `i < -> . _con 4 `i -> 4 `i 106  ]
-{
-"39
-[; ;screen.c: 39:         con.ficha_Hpos++;
-[e ++ . _con 4 -> -> 1 `i `uc ]
-"40
-[; ;screen.c: 40:         con.derecha = 0;
-[e = . _con 6 -> -> 0 `i `uc ]
-"41
-[; ;screen.c: 41:     }else if (con.izquierda == 1 && con.ficha_Hpos>0){
-}
-[e $U 107  ]
-[e :U 106 ]
-[e $ ! && == -> . _con 7 `i -> 1 `i > -> . _con 4 `i -> 0 `i 108  ]
-{
-"42
-[; ;screen.c: 42:         con.ficha_Hpos--;
-[e -- . _con 4 -> -> 1 `i `uc ]
-"43
-[; ;screen.c: 43:         con.izquierda = 0;
-[e = . _con 7 -> -> 0 `i `uc ]
-"44
-[; ;screen.c: 44:     }
-}
-[e :U 108 ]
-[e :U 107 ]
-"46
-[; ;screen.c: 46:     ficha[con.ficha_Hpos ] = figuras[con.ficha_actual][0] << (con.ficha_Vpos -1);
-[e = *U + &U _ficha * -> . _con 4 `ux -> -> # *U &U _ficha `ui `ux << *U + &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux - -> . _con 3 `i -> 1 `i ]
-"47
-[; ;screen.c: 47:     ficha[con.ficha_Hpos +1] = figuras[con.ficha_actual][1] << (con.ficha_Vpos -1);
-[e = *U + &U _ficha * -> -> + -> . _con 4 `i -> 1 `i `ui `ux -> -> # *U &U _ficha `ui `ux << *U + &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux - -> . _con 3 `i -> 1 `i ]
-"48
-[; ;screen.c: 48:     ficha[con.ficha_Hpos +2] = figuras[con.ficha_actual][2] << (con.ficha_Vpos -1);
-[e = *U + &U _ficha * -> -> + -> . _con 4 `i -> 2 `i `ui `ux -> -> # *U &U _ficha `ui `ux << *U + &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 2 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux - -> . _con 3 `i -> 1 `i ]
-"49
-[; ;screen.c: 49:     ficha[con.ficha_Hpos +3] = figuras[con.ficha_actual][3] << (con.ficha_Vpos -1);
-[e = *U + &U _ficha * -> -> + -> . _con 4 `i -> 3 `i `ui `ux -> -> # *U &U _ficha `ui `ux << *U + &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 3 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 5 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux - -> . _con 3 `i -> 1 `i ]
-"50
-[; ;screen.c: 50: }
-[e :UE 105 ]
+[; ;columnas.c: 37: }
+[e :UE 106 ]
 }

@@ -446,14 +446,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;init.c: 80:     OPTION_REGbits.PSA = 0;
 [e = . . _OPTION_REGbits 0 1 -> -> 0 `i `uc ]
 "81
-[; ;init.c: 81:     OPTION_REGbits.PS0 = 1;
-[e = . . _OPTION_REGbits 1 0 -> -> 1 `i `uc ]
+[; ;init.c: 81:     OPTION_REGbits.PS0 = 0;
+[e = . . _OPTION_REGbits 1 0 -> -> 0 `i `uc ]
 "82
-[; ;init.c: 82:     OPTION_REGbits.PS1 = 1;
-[e = . . _OPTION_REGbits 1 1 -> -> 1 `i `uc ]
+[; ;init.c: 82:     OPTION_REGbits.PS1 = 0;
+[e = . . _OPTION_REGbits 1 1 -> -> 0 `i `uc ]
 "83
-[; ;init.c: 83:     OPTION_REGbits.PS2 = 1;
-[e = . . _OPTION_REGbits 1 2 -> -> 1 `i `uc ]
+[; ;init.c: 83:     OPTION_REGbits.PS2 = 0;
+[e = . . _OPTION_REGbits 1 2 -> -> 0 `i `uc ]
 "84
 [; ;init.c: 84:     OPTION_REGbits.T0CS = 0;
 [e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]

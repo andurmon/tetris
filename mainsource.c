@@ -46,16 +46,16 @@ int main(int argc, char** argv) {
     init_pines();
     init_interrupt();
     
-    int i=0, j=0;
+    int i=0, j=5;
     con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
-    srand(TMR0);
+    srand(1);
     con.ficha_actual = rand() % 7;
     //drawBground();
     
     while(1){
-        srand(TMR0);
+        //srand(TMR0);
         checkCount();
              
         updateScreen(pantalla);
@@ -68,7 +68,7 @@ void checkCount(void){
     if(con.check_count == 1){
         //drawFigure(); 
         int i=0, j=0;
-        if(timerCount >= 3906){
+        if(timerCount >= 15){
             
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;

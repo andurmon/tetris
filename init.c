@@ -77,9 +77,9 @@ void init_timer(void){
      * register known also as the prescaler), the external
      * INT interrupt, TMR0 and the weak pull-ups on PORTB.
     */
-    OPTION_REGbits.PSA = 1;   //Prescaler Assignment bit 
-    OPTION_REGbits.PS0 = 1;   //Prescaler Rate Select bits
-    OPTION_REGbits.PS1 = 1;   // 111 => 1:256 prescaler
-    OPTION_REGbits.PS2 = 1;
-    OPTION_REGbits.T0CS = 0;  //TMR0 Clock Source Select bit
+    OPTION_REGbits.PSA = 0;     //Prescaler Assignment bit 
+    OPTION_REGbits.PS0 = 1;     //Prescaler Rate Select bits
+    OPTION_REGbits.PS1 = 1;     // 111 => 1:256 prescaler
+    OPTION_REGbits.PS2 = 1;     // 000 => 1:2 prescaler
+    OPTION_REGbits.T0CS = 0;    //TMR0 Clock Source Select bit
 }
