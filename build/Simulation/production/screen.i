@@ -2164,7 +2164,6 @@ void drawFigure(void){
         con.ficha_Hpos--;
         con.izquierda = 0;
     }
-
     ficha[con.ficha_Hpos ] = figuras[con.ficha_actual][0] << (con.ficha_Vpos -1);
     ficha[con.ficha_Hpos +1] = figuras[con.ficha_actual][1] << (con.ficha_Vpos -1);
     ficha[con.ficha_Hpos +2] = figuras[con.ficha_actual][2] << (con.ficha_Vpos -1);

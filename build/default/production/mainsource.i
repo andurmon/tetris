@@ -2132,6 +2132,7 @@ void disableFilas(void);
         uint8_t ficha_actual;
         uint8_t derecha;
         uint8_t izquierda;
+        uint8_t check_count;
     };
     struct controlSign con;
 
@@ -2148,10 +2149,12 @@ void disableFilas(void);
     uint16_t fondo[8] = {0x0000};
     uint16_t ficha[8] = {0x0000};
 # 34 "mainsource.c" 2
-# 65 "mainsource.c"
-void updateScreen(uint16_t screen[8]);
-void drawFigure(void);
-void drawBground(void);
+
+
+
+
+
+void checkCount(void);
 
 int main(int argc, char** argv) {
 
@@ -2161,7 +2164,7 @@ int main(int argc, char** argv) {
     init_pines();
     init_interrupt();
     init_timer();
-    int i=0;
+    int i=0, j=0;
     con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
@@ -2169,10 +2172,7 @@ int main(int argc, char** argv) {
     drawBground();
 
     while(1){
-        drawFigure();
-        for(i=0; i<8; i++){
-            pantalla[i] = ficha[i] | fondo[i];
-        }
+        checkCount();
 
         updateScreen(pantalla);
 
@@ -2180,12 +2180,8 @@ int main(int argc, char** argv) {
     return (0);
 }
 
-void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
-
-    if(INTCONbits.TMR0IF){
-
-        INTCONbits.TMR0IF=0;
-        timerCount ++;
+void checkCount(void){
+    if(con.check_count == 1){
         if(timerCount >= 3906){
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
@@ -2195,7 +2191,37 @@ void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
                 con.ficha_Vpos = 16;
                 con.ficha_actual = rand() % 5;
             }
+
+            drawFigure();
+
+            int i=0, j=0;
+            uint16_t condicion = 0;
+            for(i=0; i<8; i++){
+                pantalla[i] = ficha[i] | fondo[i];
+            }
+
+            for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
+                condicion = ficha[i]>>1 & fondo[i];
+                if(condicion != 0){
+                    for(j=0; j<8; j++){
+                        fondo[j] = fondo[j] | ficha[j];
+                    }
+                    con.ficha_Vpos = 16;
+                    con.ficha_actual = rand() % 5;
+                    break;
+                }
+            }
+
         }
+        con.check_count = 0;
+    }
+}
+void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
+
+    if(INTCONbits.TMR0IF){
+        INTCONbits.TMR0IF=0;
+        timerCount ++;
+        con.check_count = 1;
     }
     else if(INTCONbits.RBIF){
         if(PORTBbits.RB5 == 0){

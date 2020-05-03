@@ -2060,19 +2060,15 @@ void disableFilas(void);
 # 6 "columnas.c" 2
 
 void latchClock_Col(void){
-    PORTBbits.RB4 = 1;
-
-    PORTBbits.RB4 = 0;
+    PORTDbits.RD6 = 1;
+    PORTDbits.RD6 = 0;
 }
 
 void shiftClock_Col(void){
-    PORTBbits.RB5 = 0;
-    PORTBbits.RB5 = 1;
-
-    PORTBbits.RB5 = 0;
+    PORTDbits.RD7 = 0;
+    PORTDbits.RD7 = 1;
+    PORTDbits.RD7 = 0;
 }
-
-
 
 void setColumnas(uint8_t reg_value){
     int i = 0;
@@ -2080,10 +2076,8 @@ void setColumnas(uint8_t reg_value){
     uint8_t valor = reg_value & indice;
     for(i=0;i<8;i++){
         valor = (reg_value & (1<<i) )>>i;
-        PORTBbits.RB1 = valor;
+        PORTDbits.RD4 = valor;
         shiftClock_Col();
-
-
     }
     latchClock_Col();
     return;
@@ -2091,7 +2085,7 @@ void setColumnas(uint8_t reg_value){
 
 
 void shiftBitColumna(uint8_t bit){
-    PORTBbits.RB1 = bit & 0x01;
+    PORTDbits.RD4= bit & 0x01;
     shiftClock_Col();
     latchClock_Col();
     latchClock_Fil();

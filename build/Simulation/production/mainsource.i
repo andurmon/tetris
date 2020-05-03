@@ -2055,13 +2055,47 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 28 "mainsource.c" 2
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+# 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
+
+
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+# 29 "mainsource.c" 2
+
 # 1 "./init.h" 1
 # 14 "./init.h"
     void init_pines_fil(void);
     void init_pines_col(void);
     void init_pines(void);
     void init_timer(void);
-# 29 "mainsource.c" 2
+    void init_interrupt(void);
+# 30 "mainsource.c" 2
 
 # 1 "./columnas.h" 1
 # 15 "./columnas.h"
@@ -2069,7 +2103,7 @@ typedef uint16_t uintptr_t;
     void shiftClock_Col(void);
     void setColumnas(uint8_t reg_value);
     void shiftBitColumna(uint8_t bit);
-# 30 "mainsource.c" 2
+# 31 "mainsource.c" 2
 
 # 1 "./filas.h" 1
 # 15 "./filas.h"
@@ -2078,107 +2112,109 @@ void shiftClock_Fil(void);
 void setFilas(uint16_t reg_value);
 void enableFilas(void);
 void disableFilas(void);
-# 31 "mainsource.c" 2
+# 32 "mainsource.c" 2
+
+# 1 "./screen.h" 1
+# 15 "./screen.h"
+    void updateScreen(uint16_t screen[8]);
+    void drawBground(void);
+    void drawFigure(void);
+# 33 "mainsource.c" 2
+
+# 1 "./control.h" 1
+# 14 "./control.h"
+    struct controlSign {
+        uint8_t columna;
+        uint8_t tecla;
+        uint8_t led;
+        uint8_t ficha_Vpos;
+        uint8_t ficha_Hpos;
+        uint8_t ficha_actual;
+        uint8_t derecha;
+        uint8_t izquierda;
+        uint8_t check_count;
+    };
+    struct controlSign con;
+
+    uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
+                            {0x0,0x3,0x2,0x2},
+                            {0x1,0x3,0x2,0x0},
+                            {0x0, 0x2, 0x3, 0x1},
+                            {0x1,0x1,0x1,0x1},
+                            {0x0, 0x3,0x3,0x0}};
+
+
+    uint16_t timerCount = 0;
+    uint16_t pantalla[8] = {0x0000};
+    uint16_t fondo[8] = {0x0000};
+    uint16_t ficha[8] = {0x0000};
+# 34 "mainsource.c" 2
 
 
 
 
 
-uint16_t columna = 1;
-
-uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
-uint16_t dibujo[8] = {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
-
-uint16_t figura[4]= {0x4, 0x4, 0x6, 0x0};
-
-unsigned char led = 0;
-int counter = 0;
-void updateScreen(uint16_t dibujo[8]);
-
-void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
-
-    if(INTCONbits.TMR0IF){
-        INTCONbits.TMR0IF=0;
-        if(counter >= 3906){
-            counter=0;
-            PORTBbits.RB0 = led;
-            led= ~led;
-        }else{
-            counter ++;
-        }
-    }
-
-
-
-
-
-}
+void checkCount(void);
 
 int main(int argc, char** argv) {
 
+
+
+
     init_pines();
+    init_interrupt();
     init_timer();
     int i=0;
+    con.columna = 1;
+    con.ficha_Vpos = 16;
+    con.ficha_Hpos = 2;
 
-    setColumnas(0x00);
-    setFilas(0x0000);
-
-    dibujo[2]= dibujo[2] | figura[0]<<13;
-    dibujo[3]= dibujo[3] | figura[1]<<13;
-    dibujo[4]= dibujo[4] | figura[2]<<13;
-    dibujo[5]= dibujo[5] | figura[3]<<13;
+    drawBground();
 
     while(1){
+        checkCount();
+        drawFigure();
+        for(i=0; i<8; i++){
+            pantalla[i] = ficha[i] | fondo[i];
+        }
 
-        updateScreen(dibujo);
+        updateScreen(pantalla);
 
     }
     return (0);
 }
 
+void checkCount(void){
+    if(con.check_count == 1){
+        timerCount ++;
+        if(timerCount >= 3906){
+            PORTBbits.RB0 = con.led;
+            con.led= ~con.led;
+            con.ficha_Vpos--;
+            timerCount = 0;
+            if(con.ficha_Vpos==0){
+                con.ficha_Vpos = 16;
+                con.ficha_actual = rand() % 5;
+            }
+        }
+        con.check_count = 0;
+    }
+}
+void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
 
-
-void updateScreen(uint16_t dibujo[8]){
-    switch(columna){
-        case 1:
-            setFilas(~dibujo[0]);
-            shiftBitColumna(1);
-            columna=2;
-            break;
-        case 2:
-            setFilas(~dibujo[1]);
-            shiftBitColumna(0);
-            columna=3;
-            break;
-        case 3:
-            setFilas(~dibujo[2]);
-            shiftBitColumna(0);
-            columna=4;
-            break;
-        case 4:
-            setFilas(~dibujo[3]);
-            shiftBitColumna(0);
-            columna=5;
-            break;
-        case 5:
-            setFilas(~dibujo[4]);
-            shiftBitColumna(0);
-            columna=6;
-            break;
-        case 6:
-            setFilas(~dibujo[5]);
-            shiftBitColumna(0);
-            columna=7;
-            break;
-        case 7:
-            setFilas(~dibujo[6]);
-            shiftBitColumna(0);
-            columna=8;
-            break;
-        case 8:
-            setFilas(~dibujo[7]);
-            shiftBitColumna(0);
-            columna=1;
-            break;
+    if(INTCONbits.TMR0IF){
+        INTCONbits.TMR0IF=0;
+        con.check_count = 1;
+    }
+    else if(INTCONbits.RBIF){
+        if(PORTBbits.RB5 == 0){
+            con.derecha = 1;
+            con.izquierda = 0;
+        }
+        if(PORTBbits.RB4 == 0){
+            con.derecha = 0;
+            con.izquierda = 1;
+        }
+        INTCONbits.RBIF=0;
     }
 }

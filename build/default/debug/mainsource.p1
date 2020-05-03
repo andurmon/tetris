@@ -1,38 +1,28 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"1505 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1505:     struct {
-[s S60 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S60 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"1504
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1504: typedef union {
-[u S59 `S60 1 ]
-[n S59 . . ]
-"1516
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1516: extern volatile TRISDbits_t TRISDbits __attribute__((address(0x088)));
-[v _TRISDbits `VS59 ~T0 @X0 0 e@136 ]
-"346
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 346:     struct {
-[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S12 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"345
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 345: typedef union {
-[u S11 `S12 1 ]
-[n S11 . . ]
-"357
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 357: extern volatile PORTDbits_t PORTDbits __attribute__((address(0x008)));
-[v _PORTDbits `VS11 ~T0 @X0 0 e@8 ]
-"1381
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1381:     struct {
-[s S56 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S56 . TRISB0 TRISB1 TRISB2 TRISB3 TRISB4 TRISB5 TRISB6 TRISB7 ]
-"1380
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1380: typedef union {
-[u S55 `S56 1 ]
-[n S55 . . ]
-"1392
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1392: extern volatile TRISBbits_t TRISBbits __attribute__((address(0x086)));
-[v _TRISBbits `VS55 ~T0 @X0 0 e@134 ]
-"222
+"14 ./control.h
+[; ;./control.h: 14:     struct controlSign {
+[s S100 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S100 controlSign columna tecla led ficha_Vpos ficha_Hpos ficha_actual derecha izquierda check_count ]
+[p mainexit ]
+"16 ./init.h
+[; ;./init.h: 16:     void init_pines(void);
+[v _init_pines `(v ~T0 @X0 0 ef ]
+"18
+[; ;./init.h: 18:     void init_interrupt(void);
+[v _init_interrupt `(v ~T0 @X0 0 ef ]
+"17
+[; ;./init.h: 17:     void init_timer(void);
+[v _init_timer `(v ~T0 @X0 0 ef ]
+"16 ./screen.h
+[; ;./screen.h: 16:     void drawBground(void);
+[v _drawBground `(v ~T0 @X0 0 ef ]
+"39 mainsource.c
+[; ;mainsource.c: 39: void checkCount(void);
+[v _checkCount `(v ~T0 @X0 0 ef ]
+"15 ./screen.h
+[; ;./screen.h: 15:     void updateScreen(uint16_t screen[8]);
+[v _updateScreen `(v ~T0 @X0 0 ef1`*ui ]
+"222 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 222:     struct {
 [s S8 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S8 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
@@ -43,10 +33,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "233
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 233: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
 [v _PORTBbits `VS7 ~T0 @X0 0 e@6 ]
-"59
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 59: extern volatile unsigned char TMR0 __attribute__((address(0x001)));
-[v _TMR0 `Vuc ~T0 @X0 0 e@1 ]
-"460
+"75 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h: 75: extern int rand(void);
+[v _rand `(i ~T0 @X0 0 ef ]
+"17 ./screen.h
+[; ;./screen.h: 17:     void drawFigure(void);
+[v _drawFigure `(v ~T0 @X0 0 ef ]
+[t ~ __interrupt . k ]
+[t T1 __interrupt ]
+"460 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 460:     struct {
 [s S18 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S18 . RBIF INTF TMR0IF RBIE INTE TMR0IE PEIE GIE ]
@@ -61,21 +56,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 "477
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 477: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
 [v _INTCONbits `VS17 ~T0 @X0 0 e@11 ]
-"1261
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1261:     struct {
-[s S51 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S51 . PS PSA T0SE T0CS INTEDG nRBPU ]
-"1269
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1269:     struct {
-[s S52 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S52 . PS0 PS1 PS2 ]
-"1260
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1260: typedef union {
-[u S50 `S51 1 `S52 1 ]
-[n S50 . . . ]
-"1275
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1275: extern volatile OPTION_REGbits_t OPTION_REGbits __attribute__((address(0x081)));
-[v _OPTION_REGbits `VS50 ~T0 @X0 0 e@129 ]
+"13 mainsource.c
+[p x FOSC = XT ]
+"14
+[p x WDTE = OFF ]
+"15
+[p x PWRTE = OFF ]
+"16
+[p x BOREN = ON ]
+"17
+[p x LVP = OFF ]
+"18
+[p x CPD = OFF ]
+"19
+[p x WRT = OFF ]
+"20
+[p x CP = OFF ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -256,130 +252,342 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"4 init.c
-[; ;init.c: 4: void init_pines_fil(void){
-[v _init_pines_fil `(v ~T0 @X0 1 ef ]
-{
-[e :U _init_pines_fil ]
-[f ]
-"6
-[; ;init.c: 6:     TRISDbits.TRISD2 = 0;
-[e = . . _TRISDbits 0 2 -> -> 0 `i `uc ]
-"7
-[; ;init.c: 7:     TRISDbits.TRISD3 = 0;
-[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
-"8
-[; ;init.c: 8:     TRISDbits.TRISD4 = 0;
-[e = . . _TRISDbits 0 4 -> -> 0 `i `uc ]
-"9
-[; ;init.c: 9:     TRISDbits.TRISD5 = 0;
-[e = . . _TRISDbits 0 5 -> -> 0 `i `uc ]
-"11
-[; ;init.c: 11:     PORTDbits.RD2 = 0;
-[e = . . _PORTDbits 0 2 -> -> 0 `i `uc ]
-"12
-[; ;init.c: 12:     PORTDbits.RD3 = 0;
-[e = . . _PORTDbits 0 3 -> -> 0 `i `uc ]
-"13
-[; ;init.c: 13:     PORTDbits.RD4 = 0;
-[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
-"14
-[; ;init.c: 14:     PORTDbits.RD5 = 0;
-[e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
-"15
-[; ;init.c: 15: }
-[e :UE 95 ]
-}
-"17
-[; ;init.c: 17: void init_pines_col(void){
-[v _init_pines_col `(v ~T0 @X0 1 ef ]
-{
-[e :U _init_pines_col ]
-[f ]
-"18
-[; ;init.c: 18:     TRISBbits.TRISB0 = 0;
-[e = . . _TRISBbits 0 0 -> -> 0 `i `uc ]
-"19
-[; ;init.c: 19:     TRISBbits.TRISB1 = 0;
-[e = . . _TRISBbits 0 1 -> -> 0 `i `uc ]
-"20
-[; ;init.c: 20:     TRISBbits.TRISB2 = 0;
-[e = . . _TRISBbits 0 2 -> -> 0 `i `uc ]
-"21
-[; ;init.c: 21:     TRISBbits.TRISB4 = 0;
-[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
-"22
-[; ;init.c: 22:     TRISBbits.TRISB5 = 0;
-[e = . . _TRISBbits 0 5 -> -> 0 `i `uc ]
-"24
-[; ;init.c: 24:     PORTBbits.RB0 = 0;
-[e = . . _PORTBbits 0 0 -> -> 0 `i `uc ]
-"25
-[; ;init.c: 25:     PORTBbits.RB1 = 0;
-[e = . . _PORTBbits 0 1 -> -> 0 `i `uc ]
-"26
-[; ;init.c: 26:     PORTBbits.RB2 = 0;
-[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
+"25 ./control.h
+[; ;./control.h: 25:     struct controlSign con;
+[v _con `S100 ~T0 @X0 1 e ]
+[v F1176 `ui ~T0 @X0 -> 4 `i t ]
 "27
-[; ;init.c: 27:     PORTBbits.RB4 = 0;
-[e = . . _PORTBbits 0 4 -> -> 0 `i `uc ]
-"28
-[; ;init.c: 28:     PORTBbits.RB5 = 0;
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-"29
-[; ;init.c: 29: }
-[e :UE 96 ]
-}
-"30
-[; ;init.c: 30: void init_pines(void){
-[v _init_pines `(v ~T0 @X0 1 ef ]
-{
-[e :U _init_pines ]
-[f ]
-"32
-[; ;init.c: 32:     init_pines_fil();
-[e ( _init_pines_fil ..  ]
-"33
-[; ;init.c: 33:     init_pines_col();
-[e ( _init_pines_col ..  ]
+[; ;./control.h: 27:     uint16_t figuras[6][4]= {{0x2, 0x2, 0x3, 0x0},
+[v _figuras `F1176 ~T0 @X0 -> 6 `i e ]
+[i _figuras
+:U ..
+:U ..
+-> -> 2 `i `ui
+-> -> 2 `i `ui
+-> -> 3 `i `ui
+-> -> 0 `i `ui
+..
+:U ..
+-> -> 0 `i `ui
+-> -> 3 `i `ui
+-> -> 2 `i `ui
+-> -> 2 `i `ui
+..
+:U ..
+-> -> 1 `i `ui
+-> -> 3 `i `ui
+-> -> 2 `i `ui
+-> -> 0 `i `ui
+..
+:U ..
+-> -> 0 `i `ui
+-> -> 2 `i `ui
+-> -> 3 `i `ui
+-> -> 1 `i `ui
+..
+:U ..
+-> -> 1 `i `ui
+-> -> 1 `i `ui
+-> -> 1 `i `ui
+-> -> 1 `i `ui
+..
+:U ..
+-> -> 0 `i `ui
+-> -> 3 `i `ui
+-> -> 3 `i `ui
+-> -> 0 `i `ui
+..
+..
+]
 "35
-[; ;init.c: 35: }
-[e :UE 97 ]
-}
+[; ;./control.h: 35:     uint16_t timerCount = 0;
+[v _timerCount `ui ~T0 @X0 1 e ]
+[i _timerCount
+-> -> 0 `i `ui
+]
+"36
+[; ;./control.h: 36:     uint16_t pantalla[8] = {0x0000};
+[v _pantalla `ui ~T0 @X0 -> 8 `i e ]
+[i _pantalla
+:U ..
+-> -> 0 `i `ui
+..
+]
 "37
-[; ;init.c: 37: void init_timer(void){
-[v _init_timer `(v ~T0 @X0 1 ef ]
+[; ;./control.h: 37:     uint16_t fondo[8] = {0x0000};
+[v _fondo `ui ~T0 @X0 -> 8 `i e ]
+[i _fondo
+:U ..
+-> -> 0 `i `ui
+..
+]
+"38
+[; ;./control.h: 38:     uint16_t ficha[8] = {0x0000};
+[v _ficha `ui ~T0 @X0 -> 8 `i e ]
+[i _ficha
+:U ..
+-> -> 0 `i `ui
+..
+]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"41 mainsource.c
+[; ;mainsource.c: 41: int main(int argc, char** argv) {
+[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
 {
-[e :U _init_timer ]
+[e :U _main ]
+[v _argc `i ~T0 @X0 1 r1 ]
+[v _argv `**uc ~T0 @X0 1 r2 ]
 [f ]
-"39
-[; ;init.c: 39:     TMR0=0;
-[e = _TMR0 -> -> 0 `i `uc ]
+"46
+[; ;mainsource.c: 46:     init_pines();
+[e ( _init_pines ..  ]
 "47
-[; ;init.c: 47:     INTCONbits.GIE = 1;
-[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+[; ;mainsource.c: 47:     init_interrupt();
+[e ( _init_interrupt ..  ]
 "48
-[; ;init.c: 48:     INTCONbits.TMR0IE = 1;
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;mainsource.c: 48:     init_timer();
+[e ( _init_timer ..  ]
 "49
-[; ;init.c: 49:     INTCONbits.TMR0IF = 0;
+[; ;mainsource.c: 49:     int i=0, j=0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+"50
+[; ;mainsource.c: 50:     con.columna = 1;
+[e = . _con 0 -> -> 1 `i `uc ]
+"51
+[; ;mainsource.c: 51:     con.ficha_Vpos = 16;
+[e = . _con 3 -> -> 16 `i `uc ]
+"52
+[; ;mainsource.c: 52:     con.ficha_Hpos = 2;
+[e = . _con 4 -> -> 2 `i `uc ]
+"54
+[; ;mainsource.c: 54:     drawBground();
+[e ( _drawBground ..  ]
+"56
+[; ;mainsource.c: 56:     while(1){
+[e :U 103 ]
+{
+"57
+[; ;mainsource.c: 57:         checkCount();
+[e ( _checkCount ..  ]
+"73
+[; ;mainsource.c: 73:         updateScreen(pantalla);
+[e ( _updateScreen (1 &U _pantalla ]
+"75
+[; ;mainsource.c: 75:     }
+}
+[e :U 102 ]
+[e $U 103  ]
+[e :U 104 ]
+"76
+[; ;mainsource.c: 76:     return (0);
+[e ) -> 0 `i ]
+[e $UE 101  ]
+"77
+[; ;mainsource.c: 77: }
+[e :UE 101 ]
+}
+"79
+[; ;mainsource.c: 79: void checkCount(void){
+[v _checkCount `(v ~T0 @X0 1 ef ]
+{
+[e :U _checkCount ]
+[f ]
+"80
+[; ;mainsource.c: 80:     if(con.check_count == 1){
+[e $ ! == -> . _con 8 `i -> 1 `i 106  ]
+{
+"81
+[; ;mainsource.c: 81:         if(timerCount >= 3906){
+[e $ ! >= _timerCount -> -> 3906 `i `ui 107  ]
+{
+"82
+[; ;mainsource.c: 82:             PORTBbits.RB0 = con.led;
+[e = . . _PORTBbits 0 0 . _con 2 ]
+"83
+[; ;mainsource.c: 83:             con.led= ~con.led;
+[e = . _con 2 -> ~ -> . _con 2 `i `uc ]
+"84
+[; ;mainsource.c: 84:             con.ficha_Vpos--;
+[e -- . _con 3 -> -> 1 `i `uc ]
+"85
+[; ;mainsource.c: 85:             timerCount = 0;
+[e = _timerCount -> -> 0 `i `ui ]
+"86
+[; ;mainsource.c: 86:             if(con.ficha_Vpos==0){
+[e $ ! == -> . _con 3 `i -> 0 `i 108  ]
+{
+"87
+[; ;mainsource.c: 87:                 con.ficha_Vpos = 16;
+[e = . _con 3 -> -> 16 `i `uc ]
+"88
+[; ;mainsource.c: 88:                 con.ficha_actual = rand() % 5;
+[e = . _con 5 -> % ( _rand ..  -> 5 `i `uc ]
+"89
+[; ;mainsource.c: 89:             }
+}
+[e :U 108 ]
+"91
+[; ;mainsource.c: 91:             drawFigure();
+[e ( _drawFigure ..  ]
+"93
+[; ;mainsource.c: 93:             int i=0, j=0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+"94
+[; ;mainsource.c: 94:             uint8_t condicion = 0;
+[v _condicion `uc ~T0 @X0 1 a ]
+[e = _condicion -> -> 0 `i `uc ]
+"95
+[; ;mainsource.c: 95:             for(i=0; i<8; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 109  ]
+[e $U 110  ]
+[e :U 109 ]
+{
+"96
+[; ;mainsource.c: 96:                 pantalla[i] = ficha[i] | fondo[i];
+[e = *U + &U _pantalla * -> -> _i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _ficha * -> -> _i `ui `ux -> -> # *U &U _ficha `ui `ux *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux ]
+"97
+[; ;mainsource.c: 97:             }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 109  ]
+[e :U 110 ]
+}
+"99
+[; ;mainsource.c: 99:             for(i=con.ficha_Hpos; i<(con.ficha_Hpos+3); i++){
+{
+[e = _i -> . _con 4 `i ]
+[e $U 115  ]
+[e :U 112 ]
+{
+"100
+[; ;mainsource.c: 100:                 condicion = ficha[i]>>1 & fondo[i];
+[e = _condicion -> & >> *U + &U _ficha * -> -> _i `ui `ux -> -> # *U &U _ficha `ui `ux -> 1 `i *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux `uc ]
+"101
+[; ;mainsource.c: 101:                 if(condicion != 0){
+[e $ ! != -> _condicion `i -> 0 `i 116  ]
+{
+"102
+[; ;mainsource.c: 102:                     for(j=0; j<8; j++){
+{
+[e = _j -> 0 `i ]
+[e $ < _j -> 8 `i 117  ]
+[e $U 118  ]
+[e :U 117 ]
+{
+"103
+[; ;mainsource.c: 103:                         fondo[j] = fondo[j] | ficha[j];
+[e = *U + &U _fondo * -> -> _j `ui `ux -> -> # *U &U _fondo `ui `ux | *U + &U _fondo * -> -> _j `ui `ux -> -> # *U &U _fondo `ui `ux *U + &U _ficha * -> -> _j `ui `ux -> -> # *U &U _ficha `ui `ux ]
+"104
+[; ;mainsource.c: 104:                     }
+}
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 8 `i 117  ]
+[e :U 118 ]
+}
+"105
+[; ;mainsource.c: 105:                     break;
+[e $U 113  ]
+"106
+[; ;mainsource.c: 106:                 }
+}
+[e :U 116 ]
+"107
+[; ;mainsource.c: 107:             }
+}
+[e ++ _i -> 1 `i ]
+[e :U 115 ]
+[e $ < _i + -> . _con 4 `i -> 3 `i 112  ]
+[e :U 113 ]
+}
+"109
+[; ;mainsource.c: 109:         }
+}
+[e :U 107 ]
+"110
+[; ;mainsource.c: 110:         con.check_count = 0;
+[e = . _con 8 -> -> 0 `i `uc ]
+"111
+[; ;mainsource.c: 111:     }
+}
+[e :U 106 ]
+"112
+[; ;mainsource.c: 112: }
+[e :UE 105 ]
+}
+[v $root$_Timer0_ISR `(v ~T0 @X0 0 e ]
+"113
+[; ;mainsource.c: 113: void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
+[v _Timer0_ISR `(v ~T1 @X0 1 ef ]
+{
+[e :U _Timer0_ISR ]
+[f ]
+"115
+[; ;mainsource.c: 115:     if(INTCONbits.TMR0IF){
+[e $ ! != -> . . _INTCONbits 0 2 `i -> 0 `i 121  ]
+{
+"116
+[; ;mainsource.c: 116:         INTCONbits.TMR0IF=0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"58
-[; ;init.c: 58:     OPTION_REGbits.PSA = 1;
-[e = . . _OPTION_REGbits 0 1 -> -> 1 `i `uc ]
-"59
-[; ;init.c: 59:     OPTION_REGbits.PS0 = 1;
-[e = . . _OPTION_REGbits 1 0 -> -> 1 `i `uc ]
-"60
-[; ;init.c: 60:     OPTION_REGbits.PS1 = 1;
-[e = . . _OPTION_REGbits 1 1 -> -> 1 `i `uc ]
-"61
-[; ;init.c: 61:     OPTION_REGbits.PS2 = 1;
-[e = . . _OPTION_REGbits 1 2 -> -> 1 `i `uc ]
-"62
-[; ;init.c: 62:     OPTION_REGbits.T0CS = 0;
-[e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]
-"63
-[; ;init.c: 63: }
-[e :UE 98 ]
+"117
+[; ;mainsource.c: 117:         timerCount ++;
+[e ++ _timerCount -> -> 1 `i `ui ]
+"118
+[; ;mainsource.c: 118:         con.check_count = 1;
+[e = . _con 8 -> -> 1 `i `uc ]
+"119
+[; ;mainsource.c: 119:     }
+}
+[e $U 122  ]
+"120
+[; ;mainsource.c: 120:     else if(INTCONbits.RBIF){
+[e :U 121 ]
+[e $ ! != -> . . _INTCONbits 0 0 `i -> 0 `i 123  ]
+{
+"121
+[; ;mainsource.c: 121:         if(PORTBbits.RB5 == 0){
+[e $ ! == -> . . _PORTBbits 0 5 `i -> 0 `i 124  ]
+{
+"122
+[; ;mainsource.c: 122:             con.derecha = 1;
+[e = . _con 6 -> -> 1 `i `uc ]
+"123
+[; ;mainsource.c: 123:             con.izquierda = 0;
+[e = . _con 7 -> -> 0 `i `uc ]
+"124
+[; ;mainsource.c: 124:         }
+}
+[e :U 124 ]
+"125
+[; ;mainsource.c: 125:         if(PORTBbits.RB4 == 0){
+[e $ ! == -> . . _PORTBbits 0 4 `i -> 0 `i 125  ]
+{
+"126
+[; ;mainsource.c: 126:             con.derecha = 0;
+[e = . _con 6 -> -> 0 `i `uc ]
+"127
+[; ;mainsource.c: 127:             con.izquierda = 1;
+[e = . _con 7 -> -> 1 `i `uc ]
+"128
+[; ;mainsource.c: 128:         }
+}
+[e :U 125 ]
+"129
+[; ;mainsource.c: 129:         INTCONbits.RBIF=0;
+[e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
+"131
+[; ;mainsource.c: 131:     }
+}
+[e :U 123 ]
+[e :U 122 ]
+"132
+[; ;mainsource.c: 132: }
+[e :UE 120 ]
 }

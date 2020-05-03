@@ -1,18 +1,15 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"222 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 222:     struct {
-[s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S13 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"221
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 221: typedef union {
-[u S12 `S13 1 ]
-[n S12 . . ]
-"233
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 233: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
-[v _PORTBbits `VS12 ~T0 @X0 0 e@6 ]
-"15 ./filas.h
-[; ;./filas.h: 15: void latchClock_Fil(void);
-[v _latchClock_Fil `(v ~T0 @X0 0 ef ]
+"284 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 284:     struct {
+[s S15 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S15 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"283
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 283: typedef union {
+[u S14 `S15 1 ]
+[n S14 . . ]
+"295
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 295: extern volatile PORTCbits_t PORTCbits __attribute__((address(0x007)));
+[v _PORTCbits `VS14 ~T0 @X0 0 e@7 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -193,114 +190,80 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"7 columnas.c
-[; ;columnas.c: 7: void latchClock_Col(void){
-[v _latchClock_Col `(v ~T0 @X0 1 ef ]
+"7 filas.c
+[; ;filas.c: 7: void latchClock_Fil(void){
+[v _latchClock_Fil `(v ~T0 @X0 1 ef ]
 {
-[e :U _latchClock_Col ]
+[e :U _latchClock_Fil ]
 [f ]
 "8
-[; ;columnas.c: 8:     PORTBbits.RB4 = 1;
-[e = . . _PORTBbits 0 4 -> -> 1 `i `uc ]
+[; ;filas.c: 8:     PORTCbits.RC6 = 0;
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
+"9
+[; ;filas.c: 9:     PORTCbits.RC6 = 1;
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
 "10
-[; ;columnas.c: 10:     PORTBbits.RB4 = 0;
-[e = . . _PORTBbits 0 4 -> -> 0 `i `uc ]
+[; ;filas.c: 10:     PORTCbits.RC6 = 0;
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
 "11
-[; ;columnas.c: 11: }
+[; ;filas.c: 11: }
 [e :UE 100 ]
 }
 "13
-[; ;columnas.c: 13: void shiftClock_Col(void){
-[v _shiftClock_Col `(v ~T0 @X0 1 ef ]
+[; ;filas.c: 13: void shiftClock_Fil(void){
+[v _shiftClock_Fil `(v ~T0 @X0 1 ef ]
 {
-[e :U _shiftClock_Col ]
+[e :U _shiftClock_Fil ]
 [f ]
 "14
-[; ;columnas.c: 14:     PORTBbits.RB5 = 0;
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
+[; ;filas.c: 14:     PORTCbits.RC7 = 0;
+[e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
 "15
-[; ;columnas.c: 15:     PORTBbits.RB5 = 1;
-[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
+[; ;filas.c: 15:     PORTCbits.RC7 = 1;
+[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
+"16
+[; ;filas.c: 16:     PORTCbits.RC7 = 0;
+[e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
 "17
-[; ;columnas.c: 17:     PORTBbits.RB5 = 0;
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-"18
-[; ;columnas.c: 18: }
+[; ;filas.c: 17: }
 [e :UE 101 ]
 }
-"22
-[; ;columnas.c: 22: void setColumnas(uint8_t reg_value){
-[v _setColumnas `(v ~T0 @X0 1 ef1`uc ]
+"19
+[; ;filas.c: 19: void setFilas(uint16_t reg_value){
+[v _setFilas `(v ~T0 @X0 1 ef1`ui ]
 {
-[e :U _setColumnas ]
-[v _reg_value `uc ~T0 @X0 1 r1 ]
+[e :U _setFilas ]
+[v _reg_value `ui ~T0 @X0 1 r1 ]
 [f ]
-"23
-[; ;columnas.c: 23:     int i = 0;
+"20
+[; ;filas.c: 20:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"24
-[; ;columnas.c: 24:     uint8_t indice = (1<<2);
-[v _indice `uc ~T0 @X0 1 a ]
-[e = _indice -> << -> 1 `i -> 2 `i `uc ]
-"25
-[; ;columnas.c: 25:     uint8_t valor = reg_value & indice;
-[v _valor `uc ~T0 @X0 1 a ]
-[e = _valor -> & -> _reg_value `i -> _indice `i `uc ]
-"26
-[; ;columnas.c: 26:     for(i=0;i<8;i++){
+"21
+[; ;filas.c: 21:     for(i=0;i<16;i++){
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 103  ]
+[e $ < _i -> 16 `i 103  ]
 [e $U 104  ]
 [e :U 103 ]
 {
-"27
-[; ;columnas.c: 27:         valor = (reg_value & (1<<i) )>>i;
-[e = _valor -> >> & -> _reg_value `i << -> 1 `i _i _i `uc ]
-"28
-[; ;columnas.c: 28:         PORTBbits.RB1 = valor;
-[e = . . _PORTBbits 0 1 _valor ]
-"29
-[; ;columnas.c: 29:         shiftClock_Col();
-[e ( _shiftClock_Col ..  ]
-"32
-[; ;columnas.c: 32:     }
+"22
+[; ;filas.c: 22:         PORTCbits.RC4 = (reg_value & (1<<i) )>>i;
+[e = . . _PORTCbits 0 4 -> >> & _reg_value -> << -> 1 `i _i `ui _i `uc ]
+"23
+[; ;filas.c: 23:         shiftClock_Fil();
+[e ( _shiftClock_Fil ..  ]
+"24
+[; ;filas.c: 24:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 103  ]
+[e $ < _i -> 16 `i 103  ]
 [e :U 104 ]
 }
-"33
-[; ;columnas.c: 33:     latchClock_Col();
-[e ( _latchClock_Col ..  ]
-"34
-[; ;columnas.c: 34:     return;
+"25
+[; ;filas.c: 25:     return;
 [e $UE 102  ]
-"35
-[; ;columnas.c: 35: }
+"26
+[; ;filas.c: 26: }
 [e :UE 102 ]
-}
-"38
-[; ;columnas.c: 38: void shiftBitColumna(uint8_t bit){
-[v _shiftBitColumna `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _shiftBitColumna ]
-[v _bit `uc ~T0 @X0 1 r1 ]
-[f ]
-"39
-[; ;columnas.c: 39:     PORTBbits.RB1 = bit & 0x01;
-[e = . . _PORTBbits 0 1 -> & -> _bit `i -> 1 `i `uc ]
-"40
-[; ;columnas.c: 40:     shiftClock_Col();
-[e ( _shiftClock_Col ..  ]
-"41
-[; ;columnas.c: 41:     latchClock_Col();
-[e ( _latchClock_Col ..  ]
-"42
-[; ;columnas.c: 42:     latchClock_Fil();
-[e ( _latchClock_Fil ..  ]
-"43
-[; ;columnas.c: 43: }
-[e :UE 106 ]
 }

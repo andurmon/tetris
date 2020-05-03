@@ -1,4 +1,4 @@
-build/Simulation/production/mainsource.p1:  \
+build/default/debug/mainsource.p1:  \
 mainsource.c  \
 init.h  \
 columnas.h  \
