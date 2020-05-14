@@ -2059,6 +2059,7 @@ void enableFilas(void);
 void disableFilas(void);
 # 6 "columnas.c" 2
 
+
 void latchClock_Col(void){
     PORTDbits.RD6 = 1;
     PORTDbits.RD6 = 0;

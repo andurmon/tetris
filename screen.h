@@ -13,9 +13,9 @@ extern "C" {
 #endif
 
     void updateScreen(uint16_t screen[8]);
+    void addToScreen(void);
     void drawBground(void);
     void drawFigure(void);
-
 
 #ifdef	__cplusplus
 }

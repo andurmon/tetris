@@ -44,10 +44,9 @@ int main(int argc, char** argv) {
     //uint16_t test[8] =  {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
     init_timer();
     init_pines();
-    init_interrupt();
+    //init_interrupt();
     
     int i=0, j=5;
-    con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
     srand(1);
@@ -63,34 +62,54 @@ int main(int argc, char** argv) {
     }
     return (EXIT_SUCCESS); 
 }
-
+void leerEntradas(void){
+    //leer Entradas
+    int i =0;
+    if(con.derecha == 1 && con.ficha_Hpos<4){
+        con.derecha = 0;
+        for(i=(con.ficha_Hpos+4); i>con.ficha_Hpos; i--){
+            if((ficha[i] & fondo[i+1]) != 0){
+                return;
+            }
+        }
+        con.ficha_Hpos++;
+        drawFigure();
+        return;
+    }
+    else if(con.izquierda == 1 && con.ficha_Hpos>0){
+        con.izquierda = 0;
+        for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
+            if((ficha[i] & fondo[i-1]) != 0){
+                return;
+            }
+        }
+        con.ficha_Hpos--;
+        drawFigure();
+        return;
+    }
+}
 void checkCount(void){
-    if(con.check_count == 1){
-        //drawFigure(); 
+    if(con.check_count == 1){ 
         int i=0, j=0;
-        if(timerCount >= 15){
+        con.check_count = 0;
+        
+        leerEntradas();
+        
+        //Cuando transcurre un segundo
+        if(timerCount >= 15 ){
+            timerCount = 0;
             
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
             con.ficha_Vpos--;
-            timerCount = 0;
-            if(con.ficha_Vpos==0){
-                for(j=0; j<8; j++){
-                    fondo[j] = fondo[j] | ficha[j];
-                }
-                con.ficha_Vpos = 16;
-                con.ficha_actual = rand() % 7;
-            }
-            
-            drawFigure();
             
             /*
-             * Hace una OR entre la ficha y el fondo para obtener lo que se
-             * mostrara en pantalla. Esto me permite poder borrar todo lo otro
-             * y que no queden remanentes del movimiento de la figura
+             *  Verifica si la figura puede o no bajar mas
              */
-            for(i=0; i<8; i++){
-                pantalla[i] = ficha[i] | fondo[i];
+            if(con.ficha_Vpos==0){
+                drawBground();
+                con.ficha_Vpos = 16;
+                con.ficha_actual = rand() % 7;
             }
             
             /*
@@ -100,14 +119,16 @@ void checkCount(void){
              */
             for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
                 if((ficha[i]>>1 & fondo[i]) != 0){
-                    for(j=0; j<8; j++){
-                        fondo[j] = fondo[j] | ficha[j];
-                    }
+                    drawBground();
                     con.ficha_Vpos = 16;
                     con.ficha_actual = rand() % 7;
                     break;
                 }
             }
+
+           
+            
+            drawFigure();
             
             /*
              * Este for permite saber si el usuario ha perdido, comparando el
@@ -138,26 +159,28 @@ void checkCount(void){
             }
             
         }
-        con.check_count = 0;
+        
     }
 }
+
 void __interrupt() Timer0_ISR(void){      
     if(INTCONbits.TMR0IF){  
         INTCONbits.TMR0IF=0;
         timerCount ++;
         con.check_count = 1;
     }
-    else if(INTCONbits.RBIF){
-        if(PORTBbits.RB5 == 0){
-            con.derecha = 1;
-            con.izquierda = 0;
-        }
-        if(PORTBbits.RB4 == 0){
-            con.derecha = 0;
-            con.izquierda = 1;
-        }
-        INTCONbits.RBIF=0;
-        
+    
+    if(PORTBbits.RB5 == 0){
+        con.derecha = 1;
+        con.izquierda = 0;
+    }
+    if(PORTBbits.RB4 == 0){
+        con.derecha = 0;
+        con.izquierda = 1;
+    }
+    if(PORTBbits.RB4 == 0){
+        con.derecha = 0;
+        con.izquierda = 1;
     }
 }
 

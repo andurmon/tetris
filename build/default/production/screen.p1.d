@@ -3,4 +3,5 @@ screen.c  \
 init.h  \
 columnas.h  \
 filas.h  \
-control.h 
+control.h  \
+screen.h 

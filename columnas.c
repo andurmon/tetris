@@ -4,6 +4,7 @@
 #include <xc.h>
 #include <pic16f877a.h>
 #include "filas.h"
+
 void latchClock_Col(void){
     PORTDbits.RD6 = 1;
     PORTDbits.RD6 = 0;

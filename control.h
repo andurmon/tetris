@@ -12,8 +12,6 @@
 extern "C" {
 #endif
     struct controlSign {
-        uint8_t columna;
-        uint8_t tecla;
         uint8_t led;
         uint8_t ficha_Vpos;     //Posicion VERTICAL de la ficha que cae
         uint8_t ficha_Hpos;     //Posicion HORIZONTAL de la ficha que cae

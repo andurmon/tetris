@@ -2117,6 +2117,7 @@ void disableFilas(void);
 # 1 "./screen.h" 1
 # 15 "./screen.h"
     void updateScreen(uint16_t screen[8]);
+    void addToScreen(void);
     void drawBground(void);
     void drawFigure(void);
 # 33 "mainsource.c" 2
@@ -2124,8 +2125,6 @@ void disableFilas(void);
 # 1 "./control.h" 1
 # 14 "./control.h"
     struct controlSign {
-        uint8_t columna;
-        uint8_t tecla;
         uint8_t led;
         uint8_t ficha_Vpos;
         uint8_t ficha_Hpos;
@@ -2165,10 +2164,9 @@ int main(int argc, char** argv) {
 
     init_timer();
     init_pines();
-    init_interrupt();
+
 
     int i=0, j=5;
-    con.columna = 1;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
     srand(1);
@@ -2184,34 +2182,54 @@ int main(int argc, char** argv) {
     }
     return (0);
 }
+void leerEntradas(void){
 
+    int i =0;
+    if(con.derecha == 1 && con.ficha_Hpos<4){
+        con.derecha = 0;
+        for(i=(con.ficha_Hpos+4); i>con.ficha_Hpos; i--){
+            if((ficha[i] & fondo[i+1]) != 0){
+                return;
+            }
+        }
+        con.ficha_Hpos++;
+        drawFigure();
+        return;
+    }
+    else if(con.izquierda == 1 && con.ficha_Hpos>0){
+        con.izquierda = 0;
+        for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
+            if((ficha[i] & fondo[i-1]) != 0){
+                return;
+            }
+        }
+        con.ficha_Hpos--;
+        drawFigure();
+        return;
+    }
+}
 void checkCount(void){
     if(con.check_count == 1){
-
         int i=0, j=0;
-        if(timerCount >= 15){
+        con.check_count = 0;
+
+        leerEntradas();
+
+
+        if(timerCount >= 15 ){
+            timerCount = 0;
 
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
             con.ficha_Vpos--;
-            timerCount = 0;
+
+
+
+
             if(con.ficha_Vpos==0){
-                for(j=0; j<8; j++){
-                    fondo[j] = fondo[j] | ficha[j];
-                }
+                drawBground();
                 con.ficha_Vpos = 16;
                 con.ficha_actual = rand() % 7;
-            }
-
-            drawFigure();
-
-
-
-
-
-
-            for(i=0; i<8; i++){
-                pantalla[i] = ficha[i] | fondo[i];
             }
 
 
@@ -2221,14 +2239,16 @@ void checkCount(void){
 
             for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
                 if((ficha[i]>>1 & fondo[i]) != 0){
-                    for(j=0; j<8; j++){
-                        fondo[j] = fondo[j] | ficha[j];
-                    }
+                    drawBground();
                     con.ficha_Vpos = 16;
                     con.ficha_actual = rand() % 7;
                     break;
                 }
             }
+
+
+
+            drawFigure();
 
 
 
@@ -2259,25 +2279,27 @@ void checkCount(void){
             }
 
         }
-        con.check_count = 0;
+
     }
 }
+
 void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
     if(INTCONbits.TMR0IF){
         INTCONbits.TMR0IF=0;
         timerCount ++;
         con.check_count = 1;
     }
-    else if(INTCONbits.RBIF){
-        if(PORTBbits.RB5 == 0){
-            con.derecha = 1;
-            con.izquierda = 0;
-        }
-        if(PORTBbits.RB4 == 0){
-            con.derecha = 0;
-            con.izquierda = 1;
-        }
-        INTCONbits.RBIF=0;
 
+    if(PORTBbits.RB5 == 0){
+        con.derecha = 1;
+        con.izquierda = 0;
+    }
+    if(PORTBbits.RB4 == 0){
+        con.derecha = 0;
+        con.izquierda = 1;
+    }
+    if(PORTBbits.RB4 == 0){
+        con.derecha = 0;
+        con.izquierda = 1;
     }
 }
