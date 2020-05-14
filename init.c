@@ -2,15 +2,11 @@
 #include <pic16f877a.h>
 
 void init_pines_in(void){
-    //TRISBbits.TRISB4 = 1;
     TRISBbits.TRISB5 = 1;
     TRISBbits.TRISB4 = 1; 
-    
-    TRISBbits.TRISB6 = 0;  
-    TRISBbits.TRISB7 = 0;  
-    
-    PORTBbits.RB6 = 0;
-    PORTBbits.RB7 = 0;
+    TRISBbits.TRISB3 = 1;
+        
+
 }
 
 void init_pines_fil(void){

@@ -21,6 +21,10 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"16 C:\Users\ASUS\MPLABXProjects\Tetris.X\colisiones.c
+[v _checkBottom checkBottom `(v  1 e 1 0 ]
+"29
+[v _checkColission checkColission `(v  1 e 1 0 ]
 "8 C:\Users\ASUS\MPLABXProjects\Tetris.X\columnas.c
 [v _latchClock_Col latchClock_Col `(v  1 e 1 0 ]
 "13
@@ -35,22 +39,26 @@
 [v _setFilas setFilas `(v  1 e 1 0 ]
 "4 C:\Users\ASUS\MPLABXProjects\Tetris.X\init.c
 [v _init_pines_in init_pines_in `(v  1 e 1 0 ]
-"16
+"12
 [v _init_pines_fil init_pines_fil `(v  1 e 1 0 ]
-"29
+"25
 [v _init_pines_col init_pines_col `(v  1 e 1 0 ]
-"43
+"39
 [v _init_pines init_pines `(v  1 e 1 0 ]
-"59
+"55
 [v _init_timer init_timer `(v  1 e 1 0 ]
-"41 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
+"43 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
 [v _main main `(i  1 e 2 0 ]
-"65
+"67
 [v _leerEntradas leerEntradas `(v  1 e 1 0 ]
-"91
+"131
 [v _checkCount checkCount `(v  1 e 1 0 ]
-"166
+"156
 [v _Timer0_ISR Timer0_ISR `II(v  1 e 1 0 ]
+"13 C:\Users\ASUS\MPLABXProjects\Tetris.X\puntuacion.c
+[v _perdio perdio `(v  1 e 1 0 ]
+"30
+[v _sumaPuntos sumaPuntos `(v  1 e 1 0 ]
 "17 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _updateScreen updateScreen `(v  1 e 1 0 ]
 "39
@@ -59,22 +67,22 @@
 [v _drawBground drawBground `(v  1 e 1 0 ]
 "57
 [v _drawFigure drawFigure `(v  1 e 1 0 ]
-[s S281 controlSign 7 `uc 1 led 1 0 `uc 1 ficha_Vpos 1 1 `uc 1 ficha_Hpos 1 2 `uc 1 ficha_actual 1 3 `uc 1 derecha 1 4 `uc 1 izquierda 1 5 `uc 1 check_count 1 6 ]
-"23 C:\Users\ASUS\MPLABXProjects\Tetris.X/control.h
-[v _con con `S281  1 e 7 0 ]
-"25
-[v _figuras figuras `[7][4]ui  1 e 56 0 ]
-"36
-[v _timerCount timerCount `ul  1 e 4 0 ]
+[s S281 controlSign 8 `uc 1 girar 1 0 `uc 1 led 1 1 `uc 1 ficha_Vpos 1 2 `uc 1 ficha_Hpos 1 3 `uc 1 ficha_actual 1 4 `uc 1 derecha 1 5 `uc 1 izquierda 1 6 `uc 1 check_count 1 7 ]
+"24 C:\Users\ASUS\MPLABXProjects\Tetris.X/control.h
+[v _con con `S281  1 e 8 0 ]
+"26
+[v _figuras figuras `[7][4]uc  1 e 28 0 ]
 "37
-[v _pantalla pantalla `[8]ui  1 e 16 0 ]
+[v _timerCount timerCount `ul  1 e 4 0 ]
 "38
-[v _fondo fondo `[8]ui  1 e 16 0 ]
+[v _pantalla pantalla `[8]ui  1 e 16 0 ]
 "39
+[v _fondo fondo `[8]ui  1 e 16 0 ]
+"40
 [v _ficha ficha `[8]ui  1 e 16 0 ]
 "59 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
-[s S43 . 1 `uc 1 RB0 1 0 :1:0 
+[s S85 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -84,9 +92,9 @@
 `uc 1 RB7 1 0 :1:7 
 ]
 "233
-[u S52 . 1 `S43 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES52  1 e 1 @6 ]
-[s S85 . 1 `uc 1 RC0 1 0 :1:0 
+[u S94 . 1 `S85 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES94  1 e 1 @6 ]
+[s S64 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -96,8 +104,8 @@
 `uc 1 RC7 1 0 :1:7 
 ]
 "295
-[u S94 . 1 `S85 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES94  1 e 1 @7 ]
+[u S73 . 1 `S64 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES73  1 e 1 @7 ]
 [s S127 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
@@ -153,7 +161,7 @@
 "1392
 [u S31 . 1 `S22 1 . 1 0 ]
 [v _TRISBbits TRISBbits `VES31  1 e 1 @134 ]
-[s S64 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S43 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -163,8 +171,8 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1454
-[u S73 . 1 `S64 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES73  1 e 1 @135 ]
+[u S52 . 1 `S43 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES52  1 e 1 @135 ]
 [s S106 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
@@ -179,10 +187,10 @@
 [v _TRISDbits TRISDbits `VES115  1 e 1 @136 ]
 "3 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\rand.c
 [v _randx randx `l  1 s 4 randx ]
-"41 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
+"43 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
 [v _main main `(i  1 e 2 0 ]
 {
-"64
+"65
 } 0
 "17 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _updateScreen updateScreen `(v  1 e 1 0 ]
@@ -245,60 +253,65 @@
 [v srand@x x `ui  1 p 2 2 ]
 "9
 } 0
-"59 C:\Users\ASUS\MPLABXProjects\Tetris.X\init.c
+"55 C:\Users\ASUS\MPLABXProjects\Tetris.X\init.c
 [v _init_timer init_timer `(v  1 e 1 0 ]
 {
-"85
+"81
 } 0
-"43
+"39
 [v _init_pines init_pines `(v  1 e 1 0 ]
 {
-"48
+"44
 } 0
 "4
 [v _init_pines_in init_pines_in `(v  1 e 1 0 ]
 {
-"14
+"10
 } 0
-"16
+"12
 [v _init_pines_fil init_pines_fil `(v  1 e 1 0 ]
 {
-"27
+"23
 } 0
-"29
+"25
 [v _init_pines_col init_pines_col `(v  1 e 1 0 ]
 {
-"42
+"38
 } 0
-"91 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
+"131 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
 [v _checkCount checkCount `(v  1 e 1 0 ]
 {
-"93
-[v checkCount@i i `i  1 a 2 27 ]
-[v checkCount@j j `i  1 a 2 25 ]
-"164
+"133
+[v checkCount@j j `i  1 a 2 30 ]
+"154
 } 0
-"12 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\rand.c
-[v _rand rand `(i  1 e 2 0 ]
+"30 C:\Users\ASUS\MPLABXProjects\Tetris.X\puntuacion.c
+[v _sumaPuntos sumaPuntos `(v  1 e 1 0 ]
 {
-"17
+"31
+[v sumaPuntos@j j `i  1 a 2 2 ]
+[v sumaPuntos@i i `i  1 a 2 0 ]
+"39
 } 0
-"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul32.c
-[v ___lmul __lmul `(ul  1 e 4 0 ]
+"13
+[v _perdio perdio `(v  1 e 1 0 ]
 {
-"17
-[v ___lmul@product product `ul  1 a 4 0 ]
-"15
-[v ___lmul@multiplier multiplier `ul  1 p 4 2 ]
-[v ___lmul@multiplicand multiplicand `ul  1 p 4 6 ]
-"129
+"14
+[v perdio@i i `i  1 a 2 20 ]
+"24
 } 0
-"65 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
+"67 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
 [v _leerEntradas leerEntradas `(v  1 e 1 0 ]
 {
-"67
-[v leerEntradas@i i `i  1 a 2 9 ]
-"90
+"70
+[v leerEntradas@aux aux `[4]uc  1 a 4 16 ]
+"69
+[v leerEntradas@i i `i  1 a 2 22 ]
+[v leerEntradas@j j `i  1 a 2 20 ]
+[v leerEntradas@k k `i  1 a 2 13 ]
+"71
+[v leerEntradas@mask mask `uc  1 a 1 15 ]
+"129
 } 0
 "57 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _drawFigure drawFigure `(v  1 e 1 0 ]
@@ -319,6 +332,33 @@
 [v memset@p1 p1 `*.4v  1 a 1 8 ]
 "22
 } 0
+"29 C:\Users\ASUS\MPLABXProjects\Tetris.X\colisiones.c
+[v _checkColission checkColission `(v  1 e 1 0 ]
+{
+"30
+[v checkColission@i i `i  1 a 2 25 ]
+"39
+} 0
+"16
+[v _checkBottom checkBottom `(v  1 e 1 0 ]
+{
+"22
+} 0
+"12 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\rand.c
+[v _rand rand `(i  1 e 2 0 ]
+{
+"17
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+{
+"17
+[v ___lmul@product product `ul  1 a 4 0 ]
+"15
+[v ___lmul@multiplier multiplier `ul  1 p 4 2 ]
+[v ___lmul@multiplicand multiplicand `ul  1 p 4 6 ]
+"129
+} 0
 "46 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _drawBground drawBground `(v  1 e 1 0 ]
 {
@@ -337,8 +377,8 @@
 [v ___awmod@dividend dividend `i  1 p 2 13 ]
 "34
 } 0
-"166 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
+"156 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
 [v _Timer0_ISR Timer0_ISR `II(v  1 e 1 0 ]
 {
-"185
+"174
 } 0

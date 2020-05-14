@@ -12,6 +12,7 @@
 extern "C" {
 #endif
     struct controlSign {
+        uint8_t girar;
         uint8_t led;
         uint8_t ficha_Vpos;     //Posicion VERTICAL de la ficha que cae
         uint8_t ficha_Hpos;     //Posicion HORIZONTAL de la ficha que cae
@@ -22,7 +23,7 @@ extern "C" {
     };
     struct controlSign con;
 
-    uint16_t figuras[7][4]= {
+    uint8_t figuras[7][4]= {
         {0x2, 0x2, 0x3, 0x0},
         {0x3, 0x2, 0x2, 0x0},
         {0x1, 0x3, 0x2, 0x0},

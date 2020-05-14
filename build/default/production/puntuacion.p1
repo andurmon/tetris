@@ -3,18 +3,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./control.h: 14:     struct controlSign {
 [s S100 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S100 controlSign girar led ficha_Vpos ficha_Hpos ficha_actual derecha izquierda check_count ]
-"16 ./screen.h
-[; ;./screen.h: 16:     void addToScreen(void);
-[v _addToScreen `(v ~T0 @X0 0 ef ]
-"17 ./filas.h
-[; ;./filas.h: 17: void setFilas(uint16_t reg_value);
-[v _setFilas `(v ~T0 @X0 0 ef1`ui ]
-"18 ./columnas.h
-[; ;./columnas.h: 18:     void shiftBitColumna(uint8_t bit);
-[v _shiftBitColumna `(v ~T0 @X0 0 ef1`uc ]
 "16 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h: 16: extern void * memset(void *, int, size_t);
 [v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
+"75 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h: 75: extern int rand(void);
+[v _rand `(i ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -198,10 +192,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24 ./control.h
 [; ;./control.h: 24:     struct controlSign con;
 [v _con `S100 ~T0 @X0 1 e ]
-[v F1171 `uc ~T0 @X0 -> 4 `i t ]
+[v F1154 `uc ~T0 @X0 -> 4 `i t ]
 "26
 [; ;./control.h: 26:     uint8_t figuras[7][4]= {
-[v _figuras `F1171 ~T0 @X0 -> 7 `i e ]
+[v _figuras `F1154 ~T0 @X0 -> 7 `i e ]
 [i _figuras
 :U ..
 :U ..
@@ -278,153 +272,112 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `ui
 ..
 ]
-"17 screen.c
-[; ;screen.c: 17: void updateScreen(uint16_t screen[8]){
-[v _updateScreen `(v ~T0 @X0 1 ef1`*ui ]
+"13 puntuacion.c
+[; ;puntuacion.c: 13: void perdio(void){
+[v _perdio `(v ~T0 @X0 1 ef ]
 {
-[e :U _updateScreen ]
-[v _screen `*ui ~T0 @X0 1 r1 ]
+[e :U _perdio ]
 [f ]
-"18
-[; ;screen.c: 18:     int i=0;
+"14
+[; ;puntuacion.c: 14:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"20
-[; ;screen.c: 20:     addToScreen();
-[e ( _addToScreen ..  ]
-"22
-[; ;screen.c: 22:     for(i=0; i<=7;i++){
+"15
+[; ;puntuacion.c: 15:     for(i=0; i<8; i++){
 {
 [e = _i -> 0 `i ]
-[e $ <= _i -> 7 `i 102  ]
+[e $ < _i -> 8 `i 102  ]
 [e $U 103  ]
 [e :U 102 ]
 {
-"23
-[; ;screen.c: 23:        if(i == 0){
-[e $ ! == _i -> 0 `i 105  ]
+"16
+[; ;puntuacion.c: 16:         if((fondo[i] & 0x8000) != 0){
+[e $ ! != & *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux -> 32768 `ui -> -> 0 `i `ui 105  ]
 {
-"24
-[; ;screen.c: 24:             setFilas(~screen[i]);
-[e ( _setFilas (1 ~ *U + _screen * -> _i `x -> -> # *U _screen `i `x ]
-"25
-[; ;screen.c: 25:             shiftBitColumna(1);
-[e ( _shiftBitColumna (1 -> -> 1 `i `uc ]
-"26
-[; ;screen.c: 26:         }
+"17
+[; ;puntuacion.c: 17:             memset(ficha, 0, sizeof(ficha));
+[e ( _memset (3 , , -> &U _ficha `*v -> 0 `i -> # _ficha `ui ]
+"18
+[; ;puntuacion.c: 18:             memset(fondo, 0, sizeof(fondo));
+[e ( _memset (3 , , -> &U _fondo `*v -> 0 `i -> # _fondo `ui ]
+"19
+[; ;puntuacion.c: 19:             con.ficha_Vpos = 16;
+[e = . _con 2 -> -> 16 `i `uc ]
+"20
+[; ;puntuacion.c: 20:             con.ficha_actual = rand() % 7;
+[e = . _con 4 -> % ( _rand ..  -> 7 `i `uc ]
+"21
+[; ;puntuacion.c: 21:             break;
+[e $U 103  ]
+"22
+[; ;puntuacion.c: 22:         }
 }
-[e $U 106  ]
-"27
-[; ;screen.c: 27:         else{
 [e :U 105 ]
-{
-"28
-[; ;screen.c: 28:             setFilas(~screen[i]);
-[e ( _setFilas (1 ~ *U + _screen * -> _i `x -> -> # *U _screen `i `x ]
-"29
-[; ;screen.c: 29:             shiftBitColumna(0);
-[e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"30
-[; ;screen.c: 30:         }
-}
-[e :U 106 ]
-"31
-[; ;screen.c: 31:     }
+"23
+[; ;puntuacion.c: 23:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ <= _i -> 7 `i 102  ]
+[e $ < _i -> 8 `i 102  ]
 [e :U 103 ]
 }
-"32
-[; ;screen.c: 32: }
+"24
+[; ;puntuacion.c: 24: }
 [e :UE 101 ]
 }
-"39
-[; ;screen.c: 39: void addToScreen(void){
-[v _addToScreen `(v ~T0 @X0 1 ef ]
+"30
+[; ;puntuacion.c: 30: void sumaPuntos(void){
+[v _sumaPuntos `(v ~T0 @X0 1 ef ]
 {
-[e :U _addToScreen ]
+[e :U _sumaPuntos ]
 [f ]
-"40
-[; ;screen.c: 40:     int i=0;
+"31
+[; ;puntuacion.c: 31:     int i=0, j=0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"41
-[; ;screen.c: 41:     for(i=0; i<8; i++){
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+"32
+[; ;puntuacion.c: 32:     for (i=0; i<16; i++){
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 108  ]
-[e $U 109  ]
-[e :U 108 ]
+[e $ < _i -> 16 `i 107  ]
+[e $U 108  ]
+[e :U 107 ]
 {
-"42
-[; ;screen.c: 42:         pantalla[i] = ficha[i] | fondo[i];
-[e = *U + &U _pantalla * -> -> _i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _ficha * -> -> _i `ui `ux -> -> # *U &U _ficha `ui `ux *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux ]
-"43
-[; ;screen.c: 43:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 108  ]
-[e :U 109 ]
-}
-"44
-[; ;screen.c: 44: }
-[e :UE 107 ]
-}
-"46
-[; ;screen.c: 46: void drawBground(void){
-[v _drawBground `(v ~T0 @X0 1 ef ]
+"33
+[; ;puntuacion.c: 33:         for(j=0; j<8; j++){
 {
-[e :U _drawBground ]
-[f ]
-"47
-[; ;screen.c: 47:     int i=0;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-"48
-[; ;screen.c: 48:     for(i=0; i<8; i++){
+[e = _j -> 0 `i ]
+[e $ < _j -> 8 `i 110  ]
+[e $U 111  ]
+[e :U 110 ]
 {
-[e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 112  ]
-[e $U 113  ]
-[e :U 112 ]
+"34
+[; ;puntuacion.c: 34:            if( (fondo[i] & (1<<j)) == 0){
+[e $ ! == & *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux -> << -> 1 `i _j `ui -> -> 0 `i `ui 113  ]
 {
-"49
-[; ;screen.c: 49:         fondo[i] = fondo[i] | ficha[i];
-[e = *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux | *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux *U + &U _ficha * -> -> _i `ui `ux -> -> # *U &U _ficha `ui `ux ]
-"50
-[; ;screen.c: 50:     }
+"35
+[; ;puntuacion.c: 35:                break;
+[e $U 111  ]
+"36
+[; ;puntuacion.c: 36:            }
 }
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 112  ]
 [e :U 113 ]
+"37
+[; ;puntuacion.c: 37:         }
 }
-"51
-[; ;screen.c: 51: }
-[e :UE 111 ]
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 8 `i 110  ]
+[e :U 111 ]
 }
-"57
-[; ;screen.c: 57: void drawFigure(void){
-[v _drawFigure `(v ~T0 @X0 1 ef ]
-{
-[e :U _drawFigure ]
-[f ]
-"58
-[; ;screen.c: 58:     memset(ficha, 0, sizeof(ficha));
-[e ( _memset (3 , , -> &U _ficha `*v -> 0 `i -> # _ficha `ui ]
-"59
-[; ;screen.c: 59:     ficha[con.ficha_Hpos ] = figuras[con.ficha_actual][0] << (con.ficha_Vpos-1);
-[e = *U + &U _ficha * -> . _con 3 `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"60
-[; ;screen.c: 60:     ficha[con.ficha_Hpos +1] = figuras[con.ficha_actual][1] << (con.ficha_Vpos-1);
-[e = *U + &U _ficha * -> -> + -> . _con 3 `i -> 1 `i `ui `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"61
-[; ;screen.c: 61:     ficha[con.ficha_Hpos +2] = figuras[con.ficha_actual][2] << (con.ficha_Vpos-1);
-[e = *U + &U _ficha * -> -> + -> . _con 3 `i -> 2 `i `ui `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 2 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"62
-[; ;screen.c: 62:     ficha[con.ficha_Hpos +3] = figuras[con.ficha_actual][3] << (con.ficha_Vpos-1);
-[e = *U + &U _ficha * -> -> + -> . _con 3 `i -> 3 `i `ui `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 3 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"63
-[; ;screen.c: 63: }
-[e :UE 115 ]
+"38
+[; ;puntuacion.c: 38:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 16 `i 107  ]
+[e :U 108 ]
+}
+"39
+[; ;puntuacion.c: 39: }
+[e :UE 106 ]
 }

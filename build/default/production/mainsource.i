@@ -2125,6 +2125,7 @@ void disableFilas(void);
 # 1 "./control.h" 1
 # 14 "./control.h"
     struct controlSign {
+        uint8_t girar;
         uint8_t led;
         uint8_t ficha_Vpos;
         uint8_t ficha_Hpos;
@@ -2135,7 +2136,7 @@ void disableFilas(void);
     };
     struct controlSign con;
 
-    uint16_t figuras[7][4]= {
+    uint8_t figuras[7][4]= {
         {0x2, 0x2, 0x3, 0x0},
         {0x3, 0x2, 0x2, 0x0},
         {0x1, 0x3, 0x2, 0x0},
@@ -2152,6 +2153,18 @@ void disableFilas(void);
     uint16_t ficha[8] = {0x0000};
 # 34 "mainsource.c" 2
 
+# 1 "./colisiones.h" 1
+# 15 "./colisiones.h"
+void checkBottom(void);
+void checkColission(void);
+# 35 "mainsource.c" 2
+
+# 1 "./puntuacion.h" 1
+# 15 "./puntuacion.h"
+    void perdio(void);
+    void sumaPuntos(void);
+# 36 "mainsource.c" 2
+
 
 
 
@@ -2167,24 +2180,61 @@ int main(int argc, char** argv) {
 
 
     int i=0, j=5;
+    con.girar =0;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
     srand(1);
     con.ficha_actual = rand() % 7;
 
-
     while(1){
 
         checkCount();
-
         updateScreen(pantalla);
 
     }
     return (0);
 }
+
 void leerEntradas(void){
 
-    int i =0;
+    int i=0, j=0, k=0;
+    uint8_t aux[4]={0x0000};
+    uint8_t mask = 0x00;
+    if(con.girar){
+        con.girar=0;
+
+        for(i=0; i<4; i++){
+            for(j=0; j<4; j++){
+                mask = (figuras[con.ficha_actual][j] >> i) & 0x01;
+                aux[i] = aux[i] | (mask<<(3-j));
+            }
+        }
+
+
+
+
+        while(k<2){
+            for(i=0; i<4; i++){
+                if( aux[i] & 0x01 ){
+                    break;
+                }
+                if(i==3){
+                    for(j=0; j<4; j++){
+                        aux[j] = aux[j]>>1;
+                    }
+                }
+            }
+            k++;
+        }
+
+
+        for(i=0; i<4; i++){
+            figuras[con.ficha_actual][i] = aux[i];
+        }
+        drawFigure();
+        return;
+    }
+
     if(con.derecha == 1 && con.ficha_Hpos<4){
         con.derecha = 0;
         for(i=(con.ficha_Hpos+4); i>con.ficha_Hpos; i--){
@@ -2208,6 +2258,7 @@ void leerEntradas(void){
         return;
     }
 }
+
 void checkCount(void){
     if(con.check_count == 1){
         int i=0, j=0;
@@ -2223,63 +2274,13 @@ void checkCount(void){
             con.led= ~con.led;
             con.ficha_Vpos--;
 
-
-
-
-            if(con.ficha_Vpos==0){
-                drawBground();
-                con.ficha_Vpos = 16;
-                con.ficha_actual = rand() % 7;
-            }
-
-
-
-
-
-
-            for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-                if((ficha[i]>>1 & fondo[i]) != 0){
-                    drawBground();
-                    con.ficha_Vpos = 16;
-                    con.ficha_actual = rand() % 7;
-                    break;
-                }
-            }
-
-
-
+            checkBottom();
+            checkColission();
             drawFigure();
 
-
-
-
-
-            for(i=0; i<8; i++){
-                if((fondo[i] & 0x8000) != 0){
-                    memset(ficha, 0, sizeof(ficha));
-                    memset(fondo, 0, sizeof(fondo));
-                    con.ficha_Vpos = 16;
-                    con.ficha_actual = rand() % 7;
-                    break;
-                }
-
-            }
-
-
-
-
-
-            for (i=0; i<16; i++){
-                for(j=0; j<8; j++){
-                   if( (fondo[i] & (1<<j)) == 0){
-                       break;
-                   }
-                }
-
-            }
-
+            perdio();
+            sumaPuntos();
         }
-
     }
 }
 
@@ -2298,8 +2299,7 @@ void __attribute__((picinterrupt(("")))) Timer0_ISR(void){
         con.derecha = 0;
         con.izquierda = 1;
     }
-    if(PORTBbits.RB4 == 0){
-        con.derecha = 0;
-        con.izquierda = 1;
+    if(PORTBbits.RB3== 0){
+        con.girar = 1;
     }
 }

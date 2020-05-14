@@ -2103,6 +2103,7 @@ void disableFilas(void);
 # 1 "./control.h" 1
 # 14 "./control.h"
     struct controlSign {
+        uint8_t girar;
         uint8_t led;
         uint8_t ficha_Vpos;
         uint8_t ficha_Hpos;
@@ -2113,7 +2114,7 @@ void disableFilas(void);
     };
     struct controlSign con;
 
-    uint16_t figuras[7][4]= {
+    uint8_t figuras[7][4]= {
         {0x2, 0x2, 0x3, 0x0},
         {0x3, 0x2, 0x2, 0x0},
         {0x1, 0x3, 0x2, 0x0},

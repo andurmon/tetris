@@ -9,6 +9,8 @@
       <itemPath>columnas.h</itemPath>
       <itemPath>screen.h</itemPath>
       <itemPath>control.h</itemPath>
+      <itemPath>colisiones.h</itemPath>
+      <itemPath>puntuacion.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -23,6 +25,8 @@
       <itemPath>filas.c</itemPath>
       <itemPath>columnas.c</itemPath>
       <itemPath>screen.c</itemPath>
+      <itemPath>colisiones.c</itemPath>
+      <itemPath>puntuacion.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

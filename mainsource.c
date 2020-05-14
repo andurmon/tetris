@@ -32,6 +32,8 @@
 #include "filas.h"
 #include "screen.h"
 #include "control.h"
+#include "colisiones.h"
+#include "puntuacion.h"
 #include <pic16f877a.h>
 
 #define _XTAL_FREQ 4000000
@@ -47,24 +49,61 @@ int main(int argc, char** argv) {
     //init_interrupt();
     
     int i=0, j=5;
+    con.girar =0;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
     srand(1);
     con.ficha_actual = rand() % 7;
-    //drawBground();
-    
+
     while(1){
-        //srand(TMR0);
+        
         checkCount();
-             
         updateScreen(pantalla);
         
     }
     return (EXIT_SUCCESS); 
 }
+
 void leerEntradas(void){
     //leer Entradas
-    int i =0;
+    int i=0, j=0, k=0;
+    uint8_t aux[4]={0x0000};
+    uint8_t mask = 0x00;
+    if(con.girar){
+        con.girar=0;
+        
+        for(i=0; i<4; i++){
+            for(j=0; j<4; j++){
+                mask = (figuras[con.ficha_actual][j] >> i) & 0x01;
+                aux[i] = aux[i] | (mask<<(3-j));
+            }
+        }
+        
+        /*
+         * Ajustar "cero"
+         */
+        while(k<2){
+            for(i=0; i<4; i++){
+                if( aux[i] & 0x01 ){
+                    break;
+                }
+                if(i==3){
+                    for(j=0; j<4; j++){
+                        aux[j] = aux[j]>>1;
+                    }
+                }
+            }
+            k++;
+        }
+
+        
+        for(i=0; i<4; i++){
+            figuras[con.ficha_actual][i] = aux[i];
+        }
+        drawFigure();
+        return;
+    }
+    
     if(con.derecha == 1 && con.ficha_Hpos<4){
         con.derecha = 0;
         for(i=(con.ficha_Hpos+4); i>con.ficha_Hpos; i--){
@@ -88,6 +127,7 @@ void leerEntradas(void){
         return;
     }
 }
+
 void checkCount(void){
     if(con.check_count == 1){ 
         int i=0, j=0;
@@ -103,63 +143,13 @@ void checkCount(void){
             con.led= ~con.led;
             con.ficha_Vpos--;
             
-            /*
-             *  Verifica si la figura puede o no bajar mas
-             */
-            if(con.ficha_Vpos==0){
-                drawBground();
-                con.ficha_Vpos = 16;
-                con.ficha_actual = rand() % 7;
-            }
-            
-            /*
-             * Este for se encarga de verificar si la figura se choca con el
-             * fondo o no. Lo hace evaluando si la siguiente posicion vertical
-             * coincide con un pedazo del fondo
-             */
-            for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-                if((ficha[i]>>1 & fondo[i]) != 0){
-                    drawBground();
-                    con.ficha_Vpos = 16;
-                    con.ficha_actual = rand() % 7;
-                    break;
-                }
-            }
-
-           
-            
+            checkBottom();
+            checkColission();
             drawFigure();
             
-            /*
-             * Este for permite saber si el usuario ha perdido, comparando el
-             * bit de mas arriba del tablero.
-             */
-            for(i=0; i<8; i++){
-                if((fondo[i] & 0x8000) != 0){
-                    memset(ficha, 0, sizeof(ficha));
-                    memset(fondo, 0, sizeof(fondo));
-                    con.ficha_Vpos = 16;
-                    con.ficha_actual = rand() % 7;
-                    break;
-                }
-                
-            }
-            
-            /*
-             * Con este for se busca que pueda detectar si se lleno toda una
-             * fila para borrarla y bajar las demás.
-             */
-            for (i=0; i<16; i++){
-                for(j=0; j<8; j++){
-                   if( (fondo[i] & (1<<j)) == 0){
-                       break;
-                   } 
-                }
-                
-            }
-            
+            perdio();
+            sumaPuntos();
         }
-        
     }
 }
 
@@ -178,9 +168,8 @@ void __interrupt() Timer0_ISR(void){
         con.derecha = 0;
         con.izquierda = 1;
     }
-    if(PORTBbits.RB4 == 0){
-        con.derecha = 0;
-        con.izquierda = 1;
+    if(PORTBbits.RB3== 0){
+        con.girar = 1;
     }
 }
 

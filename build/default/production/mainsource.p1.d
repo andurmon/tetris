@@ -4,4 +4,6 @@ init.h  \
 columnas.h  \
 filas.h  \
 screen.h  \
-control.h 
+control.h  \
+colisiones.h  \
+puntuacion.h 
