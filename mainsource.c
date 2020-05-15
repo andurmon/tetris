@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 #include "init.h"
 #include "columnas.h"
 #include "filas.h"
@@ -52,6 +53,7 @@ int main(int argc, char** argv) {
     con.girar =0;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
+    con.puntaje = 0;
     srand(1);
     con.ficha_actual = rand() % 7;
 
@@ -82,7 +84,7 @@ void leerEntradas(void){
         /*
          * Ajustar "cero"
          */
-        while(k<2){
+        while(k<3){
             for(i=0; i<4; i++){
                 if( aux[i] & 0x01 ){
                     break;
@@ -96,7 +98,13 @@ void leerEntradas(void){
             k++;
         }
 
-        
+        if((aux[0] & 0xF) == 0){
+            aux[0] = aux[1];
+            aux[1] = aux[2];
+            aux[2] = aux[3];
+            aux[3] = 0x0;
+        }
+
         for(i=0; i<4; i++){
             figuras[con.ficha_actual][i] = aux[i];
         }
@@ -104,12 +112,10 @@ void leerEntradas(void){
         return;
     }
     
-    if(con.derecha == 1 && con.ficha_Hpos<4){
+    if(con.derecha == 1 ){
         con.derecha = 0;
-        for(i=(con.ficha_Hpos+4); i>con.ficha_Hpos; i--){
-            if((ficha[i] & fondo[i+1]) != 0){
-                return;
-            }
+        if(checkColission_R() | checkRight()){
+            return;
         }
         con.ficha_Hpos++;
         drawFigure();
@@ -117,10 +123,8 @@ void leerEntradas(void){
     }
     else if(con.izquierda == 1 && con.ficha_Hpos>0){
         con.izquierda = 0;
-        for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-            if((ficha[i] & fondo[i-1]) != 0){
-                return;
-            }
+        if(checkColission_L()==true){
+            return;
         }
         con.ficha_Hpos--;
         drawFigure();
@@ -144,7 +148,7 @@ void checkCount(void){
             con.ficha_Vpos--;
             
             checkBottom();
-            checkColission();
+            checkColission_D();
             drawFigure();
             
             perdio();

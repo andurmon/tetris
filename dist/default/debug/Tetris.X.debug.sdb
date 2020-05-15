@@ -67,11 +67,11 @@
 [v _sumaPuntos sumaPuntos `(v  1 e 1 0 ]
 "17 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _updateScreen updateScreen `(v  1 e 1 0 ]
-"43
+"39
 [v _addToScreen addToScreen `(v  1 e 1 0 ]
-"50
+"46
 [v _drawBground drawBground `(v  1 e 1 0 ]
-"61
+"57
 [v _drawFigure drawFigure `(v  1 e 1 0 ]
 [s S281 controlSign 10 `uc 1 girar 1 0 `uc 1 led 1 1 `uc 1 ficha_Vpos 1 2 `uc 1 ficha_Hpos 1 3 `uc 1 ficha_actual 1 4 `uc 1 derecha 1 5 `uc 1 izquierda 1 6 `uc 1 check_count 1 7 `ui 1 puntaje 2 8 ]
 "25 C:\Users\ASUS\MPLABXProjects\Tetris.X/control.h
@@ -207,7 +207,7 @@
 "17
 [v updateScreen@screen screen `*.4ui  1 a 1 wreg ]
 [v updateScreen@screen screen `*.4ui  1 a 1 6 ]
-"36
+"32
 } 0
 "33 C:\Users\ASUS\MPLABXProjects\Tetris.X\columnas.c
 [v _shiftBitColumna shiftBitColumna `(v  1 e 1 0 ]
@@ -236,7 +236,7 @@
 [v _setFilas setFilas `(v  1 e 1 0 ]
 {
 "20
-[v setFilas@i i `i  1 a 2 10 ]
+[v setFilas@i i `i  1 a 2 0 ]
 "19
 [v setFilas@reg_value reg_value `ui  1 p 2 2 ]
 "26
@@ -246,12 +246,12 @@
 {
 "17
 } 0
-"43 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
+"39 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _addToScreen addToScreen `(v  1 e 1 0 ]
 {
-"44
+"40
 [v addToScreen@i i `i  1 a 2 0 ]
-"48
+"44
 } 0
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\rand.c
 [v _srand srand `(v  1 e 1 0 ]
@@ -288,7 +288,7 @@
 [v _checkCount checkCount `(v  1 e 1 0 ]
 {
 "137
-[v checkCount@j j `i  1 a 2 30 ]
+[v checkCount@j j `i  1 a 2 31 ]
 "158
 } 0
 "30 C:\Users\ASUS\MPLABXProjects\Tetris.X\puntuacion.c
@@ -305,7 +305,7 @@
 [v _perdio perdio `(v  1 e 1 0 ]
 {
 "14
-[v perdio@i i `i  1 a 2 20 ]
+[v perdio@i i `i  1 a 2 21 ]
 "24
 } 0
 "69 C:\Users\ASUS\MPLABXProjects\Tetris.X\mainsource.c
@@ -321,10 +321,10 @@
 [v leerEntradas@mask mask `uc  1 a 1 12 ]
 "133
 } 0
-"61 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
+"57 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _drawFigure drawFigure `(v  1 e 1 0 ]
 {
-"67
+"63
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\memset.c
 [v _memset memset `(*.4v  1 e 1 0 ]
@@ -349,21 +349,21 @@
 [v _checkColission_R checkColission_R `(a  1 e 1 0 ]
 {
 "52
-[v checkColission_R@i i `i  1 a 2 10 ]
+[v checkColission_R@i i `i  1 a 2 0 ]
 "59
 } 0
 "61
 [v _checkColission_L checkColission_L `(a  1 e 1 0 ]
 {
 "62
-[v checkColission_L@i i `i  1 a 2 10 ]
+[v checkColission_L@i i `i  1 a 2 0 ]
 "69
 } 0
 "38
 [v _checkColission_D checkColission_D `(v  1 e 1 0 ]
 {
 "39
-[v checkColission_D@i i `i  1 a 2 25 ]
+[v checkColission_D@i i `i  1 a 2 26 ]
 "49
 } 0
 "17
@@ -386,19 +386,19 @@
 [v ___lmul@multiplicand multiplicand `ul  1 p 4 6 ]
 "129
 } 0
-"50 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
+"46 C:\Users\ASUS\MPLABXProjects\Tetris.X\screen.c
 [v _drawBground drawBground `(v  1 e 1 0 ]
 {
-"51
+"47
 [v drawBground@i i `i  1 a 2 0 ]
-"55
+"51
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v ___awmod@sign sign `uc  1 a 1 16 ]
-[v ___awmod@counter counter `uc  1 a 1 15 ]
+[v ___awmod@sign sign `uc  1 a 1 17 ]
+[v ___awmod@counter counter `uc  1 a 1 16 ]
 "5
 [v ___awmod@divisor divisor `i  1 p 2 11 ]
 [v ___awmod@dividend dividend `i  1 p 2 13 ]

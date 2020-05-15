@@ -20,6 +20,7 @@ extern "C" {
         uint8_t derecha;
         uint8_t izquierda;
         uint8_t check_count;
+        uint16_t puntaje;
     };
     struct controlSign con;
 

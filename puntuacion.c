@@ -29,11 +29,14 @@ void perdio(void){
 */
 void sumaPuntos(void){
     int i=0, j=0;
+    uint8_t aux = 1;
     for (i=0; i<16; i++){
         for(j=0; j<8; j++){
-           if( (fondo[i] & (1<<j)) == 0){
-               break;
-           } 
-        }   
+            aux = aux & fondo[j]>>i;
+        }
+        if(aux == 1){
+            //Sume puntos
+        }
     }
+    
 }

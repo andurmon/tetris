@@ -2111,6 +2111,7 @@ void disableFilas(void);
         uint8_t derecha;
         uint8_t izquierda;
         uint8_t check_count;
+        uint16_t puntaje;
     };
     struct controlSign con;
 
@@ -2152,12 +2153,16 @@ void updateScreen(uint16_t screen[8]){
 
     for(i=0; i<=7;i++){
        if(i == 0){
+
             setFilas(~screen[i]);
             shiftBitColumna(1);
+
         }
         else{
+
             setFilas(~screen[i]);
             shiftBitColumna(0);
+
         }
     }
 }

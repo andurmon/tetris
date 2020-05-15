@@ -1,4 +1,4 @@
-# 1 "colisiones.c"
+# 1 "screen.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "colisiones.c" 2
+# 1 "screen.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1720,7 +1720,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 1 "colisiones.c" 2
+# 1 "screen.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
 
@@ -1819,7 +1819,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 2 "colisiones.c" 2
+# 2 "screen.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -1904,7 +1904,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 3 "colisiones.c" 2
+# 3 "screen.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2039,7 +2039,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 4 "colisiones.c" 2
+# 4 "screen.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
 # 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
@@ -2072,10 +2072,16 @@ extern char * strchr(const char *, int);
 extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
-# 5 "colisiones.c" 2
+# 5 "screen.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdbool.h" 1 3
-# 6 "colisiones.c" 2
+# 1 "./init.h" 1
+# 14 "./init.h"
+    void init_pines_fil(void);
+    void init_pines_col(void);
+    void init_pines(void);
+    void init_timer(void);
+    void init_interrupt(void);
+# 6 "screen.c" 2
 
 # 1 "./columnas.h" 1
 # 15 "./columnas.h"
@@ -2083,7 +2089,7 @@ extern char * strrichr(const char *, int);
     void shiftClock_Col(void);
     void setColumnas(uint8_t reg_value);
     void shiftBitColumna(uint8_t bit);
-# 7 "colisiones.c" 2
+# 7 "screen.c" 2
 
 # 1 "./filas.h" 1
 # 15 "./filas.h"
@@ -2092,7 +2098,7 @@ void shiftClock_Fil(void);
 void setFilas(uint16_t reg_value);
 void enableFilas(void);
 void disableFilas(void);
-# 8 "colisiones.c" 2
+# 8 "screen.c" 2
 
 # 1 "./control.h" 1
 # 14 "./control.h"
@@ -2124,7 +2130,7 @@ void disableFilas(void);
     uint16_t pantalla[8] = {0x0000};
     uint16_t fondo[8] = {0x0000};
     uint16_t ficha[8] = {0x0000};
-# 9 "colisiones.c" 2
+# 9 "screen.c" 2
 
 # 1 "./screen.h" 1
 # 15 "./screen.h"
@@ -2132,72 +2138,58 @@ void disableFilas(void);
     void addToScreen(void);
     void drawBground(void);
     void drawFigure(void);
-# 10 "colisiones.c" 2
-
-# 1 "./colisiones.h" 1
-# 15 "./colisiones.h"
-void checkBottom(void);
-_Bool checkRight(void);
-void checkColission_D(void);
-_Bool checkColission_R(void);
-_Bool checkColission_L(void);
-# 11 "colisiones.c" 2
+# 10 "screen.c" 2
 
 
 
 
 
 
-void checkBottom(void){
-    if(con.ficha_Vpos==0){
-        drawBground();
-        con.ficha_Vpos = 16;
-        con.ficha_Hpos = 2;
-        con.ficha_actual = rand() % 7;
-    }
-}
 
-_Bool checkRight(void){
-    if(ficha[7]!=0){
-        return 1;
-    }
-    return 0;
-}
-
-
-
-
-
-
-void checkColission_D(void){
-    int i = 0;
-    for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-        if((ficha[i]>>1 & fondo[i]) != 0){
-            drawBground();
-            con.ficha_Vpos = 16;
-            con.ficha_Hpos = 2;
-            con.ficha_actual = rand() % 7;
-            break;
-        }
-    }
-}
-
-_Bool checkColission_R(void){
+void updateScreen(uint16_t screen[8]){
     int i=0;
-    for(i=(con.ficha_Hpos+3); i>=con.ficha_Hpos; i--){
-        if((ficha[i] & fondo[i+1]) != 0){
-            return 1;
+
+    addToScreen();
+
+    for(i=0; i<=7;i++){
+       if(i == 0){
+            setFilas(~screen[i]);
+            shiftBitColumna(1);
+        }
+        else{
+            setFilas(~screen[i]);
+            shiftBitColumna(0);
         }
     }
-    return 0;
 }
 
-_Bool checkColission_L(void){
+
+
+
+
+
+void addToScreen(void){
     int i=0;
-    for(i=con.ficha_Hpos; i<(con.ficha_Hpos+4); i++){
-        if((ficha[i] & fondo[i-1]) != 0){
-            return 1;
-        }
+    for(i=0; i<8; i++){
+        pantalla[i] = ficha[i] | fondo[i];
     }
-    return 0;
+}
+
+void drawBground(void){
+    int i=0;
+    for(i=0; i<8; i++){
+        fondo[i] = fondo[i] | ficha[i];
+    }
+}
+
+
+
+
+
+void drawFigure(void){
+    memset(ficha, 0, sizeof(ficha));
+    ficha[con.ficha_Hpos ] = figuras[con.ficha_actual][0] << (con.ficha_Vpos-1);
+    ficha[con.ficha_Hpos +1] = figuras[con.ficha_actual][1] << (con.ficha_Vpos-1);
+    ficha[con.ficha_Hpos +2] = figuras[con.ficha_actual][2] << (con.ficha_Vpos-1);
+    ficha[con.ficha_Hpos +3] = figuras[con.ficha_actual][3] << (con.ficha_Vpos-1);
 }

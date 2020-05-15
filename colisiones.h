@@ -13,7 +13,10 @@ extern "C" {
 #endif
 
 void checkBottom(void);
-void checkColission(void);
+bool checkRight(void);
+void checkColission_D(void);
+bool checkColission_R(void);
+bool checkColission_L(void);
 
 
 #ifdef	__cplusplus

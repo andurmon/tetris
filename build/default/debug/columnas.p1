@@ -1,14 +1,18 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"14 ./control.h
-[; ;./control.h: 14:     struct controlSign {
-[s S100 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `ui 1 ]
-[n S100 controlSign girar led ficha_Vpos ficha_Hpos ficha_actual derecha izquierda check_count puntaje ]
-"16 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h: 16: extern void * memset(void *, int, size_t);
-[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
-"75 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdlib.h: 75: extern int rand(void);
-[v _rand `(i ~T0 @X0 0 ef ]
+"346 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 346:     struct {
+[s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S17 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"345
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 345: typedef union {
+[u S16 `S17 1 ]
+[n S16 . . ]
+"357
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 357: extern volatile PORTDbits_t PORTDbits __attribute__((address(0x008)));
+[v _PORTDbits `VS16 ~T0 @X0 0 e@8 ]
+"15 ./filas.h
+[; ;./filas.h: 15: void latchClock_Fil(void);
+[v _latchClock_Fil `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -189,199 +193,114 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"25 ./control.h
-[; ;./control.h: 25:     struct controlSign con;
-[v _con `S100 ~T0 @X0 1 e ]
-[v F1155 `uc ~T0 @X0 -> 4 `i t ]
-"27
-[; ;./control.h: 27:     uint8_t figuras[7][4]= {
-[v _figuras `F1155 ~T0 @X0 -> 7 `i e ]
-[i _figuras
-:U ..
-:U ..
--> -> 2 `i `uc
--> -> 2 `i `uc
--> -> 3 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 3 `i `uc
--> -> 2 `i `uc
--> -> 2 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 1 `i `uc
--> -> 3 `i `uc
--> -> 2 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 2 `i `uc
--> -> 3 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 1 `i `uc
--> -> 1 `i `uc
--> -> 1 `i `uc
--> -> 1 `i `uc
-..
-:U ..
--> -> 3 `i `uc
--> -> 3 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 1 `i `uc
--> -> 3 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
-..
-..
-]
-"38
-[; ;./control.h: 38:     uint32_t timerCount = 0;
-[v _timerCount `ul ~T0 @X0 1 e ]
-[i _timerCount
--> -> -> 0 `i `l `ul
-]
-"39
-[; ;./control.h: 39:     uint16_t pantalla[8] = {0x0000};
-[v _pantalla `ui ~T0 @X0 -> 8 `i e ]
-[i _pantalla
-:U ..
--> -> 0 `i `ui
-..
-]
-"40
-[; ;./control.h: 40:     uint16_t fondo[8] = {0x0000};
-[v _fondo `ui ~T0 @X0 -> 8 `i e ]
-[i _fondo
-:U ..
--> -> 0 `i `ui
-..
-]
-"41
-[; ;./control.h: 41:     uint16_t ficha[8] = {0x0000};
-[v _ficha `ui ~T0 @X0 -> 8 `i e ]
-[i _ficha
-:U ..
--> -> 0 `i `ui
-..
-]
-"13 puntuacion.c
-[; ;puntuacion.c: 13: void perdio(void){
-[v _perdio `(v ~T0 @X0 1 ef ]
+"8 columnas.c
+[; ;columnas.c: 8: void latchClock_Col(void){
+[v _latchClock_Col `(v ~T0 @X0 1 ef ]
 {
-[e :U _perdio ]
+[e :U _latchClock_Col ]
+[f ]
+"9
+[; ;columnas.c: 9:     PORTDbits.RD6 = 1;
+[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
+"10
+[; ;columnas.c: 10:     PORTDbits.RD6 = 0;
+[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
+"11
+[; ;columnas.c: 11: }
+[e :UE 100 ]
+}
+"13
+[; ;columnas.c: 13: void shiftClock_Col(void){
+[v _shiftClock_Col `(v ~T0 @X0 1 ef ]
+{
+[e :U _shiftClock_Col ]
 [f ]
 "14
-[; ;puntuacion.c: 14:     int i = 0;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
+[; ;columnas.c: 14:     PORTDbits.RD7 = 0;
+[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
 "15
-[; ;puntuacion.c: 15:     for(i=0; i<8; i++){
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 102  ]
-[e $U 103  ]
-[e :U 102 ]
-{
+[; ;columnas.c: 15:     PORTDbits.RD7 = 1;
+[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
 "16
-[; ;puntuacion.c: 16:         if((fondo[i] & 0x8000) != 0){
-[e $ ! != & *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux -> 32768 `ui -> -> 0 `i `ui 105  ]
-{
+[; ;columnas.c: 16:     PORTDbits.RD7 = 0;
+[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
 "17
-[; ;puntuacion.c: 17:             memset(ficha, 0, sizeof(ficha));
-[e ( _memset (3 , , -> &U _ficha `*v -> 0 `i -> # _ficha `ui ]
-"18
-[; ;puntuacion.c: 18:             memset(fondo, 0, sizeof(fondo));
-[e ( _memset (3 , , -> &U _fondo `*v -> 0 `i -> # _fondo `ui ]
-"19
-[; ;puntuacion.c: 19:             con.ficha_Vpos = 16;
-[e = . _con 2 -> -> 16 `i `uc ]
-"20
-[; ;puntuacion.c: 20:             con.ficha_actual = rand() % 7;
-[e = . _con 4 -> % ( _rand ..  -> 7 `i `uc ]
-"21
-[; ;puntuacion.c: 21:             break;
-[e $U 103  ]
-"22
-[; ;puntuacion.c: 22:         }
-}
-[e :U 105 ]
-"23
-[; ;puntuacion.c: 23:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 102  ]
-[e :U 103 ]
-}
-"24
-[; ;puntuacion.c: 24: }
+[; ;columnas.c: 17: }
 [e :UE 101 ]
 }
-"30
-[; ;puntuacion.c: 30: void sumaPuntos(void){
-[v _sumaPuntos `(v ~T0 @X0 1 ef ]
+"19
+[; ;columnas.c: 19: void setColumnas(uint8_t reg_value){
+[v _setColumnas `(v ~T0 @X0 1 ef1`uc ]
 {
-[e :U _sumaPuntos ]
+[e :U _setColumnas ]
+[v _reg_value `uc ~T0 @X0 1 r1 ]
 [f ]
-"31
-[; ;puntuacion.c: 31:     int i=0, j=0;
+"20
+[; ;columnas.c: 20:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[v _j `i ~T0 @X0 1 a ]
-[e = _j -> 0 `i ]
-"32
-[; ;puntuacion.c: 32:     uint8_t aux = 1;
-[v _aux `uc ~T0 @X0 1 a ]
-[e = _aux -> -> 1 `i `uc ]
-"33
-[; ;puntuacion.c: 33:     for (i=0; i<16; i++){
+"21
+[; ;columnas.c: 21:     uint8_t indice = (1<<2);
+[v _indice `uc ~T0 @X0 1 a ]
+[e = _indice -> << -> 1 `i -> 2 `i `uc ]
+"22
+[; ;columnas.c: 22:     uint8_t valor = reg_value & indice;
+[v _valor `uc ~T0 @X0 1 a ]
+[e = _valor -> & -> _reg_value `i -> _indice `i `uc ]
+"23
+[; ;columnas.c: 23:     for(i=0;i<8;i++){
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 107  ]
-[e $U 108  ]
-[e :U 107 ]
+[e $ < _i -> 8 `i 103  ]
+[e $U 104  ]
+[e :U 103 ]
 {
-"34
-[; ;puntuacion.c: 34:         for(j=0; j<8; j++){
-{
-[e = _j -> 0 `i ]
-[e $ < _j -> 8 `i 110  ]
-[e $U 111  ]
-[e :U 110 ]
-{
-"35
-[; ;puntuacion.c: 35:             aux = aux & fondo[j]>>i;
-[e = _aux -> & -> _aux `ui >> *U + &U _fondo * -> -> _j `ui `ux -> -> # *U &U _fondo `ui `ux _i `uc ]
-"36
-[; ;puntuacion.c: 36:         }
-}
-[e ++ _j -> 1 `i ]
-[e $ < _j -> 8 `i 110  ]
-[e :U 111 ]
-}
-"37
-[; ;puntuacion.c: 37:         if(aux == 1){
-[e $ ! == -> _aux `i -> 1 `i 113  ]
-{
-"39
-[; ;puntuacion.c: 39:         }
-}
-[e :U 113 ]
-"40
-[; ;puntuacion.c: 40:     }
+"24
+[; ;columnas.c: 24:         valor = (reg_value & (1<<i) )>>i;
+[e = _valor -> >> & -> _reg_value `i << -> 1 `i _i _i `uc ]
+"25
+[; ;columnas.c: 25:         PORTDbits.RD4 = valor;
+[e = . . _PORTDbits 0 4 _valor ]
+"26
+[; ;columnas.c: 26:         shiftClock_Col();
+[e ( _shiftClock_Col ..  ]
+"27
+[; ;columnas.c: 27:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 107  ]
-[e :U 108 ]
+[e $ < _i -> 8 `i 103  ]
+[e :U 104 ]
 }
-"42
-[; ;puntuacion.c: 42: }
+"28
+[; ;columnas.c: 28:     latchClock_Col();
+[e ( _latchClock_Col ..  ]
+"29
+[; ;columnas.c: 29:     return;
+[e $UE 102  ]
+"30
+[; ;columnas.c: 30: }
+[e :UE 102 ]
+}
+"33
+[; ;columnas.c: 33: void shiftBitColumna(uint8_t bit){
+[v _shiftBitColumna `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _shiftBitColumna ]
+[v _bit `uc ~T0 @X0 1 r1 ]
+[f ]
+"34
+[; ;columnas.c: 34:     PORTDbits.RD4= bit & 0x01;
+[e = . . _PORTDbits 0 4 -> & -> _bit `i -> 1 `i `uc ]
+"35
+[; ;columnas.c: 35:     shiftClock_Col();
+[e ( _shiftClock_Col ..  ]
+"36
+[; ;columnas.c: 36:     latchClock_Col();
+[e ( _latchClock_Col ..  ]
+"37
+[; ;columnas.c: 37:     latchClock_Fil();
+[e ( _latchClock_Fil ..  ]
+"38
+[; ;columnas.c: 38: }
 [e :UE 106 ]
 }

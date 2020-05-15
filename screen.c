@@ -21,12 +21,16 @@ void updateScreen(uint16_t screen[8]){
     
     for(i=0; i<=7;i++){
        if(i == 0){
+            //setColumnas(0x00);
             setFilas(~screen[i]);
             shiftBitColumna(1);
+            //setColumnas(1>>i);
         }
         else{
+            //setColumnas(0x00);
             setFilas(~screen[i]);
             shiftBitColumna(0);
+            //setColumnas(1>>i);
         }  
     }
 }
