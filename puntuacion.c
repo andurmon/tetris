@@ -36,6 +36,8 @@ void sumaPuntos(void){
         }
         if(aux == 1){
             //Sume puntos
+            //borre fila y baje las demas
+            
         }
     }
     

@@ -1722,14 +1722,61 @@ extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
 # 1 "init.c" 2
 
+# 1 "./init.h" 1
+# 14 "./init.h"
+    void init_pines_LCD(void);
+    void init_pines_fil(void);
+    void init_pines_col(void);
+    void init_pines(void);
+    void init_timer(void);
+    void init_interrupt(void);
+    void init_pines_in(void);
+# 2 "init.c" 2
 
+
+
+void init_pines(void){
+    init_pines_LCD();
+    init_pines_fil();
+    init_pines_col();
+    init_pines_in();
+}
 
 void init_pines_in(void){
     TRISBbits.TRISB5 = 1;
     TRISBbits.TRISB4 = 1;
     TRISBbits.TRISB3 = 1;
+}
 
+void init_pines_LCD(void){
 
+    ADCON1 = 0x7;
+
+    TRISAbits.TRISA0 = 0;
+    TRISAbits.TRISA1 = 0;
+    TRISAbits.TRISA2 = 0;
+    TRISAbits.TRISA3 = 0;
+    TRISAbits.TRISA4 = 0;
+    TRISAbits.TRISA5 = 0;
+    TRISEbits.TRISE0 = 0;
+    TRISEbits.TRISE1 = 0;
+
+    TRISCbits.TRISC0 = 0;
+    TRISCbits.TRISC1 = 0;
+    TRISCbits.TRISC2 = 0;
+
+    PORTAbits.RA0 = 0;
+    PORTAbits.RA1 = 0;
+    PORTAbits.RA2 = 0;
+    PORTAbits.RA3 = 0;
+    PORTAbits.RA4 = 0;
+    PORTAbits.RA5 = 0;
+    PORTEbits.RE0 = 0;
+    PORTEbits.RE1 = 0;
+
+    PORTCbits.RC0 = 0;
+    PORTCbits.RC1 = 0;
+    PORTCbits.RC2 = 0;
 }
 
 void init_pines_fil(void){
@@ -1759,12 +1806,6 @@ void init_pines_col(void){
     PORTDbits.RD6 = 0;
     PORTDbits.RD7 = 0;
 }
-void init_pines(void){
-
-    init_pines_fil();
-    init_pines_col();
-    init_pines_in();
-}
 
 void init_interrupt(void){
     INTCONbits.GIE = 1;
@@ -1788,7 +1829,7 @@ void init_timer(void){
     INTCONbits.GIE = 1;
     INTCONbits.TMR0IE = 1;
     INTCONbits.TMR0IF = 0;
-# 76 "init.c"
+# 107 "init.c"
     OPTION_REGbits.PSA = 0;
     OPTION_REGbits.PS0 = 1;
     OPTION_REGbits.PS1 = 1;

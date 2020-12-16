@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=configuration_bits.c init.c mainsource.c filas.c columnas.c screen.c colisiones.c puntuacion.c
+SOURCEFILES_QUOTED_IF_SPACED=configuration_bits.c init.c mainsource.c filas.c columnas.c screen.c colisiones.c puntuacion.c LCD.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/mainsource.p1 ${OBJECTDIR}/filas.p1 ${OBJECTDIR}/columnas.p1 ${OBJECTDIR}/screen.p1 ${OBJECTDIR}/colisiones.p1 ${OBJECTDIR}/puntuacion.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/configuration_bits.p1.d ${OBJECTDIR}/init.p1.d ${OBJECTDIR}/mainsource.p1.d ${OBJECTDIR}/filas.p1.d ${OBJECTDIR}/columnas.p1.d ${OBJECTDIR}/screen.p1.d ${OBJECTDIR}/colisiones.p1.d ${OBJECTDIR}/puntuacion.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/mainsource.p1 ${OBJECTDIR}/filas.p1 ${OBJECTDIR}/columnas.p1 ${OBJECTDIR}/screen.p1 ${OBJECTDIR}/colisiones.p1 ${OBJECTDIR}/puntuacion.p1 ${OBJECTDIR}/LCD.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/configuration_bits.p1.d ${OBJECTDIR}/init.p1.d ${OBJECTDIR}/mainsource.p1.d ${OBJECTDIR}/filas.p1.d ${OBJECTDIR}/columnas.p1.d ${OBJECTDIR}/screen.p1.d ${OBJECTDIR}/colisiones.p1.d ${OBJECTDIR}/puntuacion.p1.d ${OBJECTDIR}/LCD.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/mainsource.p1 ${OBJECTDIR}/filas.p1 ${OBJECTDIR}/columnas.p1 ${OBJECTDIR}/screen.p1 ${OBJECTDIR}/colisiones.p1 ${OBJECTDIR}/puntuacion.p1
+OBJECTFILES=${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/mainsource.p1 ${OBJECTDIR}/filas.p1 ${OBJECTDIR}/columnas.p1 ${OBJECTDIR}/screen.p1 ${OBJECTDIR}/colisiones.p1 ${OBJECTDIR}/puntuacion.p1 ${OBJECTDIR}/LCD.p1
 
 # Source Files
-SOURCEFILES=configuration_bits.c init.c mainsource.c filas.c columnas.c screen.c colisiones.c puntuacion.c
+SOURCEFILES=configuration_bits.c init.c mainsource.c filas.c columnas.c screen.c colisiones.c puntuacion.c LCD.c
 
 
 
@@ -158,6 +158,14 @@ ${OBJECTDIR}/puntuacion.p1: puntuacion.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/puntuacion.d ${OBJECTDIR}/puntuacion.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/puntuacion.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/LCD.p1: LCD.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/LCD.p1.d 
+	@${RM} ${OBJECTDIR}/LCD.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/LCD.p1 LCD.c 
+	@-${MV} ${OBJECTDIR}/LCD.d ${OBJECTDIR}/LCD.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/LCD.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/configuration_bits.p1: configuration_bits.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -222,6 +230,14 @@ ${OBJECTDIR}/puntuacion.p1: puntuacion.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/puntuacion.p1 puntuacion.c 
 	@-${MV} ${OBJECTDIR}/puntuacion.d ${OBJECTDIR}/puntuacion.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/puntuacion.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/LCD.p1: LCD.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/LCD.p1.d 
+	@${RM} ${OBJECTDIR}/LCD.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/LCD.p1 LCD.c 
+	@-${MV} ${OBJECTDIR}/LCD.d ${OBJECTDIR}/LCD.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/LCD.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

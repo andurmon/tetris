@@ -1,4 +1,4 @@
-# 1 "puntuacion.c"
+# 1 "LCD.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "puntuacion.c" 2
+# 1 "LCD.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1720,7 +1720,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 1 "puntuacion.c" 2
+# 1 "LCD.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
 
@@ -1819,7 +1819,10 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 2 "puntuacion.c" 2
+# 2 "LCD.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdbool.h" 1 3
+# 3 "LCD.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -1904,7 +1907,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 3 "puntuacion.c" 2
+# 4 "LCD.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2039,7 +2042,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 4 "puntuacion.c" 2
+# 5 "LCD.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
 # 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
@@ -2072,75 +2075,128 @@ extern char * strchr(const char *, int);
 extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
-# 5 "puntuacion.c" 2
+# 6 "LCD.c" 2
 
-# 1 "./control.h" 1
-# 14 "./control.h"
-    struct controlSign {
-        uint8_t girar;
-        uint8_t led;
-        uint8_t ficha_Vpos;
-        uint8_t ficha_Hpos;
-        uint8_t ficha_actual;
-        uint8_t derecha;
-        uint8_t izquierda;
-        uint8_t check_count;
-        uint16_t puntaje;
-    };
-    struct controlSign con;
-
-    uint8_t figuras[7][4]= {
-        {0x2, 0x2, 0x3, 0x0},
-        {0x3, 0x2, 0x2, 0x0},
-        {0x1, 0x3, 0x2, 0x0},
-        {0x2, 0x3, 0x1, 0x0},
-        {0x1, 0x1, 0x1, 0x1},
-        {0x3, 0x3, 0x0, 0x0},
-        {0x1, 0x3, 0x1, 0x0}
-    };
-
-
-    uint32_t timerCount = 0;
-    uint16_t pantalla[8] = {0x0000};
-    uint16_t fondo[8] = {0x0000};
-    uint16_t ficha[8] = {0x0000};
-# 6 "puntuacion.c" 2
+# 1 "./LCD.h" 1
+# 15 "./LCD.h"
+    void init_LCD(void);
+    void clearDisplay(void);
+    void returnHome(void);
+    void displayONOFF(_Bool D, _Bool C, _Bool B);
+    void functionSet(_Bool DL, _Bool N, _Bool F);
+    void entryModeSet(_Bool ID, _Bool SH);
+    void setRS(void);
+    void clearRS(void);
+    void setRW(void);
+    void clearRW(void);
+    void setE(void);
+    void clearE(void);
+    void setData(uint8_t data);
+# 7 "LCD.c" 2
 
 
 
 
 
+void init_LCD(void){
+    _Bool DL=1;
+    _Bool N=1;
+    _Bool F=0;
 
+    _Bool ID=1;
+    _Bool S=0;
 
-void perdio(void){
-    int i = 0;
-    for(i=0; i<8; i++){
-        if((fondo[i] & 0x8000) != 0){
-            memset(ficha, 0, sizeof(ficha));
-            memset(fondo, 0, sizeof(fondo));
-            con.ficha_Vpos = 16;
-            con.ficha_actual = rand() % 7;
-            break;
-        }
-    }
+    _Bool D = 1, C=1, B=1;
+
+    _delay((unsigned long)((200)*(4000000/4000.0)));
+    functionSet(1, 0, 0);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+    functionSet(1, 0, 0);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+    functionSet(1, 0, 0);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+
+    functionSet(DL, N, F);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+    displayONOFF(0,0,0);
+    clearDisplay();
+    entryModeSet(ID, S);
+
+    displayONOFF(D,C,B);
+    returnHome();
 }
 
+void clearDisplay(void){
+    clearRS();
+    clearRW();
+    setData(0x01);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+}
 
+void returnHome(void){
+    clearRS();
+    clearRW();
+    setData(0x2);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+}
 
+void entryModeSet(_Bool ID, _Bool SH){
+    uint8_t data = 0x04;
+    clearRS();
+    clearRW();
+    data = data | (ID?0x2:0x0) | (SH?0x1:0x0);
+    setData(data);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+}
 
+void displayONOFF(_Bool D, _Bool C, _Bool B){
+    uint8_t data = 0x08;
+    clearRS();
+    clearRW();
+    data = data | (D?0x04:0x00) | (C?0x02:0x00) | (B?0x01:0x00);
+    setData(data);
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+}
 
-void sumaPuntos(void){
-    int i=0, j=0;
-    uint8_t aux = 1;
-    for (i=0; i<16; i++){
-        for(j=0; j<8; j++){
-            aux = aux & fondo[j]>>i;
-        }
-        if(aux == 1){
+void functionSet(_Bool DL, _Bool N, _Bool F){
+    uint8_t data = 0x20;
+    clearRS();
+    clearRW();
+    data = data | (DL?0x10:0x00) | (N?0x08:0x00) | (F?0x04:0x00);
+    setData(data);
+}
 
+void setRS(void){
+    PORTCbits.RC0 = 1;
+}
 
+void clearRS(void){
+    PORTCbits.RC0 = 0;
+}
 
-        }
-    }
+void setRW(void){
+    PORTCbits.RC1 = 1;
+}
 
+void clearRW(void){
+    PORTCbits.RC1 = 0;
+}
+
+void setE(void){
+    PORTCbits.RC2 = 1;
+}
+
+void clearE(void){
+    PORTCbits.RC2 = 0;
+}
+
+void setData(uint8_t data){
+    PORTAbits.RA0 = data & 0x1;
+    PORTAbits.RA1 = (data >>1) & 0x1;
+    PORTAbits.RA2 = (data >>2) & 0x1;
+    PORTAbits.RA3 = (data >>3) & 0x1;
+    PORTAbits.RA4 = (data >>4) & 0x1;
+    PORTAbits.RA5 = (data >>5) & 0x1;
+    PORTEbits.RE0 = (data >>6) & 0x1;
+    PORTEbits.RE1 = (data >>7) & 0x1;
 }

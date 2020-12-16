@@ -198,10 +198,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 ./control.h
 [; ;./control.h: 25:     struct controlSign con;
 [v _con `S100 ~T0 @X0 1 e ]
-[v F1172 `uc ~T0 @X0 -> 4 `i t ]
+[v F1174 `uc ~T0 @X0 -> 4 `i t ]
 "27
 [; ;./control.h: 27:     uint8_t figuras[7][4]= {
-[v _figuras `F1172 ~T0 @X0 -> 7 `i e ]
+[v _figuras `F1174 ~T0 @X0 -> 7 `i e ]
 [i _figuras
 :U ..
 :U ..

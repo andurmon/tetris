@@ -2138,6 +2138,8 @@ void sumaPuntos(void){
         }
         if(aux == 1){
 
+
+
         }
     }
 

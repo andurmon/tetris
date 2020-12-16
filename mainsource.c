@@ -29,6 +29,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "init.h"
+#include "LCD.h"
 #include "columnas.h"
 #include "filas.h"
 #include "screen.h"
@@ -40,74 +41,75 @@
 #define _XTAL_FREQ 4000000
 
 void checkCount(void);
-
+void gire(void);
 int main(int argc, char** argv) {
     
     //uint16_t corazon[8] = {0x0030, 0x0048, 0x0044, 0x0022, 0x0044, 0x0048, 0x0030, 0x0000};
     //uint16_t test[8] =  {0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff};
     init_timer();
     init_pines();
-    //init_interrupt();
+    init_LCD();
     
     int i=0, j=5;
     con.girar =0;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
     con.puntaje = 0;
-    srand(1);
+    srand(2);
     con.ficha_actual = rand() % 7;
 
     while(1){
-        
         checkCount();
         updateScreen(pantalla);
-        
     }
     return (EXIT_SUCCESS); 
 }
 
-void leerEntradas(void){
-    //leer Entradas
+void gire(void){
     int i=0, j=0, k=0;
     uint8_t aux[4]={0x0000};
     uint8_t mask = 0x00;
+    for(i=0; i<4; i++){
+        for(j=0; j<4; j++){
+            mask = (figuras[con.ficha_actual][j] >> i) & 0x01;
+            aux[i] = aux[i] | (mask<<(3-j));
+        }
+    }
+
+    /*
+     * Ajustar "cero"
+     */
+    while(k<3){
+        for(i=0; i<4; i++){
+            if( aux[i] & 0x01 ){
+                break;
+            }
+            if(i==3){
+                for(j=0; j<4; j++){
+                    aux[j] = aux[j]>>1;
+                }
+            }
+        }
+        k++;
+    }
+
+    if((aux[0] & 0xF) == 0){
+        aux[0] = aux[1];
+        aux[1] = aux[2];
+        aux[2] = aux[3];
+        aux[3] = 0x0;
+    }
+
+    for(i=0; i<4; i++){
+        figuras[con.ficha_actual][i] = aux[i];
+    }
+}
+
+void leerEntradas(void){
+    //leer Entradas
     if(con.girar){
         con.girar=0;
-        
-        for(i=0; i<4; i++){
-            for(j=0; j<4; j++){
-                mask = (figuras[con.ficha_actual][j] >> i) & 0x01;
-                aux[i] = aux[i] | (mask<<(3-j));
-            }
-        }
-        
-        /*
-         * Ajustar "cero"
-         */
-        while(k<3){
-            for(i=0; i<4; i++){
-                if( aux[i] & 0x01 ){
-                    break;
-                }
-                if(i==3){
-                    for(j=0; j<4; j++){
-                        aux[j] = aux[j]>>1;
-                    }
-                }
-            }
-            k++;
-        }
-
-        if((aux[0] & 0xF) == 0){
-            aux[0] = aux[1];
-            aux[1] = aux[2];
-            aux[2] = aux[3];
-            aux[3] = 0x0;
-        }
-
-        for(i=0; i<4; i++){
-            figuras[con.ficha_actual][i] = aux[i];
-        }
+        gire();
         drawFigure();
         return;
     }
@@ -145,6 +147,7 @@ void checkCount(void){
             
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
+            
             con.ficha_Vpos--;
             
             checkBottom();

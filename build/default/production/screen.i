@@ -2076,11 +2076,13 @@ extern char * strrichr(const char *, int);
 
 # 1 "./init.h" 1
 # 14 "./init.h"
+    void init_pines_LCD(void);
     void init_pines_fil(void);
     void init_pines_col(void);
     void init_pines(void);
     void init_timer(void);
     void init_interrupt(void);
+    void init_pines_in(void);
 # 6 "screen.c" 2
 
 # 1 "./columnas.h" 1
@@ -2153,16 +2155,12 @@ void updateScreen(uint16_t screen[8]){
 
     for(i=0; i<=7;i++){
        if(i == 0){
-
             setFilas(~screen[i]);
             shiftBitColumna(1);
-
         }
         else{
-
             setFilas(~screen[i]);
             shiftBitColumna(0);
-
         }
     }
 }

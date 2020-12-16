@@ -370,18 +370,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;puntuacion.c: 37:         if(aux == 1){
 [e $ ! == -> _aux `i -> 1 `i 113  ]
 {
-"39
-[; ;puntuacion.c: 39:         }
+"41
+[; ;puntuacion.c: 41:         }
 }
 [e :U 113 ]
-"40
-[; ;puntuacion.c: 40:     }
+"42
+[; ;puntuacion.c: 42:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 16 `i 107  ]
 [e :U 108 ]
 }
-"42
-[; ;puntuacion.c: 42: }
+"44
+[; ;puntuacion.c: 44: }
 [e :UE 106 ]
 }

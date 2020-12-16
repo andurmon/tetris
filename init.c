@@ -1,12 +1,49 @@
 #include <xc.h>
+#include "init.h"
 #include <pic16f877a.h>
+
+void init_pines(void){
+    init_pines_LCD();
+    init_pines_fil();
+    init_pines_col();
+    init_pines_in();
+}
 
 void init_pines_in(void){
     TRISBbits.TRISB5 = 1;
     TRISBbits.TRISB4 = 1; 
     TRISBbits.TRISB3 = 1;
-        
+}
 
+void init_pines_LCD(void){
+    //ADCON1bits.PCFG0 = 1;
+    ADCON1 = 0x7;
+    
+    TRISAbits.TRISA0 = 0; //D0
+    TRISAbits.TRISA1 = 0; //D1
+    TRISAbits.TRISA2 = 0; //D2
+    TRISAbits.TRISA3 = 0; //D3
+    TRISAbits.TRISA4 = 0; //D4
+    TRISAbits.TRISA5 = 0; //D5
+    TRISEbits.TRISE0 = 0; //D6
+    TRISEbits.TRISE1 = 0; //D7
+    
+    TRISCbits.TRISC0 = 0; //RS
+    TRISCbits.TRISC1 = 0; //R/W
+    TRISCbits.TRISC2 = 0; //E
+    
+    PORTAbits.RA0 = 0;  //D0
+    PORTAbits.RA1 = 0;  //D1
+    PORTAbits.RA2 = 0;  //D2
+    PORTAbits.RA3 = 0;  //D3
+    PORTAbits.RA4 = 0;  //D4
+    PORTAbits.RA5 = 0;  //D5
+    PORTEbits.RE0 = 0;  //D6
+    PORTEbits.RE1 = 0;  //D7
+    
+    PORTCbits.RC0 = 0;  //RS
+    PORTCbits.RC1 = 0;  //R/W
+    PORTCbits.RC2 = 0;  //E
 }
 
 void init_pines_fil(void){
@@ -35,12 +72,6 @@ void init_pines_col(void){
     PORTDbits.RD5 = 0;
     PORTDbits.RD6 = 0;
     PORTDbits.RD7 = 0;
-}
-void init_pines(void){
-    
-    init_pines_fil();
-    init_pines_col();
-    init_pines_in();
 }
 
 void init_interrupt(void){

@@ -198,10 +198,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 ./control.h
 [; ;./control.h: 25:     struct controlSign con;
 [v _con `S100 ~T0 @X0 1 e ]
-[v F1172 `uc ~T0 @X0 -> 4 `i t ]
+[v F1174 `uc ~T0 @X0 -> 4 `i t ]
 "27
 [; ;./control.h: 27:     uint8_t figuras[7][4]= {
-[v _figuras `F1172 ~T0 @X0 -> 7 `i e ]
+[v _figuras `F1174 ~T0 @X0 -> 7 `i e ]
 [i _figuras
 :U ..
 :U ..
@@ -304,127 +304,127 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;screen.c: 23:        if(i == 0){
 [e $ ! == _i -> 0 `i 105  ]
 {
-"25
-[; ;screen.c: 25:             setFilas(~screen[i]);
+"24
+[; ;screen.c: 24:             setFilas(~screen[i]);
 [e ( _setFilas (1 ~ *U + _screen * -> _i `x -> -> # *U _screen `i `x ]
-"26
-[; ;screen.c: 26:             shiftBitColumna(1);
+"25
+[; ;screen.c: 25:             shiftBitColumna(1);
 [e ( _shiftBitColumna (1 -> -> 1 `i `uc ]
-"28
-[; ;screen.c: 28:         }
+"26
+[; ;screen.c: 26:         }
 }
 [e $U 106  ]
-"29
-[; ;screen.c: 29:         else{
+"27
+[; ;screen.c: 27:         else{
 [e :U 105 ]
 {
-"31
-[; ;screen.c: 31:             setFilas(~screen[i]);
+"28
+[; ;screen.c: 28:             setFilas(~screen[i]);
 [e ( _setFilas (1 ~ *U + _screen * -> _i `x -> -> # *U _screen `i `x ]
-"32
-[; ;screen.c: 32:             shiftBitColumna(0);
+"29
+[; ;screen.c: 29:             shiftBitColumna(0);
 [e ( _shiftBitColumna (1 -> -> 0 `i `uc ]
-"34
-[; ;screen.c: 34:         }
+"30
+[; ;screen.c: 30:         }
 }
 [e :U 106 ]
-"35
-[; ;screen.c: 35:     }
+"31
+[; ;screen.c: 31:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ <= _i -> 7 `i 102  ]
 [e :U 103 ]
 }
-"36
-[; ;screen.c: 36: }
+"32
+[; ;screen.c: 32: }
 [e :UE 101 ]
 }
-"43
-[; ;screen.c: 43: void addToScreen(void){
+"39
+[; ;screen.c: 39: void addToScreen(void){
 [v _addToScreen `(v ~T0 @X0 1 ef ]
 {
 [e :U _addToScreen ]
 [f ]
-"44
-[; ;screen.c: 44:     int i=0;
+"40
+[; ;screen.c: 40:     int i=0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"45
-[; ;screen.c: 45:     for(i=0; i<8; i++){
+"41
+[; ;screen.c: 41:     for(i=0; i<8; i++){
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 108  ]
 [e $U 109  ]
 [e :U 108 ]
 {
-"46
-[; ;screen.c: 46:         pantalla[i] = ficha[i] | fondo[i];
+"42
+[; ;screen.c: 42:         pantalla[i] = ficha[i] | fondo[i];
 [e = *U + &U _pantalla * -> -> _i `ui `ux -> -> # *U &U _pantalla `ui `ux | *U + &U _ficha * -> -> _i `ui `ux -> -> # *U &U _ficha `ui `ux *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux ]
-"47
-[; ;screen.c: 47:     }
+"43
+[; ;screen.c: 43:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 108  ]
 [e :U 109 ]
 }
-"48
-[; ;screen.c: 48: }
+"44
+[; ;screen.c: 44: }
 [e :UE 107 ]
 }
-"50
-[; ;screen.c: 50: void drawBground(void){
+"46
+[; ;screen.c: 46: void drawBground(void){
 [v _drawBground `(v ~T0 @X0 1 ef ]
 {
 [e :U _drawBground ]
 [f ]
-"51
-[; ;screen.c: 51:     int i=0;
+"47
+[; ;screen.c: 47:     int i=0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"52
-[; ;screen.c: 52:     for(i=0; i<8; i++){
+"48
+[; ;screen.c: 48:     for(i=0; i<8; i++){
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 112  ]
 [e $U 113  ]
 [e :U 112 ]
 {
-"53
-[; ;screen.c: 53:         fondo[i] = fondo[i] | ficha[i];
+"49
+[; ;screen.c: 49:         fondo[i] = fondo[i] | ficha[i];
 [e = *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux | *U + &U _fondo * -> -> _i `ui `ux -> -> # *U &U _fondo `ui `ux *U + &U _ficha * -> -> _i `ui `ux -> -> # *U &U _ficha `ui `ux ]
-"54
-[; ;screen.c: 54:     }
+"50
+[; ;screen.c: 50:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 112  ]
 [e :U 113 ]
 }
-"55
-[; ;screen.c: 55: }
+"51
+[; ;screen.c: 51: }
 [e :UE 111 ]
 }
-"61
-[; ;screen.c: 61: void drawFigure(void){
+"57
+[; ;screen.c: 57: void drawFigure(void){
 [v _drawFigure `(v ~T0 @X0 1 ef ]
 {
 [e :U _drawFigure ]
 [f ]
-"62
-[; ;screen.c: 62:     memset(ficha, 0, sizeof(ficha));
+"58
+[; ;screen.c: 58:     memset(ficha, 0, sizeof(ficha));
 [e ( _memset (3 , , -> &U _ficha `*v -> 0 `i -> # _ficha `ui ]
-"63
-[; ;screen.c: 63:     ficha[con.ficha_Hpos ] = figuras[con.ficha_actual][0] << (con.ficha_Vpos-1);
+"59
+[; ;screen.c: 59:     ficha[con.ficha_Hpos ] = figuras[con.ficha_actual][0] << (con.ficha_Vpos-1);
 [e = *U + &U _ficha * -> . _con 3 `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"64
-[; ;screen.c: 64:     ficha[con.ficha_Hpos +1] = figuras[con.ficha_actual][1] << (con.ficha_Vpos-1);
+"60
+[; ;screen.c: 60:     ficha[con.ficha_Hpos +1] = figuras[con.ficha_actual][1] << (con.ficha_Vpos-1);
 [e = *U + &U _ficha * -> -> + -> . _con 3 `i -> 1 `i `ui `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"65
-[; ;screen.c: 65:     ficha[con.ficha_Hpos +2] = figuras[con.ficha_actual][2] << (con.ficha_Vpos-1);
+"61
+[; ;screen.c: 61:     ficha[con.ficha_Hpos +2] = figuras[con.ficha_actual][2] << (con.ficha_Vpos-1);
 [e = *U + &U _ficha * -> -> + -> . _con 3 `i -> 2 `i `ui `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 2 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"66
-[; ;screen.c: 66:     ficha[con.ficha_Hpos +3] = figuras[con.ficha_actual][3] << (con.ficha_Vpos-1);
+"62
+[; ;screen.c: 62:     ficha[con.ficha_Hpos +3] = figuras[con.ficha_actual][3] << (con.ficha_Vpos-1);
 [e = *U + &U _ficha * -> -> + -> . _con 3 `i -> 3 `i `ui `ux -> -> # *U &U _ficha `ui `ux -> << -> *U + &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux * -> -> -> 3 `i `ui `ux -> -> # *U &U *U + &U _figuras * -> . _con 4 `ux -> * -> # *U &U *U &U _figuras `ui -> -> 4 `i `ui `ux `ui `ux `i - -> . _con 2 `i -> 1 `i `ui ]
-"67
-[; ;screen.c: 67: }
+"63
+[; ;screen.c: 63: }
 [e :UE 115 ]
 }

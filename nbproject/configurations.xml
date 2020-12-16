@@ -11,6 +11,7 @@
       <itemPath>control.h</itemPath>
       <itemPath>colisiones.h</itemPath>
       <itemPath>puntuacion.h</itemPath>
+      <itemPath>LCD.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -27,6 +28,7 @@
       <itemPath>screen.c</itemPath>
       <itemPath>colisiones.c</itemPath>
       <itemPath>puntuacion.c</itemPath>
+      <itemPath>LCD.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

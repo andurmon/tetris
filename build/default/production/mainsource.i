@@ -2093,12 +2093,31 @@ extern char * strrichr(const char *, int);
 
 # 1 "./init.h" 1
 # 14 "./init.h"
+    void init_pines_LCD(void);
     void init_pines_fil(void);
     void init_pines_col(void);
     void init_pines(void);
     void init_timer(void);
     void init_interrupt(void);
+    void init_pines_in(void);
 # 31 "mainsource.c" 2
+
+# 1 "./LCD.h" 1
+# 15 "./LCD.h"
+    void init_LCD(void);
+    void clearDisplay(void);
+    void returnHome(void);
+    void displayONOFF(_Bool D, _Bool C, _Bool B);
+    void functionSet(_Bool DL, _Bool N, _Bool F);
+    void entryModeSet(_Bool ID, _Bool SH);
+    void setRS(void);
+    void clearRS(void);
+    void setRW(void);
+    void clearRW(void);
+    void setE(void);
+    void clearE(void);
+    void setData(uint8_t data);
+# 32 "mainsource.c" 2
 
 # 1 "./columnas.h" 1
 # 15 "./columnas.h"
@@ -2106,7 +2125,7 @@ extern char * strrichr(const char *, int);
     void shiftClock_Col(void);
     void setColumnas(uint8_t reg_value);
     void shiftBitColumna(uint8_t bit);
-# 32 "mainsource.c" 2
+# 33 "mainsource.c" 2
 
 # 1 "./filas.h" 1
 # 15 "./filas.h"
@@ -2115,7 +2134,7 @@ void shiftClock_Fil(void);
 void setFilas(uint16_t reg_value);
 void enableFilas(void);
 void disableFilas(void);
-# 33 "mainsource.c" 2
+# 34 "mainsource.c" 2
 
 # 1 "./screen.h" 1
 # 15 "./screen.h"
@@ -2123,7 +2142,7 @@ void disableFilas(void);
     void addToScreen(void);
     void drawBground(void);
     void drawFigure(void);
-# 34 "mainsource.c" 2
+# 35 "mainsource.c" 2
 
 # 1 "./control.h" 1
 # 14 "./control.h"
@@ -2155,7 +2174,7 @@ void disableFilas(void);
     uint16_t pantalla[8] = {0x0000};
     uint16_t fondo[8] = {0x0000};
     uint16_t ficha[8] = {0x0000};
-# 35 "mainsource.c" 2
+# 36 "mainsource.c" 2
 
 # 1 "./colisiones.h" 1
 # 15 "./colisiones.h"
@@ -2164,87 +2183,88 @@ _Bool checkRight(void);
 void checkColission_D(void);
 _Bool checkColission_R(void);
 _Bool checkColission_L(void);
-# 36 "mainsource.c" 2
+# 37 "mainsource.c" 2
 
 # 1 "./puntuacion.h" 1
 # 15 "./puntuacion.h"
     void perdio(void);
     void sumaPuntos(void);
-# 37 "mainsource.c" 2
+# 38 "mainsource.c" 2
 
 
 
 
 
 void checkCount(void);
-
+void gire(void);
 int main(int argc, char** argv) {
 
 
 
     init_timer();
     init_pines();
-
+    init_LCD();
 
     int i=0, j=5;
     con.girar =0;
     con.ficha_Vpos = 16;
     con.ficha_Hpos = 2;
     con.puntaje = 0;
-    srand(1);
+    srand(2);
     con.ficha_actual = rand() % 7;
 
     while(1){
-
         checkCount();
         updateScreen(pantalla);
-
     }
     return (0);
 }
 
-void leerEntradas(void){
-
+void gire(void){
     int i=0, j=0, k=0;
     uint8_t aux[4]={0x0000};
     uint8_t mask = 0x00;
+    for(i=0; i<4; i++){
+        for(j=0; j<4; j++){
+            mask = (figuras[con.ficha_actual][j] >> i) & 0x01;
+            aux[i] = aux[i] | (mask<<(3-j));
+        }
+    }
+
+
+
+
+    while(k<3){
+        for(i=0; i<4; i++){
+            if( aux[i] & 0x01 ){
+                break;
+            }
+            if(i==3){
+                for(j=0; j<4; j++){
+                    aux[j] = aux[j]>>1;
+                }
+            }
+        }
+        k++;
+    }
+
+    if((aux[0] & 0xF) == 0){
+        aux[0] = aux[1];
+        aux[1] = aux[2];
+        aux[2] = aux[3];
+        aux[3] = 0x0;
+    }
+
+    for(i=0; i<4; i++){
+        figuras[con.ficha_actual][i] = aux[i];
+    }
+}
+
+void leerEntradas(void){
+
     if(con.girar){
         con.girar=0;
-
-        for(i=0; i<4; i++){
-            for(j=0; j<4; j++){
-                mask = (figuras[con.ficha_actual][j] >> i) & 0x01;
-                aux[i] = aux[i] | (mask<<(3-j));
-            }
-        }
-
-
-
-
-        while(k<3){
-            for(i=0; i<4; i++){
-                if( aux[i] & 0x01 ){
-                    break;
-                }
-                if(i==3){
-                    for(j=0; j<4; j++){
-                        aux[j] = aux[j]>>1;
-                    }
-                }
-            }
-            k++;
-        }
-
-        if((aux[0] & 0xF) == 0){
-            aux[0] = aux[1];
-            aux[1] = aux[2];
-            aux[2] = aux[3];
-            aux[3] = 0x0;
-        }
-
-        for(i=0; i<4; i++){
-            figuras[con.ficha_actual][i] = aux[i];
-        }
+        gire();
         drawFigure();
         return;
     }
@@ -2282,6 +2302,7 @@ void checkCount(void){
 
             PORTBbits.RB0 = con.led;
             con.led= ~con.led;
+
             con.ficha_Vpos--;
 
             checkBottom();
